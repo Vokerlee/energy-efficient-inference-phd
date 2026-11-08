@@ -15,6 +15,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 06 — Range prediction and tracking | Reviewed 2026-11-08 | [Review](topics/06-range-prediction-and-tracking.md) |
 | 07 — Quantization and structured sparsity | Reviewed 2026-11-08 | [Review](topics/07-quantization-and-structured-sparsity.md) |
 | 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08 | [Review](topics/08-accumulation-and-block-scaling.md) |
+| 09 — Adaptive low-rank computation | Reviewed 2026-11-08 | [Review](topics/09-adaptive-low-rank-computation.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -80,7 +81,7 @@ Records awaiting full-text review are explicitly marked.
 | [`dettmers2022llmint8`](papers/2022-dettmers-llm-int8.md) | 05 | Activation outliers routed to a higher-precision feature path. |
 | [`guo2023olive`](papers/2023-guo-olive.md) | 05 | Locally aligned outlier encoding with lossy victims. |
 | [`ramachandran2025microscopiq`](papers/2025-ramachandran-microscopiq.md) | 05 | Weight-outlier representation and reconstruction hardware. |
-| [`li2025svdquant`](papers/2025-li-svdquant.md) | 05 | Diffusion outlier handling through a fused low-rank branch. |
+| [`li2025svdquant`](papers/2025-li-svdquant.md) | 05, 09 | Diffusion outlier handling through a fused low-rank branch. |
 | [`meng2026sharq`](papers/2026-meng-sharq.md) | 05, 07 | Online sparse–dense FP4 activation decomposition. |
 | [`koster2017flexpoint`](papers/2017-koster-flexpoint.md) | 06 | Bounded-history exponent prediction and initialization. |
 | [`dunning2019tdigest`](papers/2019-dunning-t-digest.md) | 06 | Streaming quantile reference; hardware cost remains open. |
@@ -95,3 +96,7 @@ Records awaiting full-text review are explicitly marked.
 | [`colbert2023a2q`](papers/2023-colbert-a2q.md) | 08 | Overflow bounds and training-constrained accumulation. |
 | [`colbert2024a2qplus`](papers/2024-colbert-a2q-plus.md) | 08 | Tighter accumulator constraints and initialization trade-offs. |
 | [`cuyckens2025mxreduction`](papers/2025-cuyckens-mx-reduction.md) | 08 | Microscaling reduction-tree cost and NPU integration. |
+| [`halko2011randomized`](papers/2011-halko-randomized-decompositions.md) | 09 | Cost and accuracy of randomized subspace discovery. |
+| [`garcia2025rana`](papers/2025-garcia-rana.md) | 09 | Input-dependent rank allocation with learned adapters. |
+| [`wang2025nalr`](papers/2025-wang-noise-adaptive-low-rank.md) | 09 | Noise-conditioned rank schedules for diffusion. |
+| [`chang2025palu`](papers/2025-chang-palu.md) | 09 | Projection/reconstruction trade-offs in a memory-focused workload. |
