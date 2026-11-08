@@ -1,0 +1,3 @@
+[submodule "code/tensor-inference-experiments"]
+	path = code/tensor-inference-experiments
+	url = https://github.com/Vokerlee/tensor-inference-experiments.git
