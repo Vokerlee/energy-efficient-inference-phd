@@ -14,6 +14,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 05 — Outliers and selective precision | Reviewed 2026-11-08 | [Review](topics/05-outliers-and-selective-precision.md) |
 | 06 — Range prediction and tracking | Reviewed 2026-11-08 | [Review](topics/06-range-prediction-and-tracking.md) |
 | 07 — Quantization and structured sparsity | Reviewed 2026-11-08 | [Review](topics/07-quantization-and-structured-sparsity.md) |
+| 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08 | [Review](topics/08-accumulation-and-block-scaling.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -68,10 +69,10 @@ Records awaiting full-text review are explicitly marked.
 | [`selvam2021fuseconv`](papers/2021-selvam-fuseconv.md) | 03 | Depthwise utilization and the boundary between mapping and operator changes. |
 | [`soltaniyeh2022spots`](papers/2022-soltaniyeh-spots.md) | 03, 07 | Pipelined hardware im2col, overlap reuse, and zero-block skipping. |
 | [`fornt2023im2col`](papers/2023-fornt-on-the-fly-im2col.md) | 03 | On-the-fly feeder with stride/dilation and explicit overhead accounting. |
-| [`dai2021vsquant`](papers/2021-dai-vs-quant.md) | 04 | Vector scales and their numerical/hardware trade-off. |
+| [`dai2021vsquant`](papers/2021-dai-vs-quant.md) | 04, 08 | Vector scales and their numerical/hardware trade-off. |
 | [`keller2022vsqchip`](papers/2022-keller-vector-scaled-accelerator.md) | 04 | Prototype evidence for low-bit vector-scaled inference. |
 | [`yao2022zeroquant`](papers/2022-yao-zeroquant.md) | 04 | Software runtime quantization and conversion-overhead baseline. |
-| [`rouhani2023mx`](papers/2023-rouhani-microscaling.md) | 04 | Microscaling representation and conversion foundations. |
+| [`rouhani2023mx`](papers/2023-rouhani-microscaling.md) | 04, 08 | Microscaling representation and conversion foundations. |
 | [`abdelmaksoud2026adip`](papers/2026-abdelmaksoud-adip.md) | 04 | Precision-scalable systolic execution; controller distinction. |
 | [`fasoli2026microscaling`](papers/2026-fasoli-microscaling-limits.md) | 04 | Scale quantization can defeat finer grouping. |
 | [`song2020drq`](papers/2020-song-drq.md) | 04 | Priority dynamic-quantization competitor; full text pending. |
@@ -90,3 +91,7 @@ Records awaiting full-text review are explicitly marked.
 | [`shomron2021sparq`](papers/2021-shomron-sparsity-aware-quantization.md) | 07 | Runtime bit-window and zero-aware activation quantization. |
 | [`wu2022sparseloop`](papers/2022-wu-sparseloop.md) | 07 | Sparse action modeling with format and skipping overhead. |
 | [`kam2025panacea`](papers/2025-kam-panacea.md) | 07 | Asymmetric quantization and structured bit-slice opportunities. |
+| [`blanchard2020blockfma`](papers/2020-blanchard-block-fma.md) | 08 | Numerical semantics of mixed-precision block accumulation. |
+| [`colbert2023a2q`](papers/2023-colbert-a2q.md) | 08 | Overflow bounds and training-constrained accumulation. |
+| [`colbert2024a2qplus`](papers/2024-colbert-a2q-plus.md) | 08 | Tighter accumulator constraints and initialization trade-offs. |
+| [`cuyckens2025mxreduction`](papers/2025-cuyckens-mx-reduction.md) | 08 | Microscaling reduction-tree cost and NPU integration. |
