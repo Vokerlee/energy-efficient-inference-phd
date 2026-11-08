@@ -3,6 +3,11 @@
 Research on energy-efficient neural network inference: literature reviews,
 hypotheses, findings, and publications.
 
+## Literature
+
+The [literature index](literature/README.md) links topic syntheses, short paper
+reviews, source versions, and the shared bibliography.
+
 ## Experiments
 
 Reproducible experiment code lives in the
