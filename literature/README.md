@@ -10,6 +10,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 01 — Energy of compute-bound versus memory-bound inference | Reviewed 2026-11-08; 17 papers | [Review](topics/01-inference-energy.md) |
 | 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08 | [Review](topics/02-matrix-multiplier-architectures.md) |
 | 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08 | [Review](topics/03-im2col-and-convolution-mapping.md) |
+| 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08 | [Review](topics/04-dynamic-activation-quantization.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -29,7 +30,8 @@ Links point to original papers; original annotations here are our own writing.
 
 ## Paper index
 
-All entries below received full-text focused reading on 2026-11-08.
+Reading status, source version, and review date are recorded in each paper note.
+Records awaiting full-text review are explicitly marked.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
@@ -45,9 +47,9 @@ All entries below received full-text focused reading on 2026-11-08.
 | [`patel2024splitwise`](papers/2024-patel-splitwise.md) | 01 | Different inference phases and power sensitivities. |
 | [`yang2024parttime`](papers/2024-yang-power-measurements.md) | 01 | Validation limits of software-visible GPU power sensors. |
 | [`gregersen2024inputpower`](papers/2024-gregersen-input-dependent-power.md) | 01 | Operand patterns affect GEMM power. |
-| [`zhao2025viditq`](papers/2025-zhao-vidit-q.md) | 01 | Diffusion precision, conversion, latency, and quality. |
+| [`zhao2025viditq`](papers/2025-zhao-vidit-q.md) | 01, 04 | Diffusion precision, conversion, latency, and quality. |
 | [`chung2025mlenergy`](papers/2025-chung-ml-energy-benchmark.md) | 01 | Generative-inference energy measurement and accounting. |
-| [`chung2026joules`](papers/2026-chung-where-joules-go.md) | 01 | Recent batch/precision energy trade-offs. |
+| [`chung2026joules`](papers/2026-chung-where-joules-go.md) | 01, 04 | Recent batch/precision energy trade-offs. |
 | [`cai2026mobilenpu`](papers/2026-cai-mobile-npu-efficiency.md) | 01 | NPU phase behavior and host/control energy. |
 | [`bonazzi2026tinyml`](papers/2026-bonazzi-tinyml-memory-wall.md) | 01 | Edge traffic bottlenecks and measurement-boundary caveats. |
 | [`kung1982systolic`](papers/1982-kung-systolic-architectures.md) | 02 | Foundations of systolic reuse, regularity, and I/O balance. |
@@ -63,3 +65,11 @@ All entries below received full-text focused reading on 2026-11-08.
 | [`selvam2021fuseconv`](papers/2021-selvam-fuseconv.md) | 03 | Depthwise utilization and the boundary between mapping and operator changes. |
 | [`soltaniyeh2022spots`](papers/2022-soltaniyeh-spots.md) | 03 | Pipelined hardware im2col, overlap reuse, and zero-block skipping. |
 | [`fornt2023im2col`](papers/2023-fornt-on-the-fly-im2col.md) | 03 | On-the-fly feeder with stride/dilation and explicit overhead accounting. |
+| [`dai2021vsquant`](papers/2021-dai-vs-quant.md) | 04 | Vector scales and their numerical/hardware trade-off. |
+| [`keller2022vsqchip`](papers/2022-keller-vector-scaled-accelerator.md) | 04 | Prototype evidence for low-bit vector-scaled inference. |
+| [`yao2022zeroquant`](papers/2022-yao-zeroquant.md) | 04 | Software runtime quantization and conversion-overhead baseline. |
+| [`rouhani2023mx`](papers/2023-rouhani-microscaling.md) | 04 | Microscaling representation and conversion foundations. |
+| [`abdelmaksoud2026adip`](papers/2026-abdelmaksoud-adip.md) | 04 | Precision-scalable systolic execution; controller distinction. |
+| [`fasoli2026microscaling`](papers/2026-fasoli-microscaling-limits.md) | 04 | Scale quantization can defeat finer grouping. |
+| [`song2020drq`](papers/2020-song-drq.md) | 04 | Priority dynamic-quantization competitor; full text pending. |
+| [`liu2024drift`](papers/2024-liu-drift.md) | 04 | Distribution-based adaptation competitor; full text pending. |
