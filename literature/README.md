@@ -19,6 +19,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 10 — Fast matrix multiplication | Reviewed 2026-11-08 | [Review](topics/10-fast-matrix-multiplication.md) |
 | 11 — Operator fusion and streaming inference | Reviewed 2026-11-08 | [Review](topics/11-operator-fusion-and-streaming.md) |
 | 12 — Hardware control for adaptive execution | Reviewed 2026-11-08 | [Review](topics/12-adaptive-execution-control.md) |
+| 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09 | [Review](topics/13-end-to-end-quality.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -55,7 +56,7 @@ Records awaiting full-text review are explicitly marked.
 | [`patel2024splitwise`](papers/2024-patel-splitwise.md) | 01 | Different inference phases and power sensitivities. |
 | [`yang2024parttime`](papers/2024-yang-power-measurements.md) | 01 | Validation limits of software-visible GPU power sensors. |
 | [`gregersen2024inputpower`](papers/2024-gregersen-input-dependent-power.md) | 01 | Operand patterns affect GEMM power. |
-| [`zhao2025viditq`](papers/2025-zhao-vidit-q.md) | 01, 04 | Diffusion precision, conversion, latency, and quality. |
+| [`zhao2025viditq`](papers/2025-zhao-vidit-q.md) | 01, 04, 13 | Diffusion precision, conversion, latency, and quality. |
 | [`chung2025mlenergy`](papers/2025-chung-ml-energy-benchmark.md) | 01 | Generative-inference energy measurement and accounting. |
 | [`chung2026joules`](papers/2026-chung-where-joules-go.md) | 01, 04 | Recent batch/precision energy trade-offs. |
 | [`cai2026mobilenpu`](papers/2026-cai-mobile-npu-efficiency.md) | 01 | NPU phase behavior and host/control energy. |
@@ -84,7 +85,7 @@ Records awaiting full-text review are explicitly marked.
 | [`dettmers2022llmint8`](papers/2022-dettmers-llm-int8.md) | 05 | Activation outliers routed to a higher-precision feature path. |
 | [`guo2023olive`](papers/2023-guo-olive.md) | 05 | Locally aligned outlier encoding with lossy victims. |
 | [`ramachandran2025microscopiq`](papers/2025-ramachandran-microscopiq.md) | 05 | Weight-outlier representation and reconstruction hardware. |
-| [`li2025svdquant`](papers/2025-li-svdquant.md) | 05, 09, 11 | Diffusion outlier handling through a fused low-rank branch. |
+| [`li2025svdquant`](papers/2025-li-svdquant.md) | 05, 09, 11, 13 | Diffusion outlier handling through a fused low-rank branch. |
 | [`meng2026sharq`](papers/2026-meng-sharq.md) | 05, 07 | Online sparse–dense FP4 activation decomposition. |
 | [`koster2017flexpoint`](papers/2017-koster-flexpoint.md) | 06 | Bounded-history exponent prediction and initialization. |
 | [`dunning2019tdigest`](papers/2019-dunning-t-digest.md) | 06 | Streaming quantile reference; hardware cost remains open. |
@@ -116,3 +117,8 @@ Records awaiting full-text review are explicitly marked.
 | [`albericio2016pragmatic`](papers/2016-albericio-bit-pragmatic.md) | 12 | Data-dependent hardware work and synchronization costs. |
 | [`wang2019haq`](papers/2019-wang-haq.md) | 12 | Offline hardware-aware mixed-precision search. |
 | [`yu2021anyprecision`](papers/2021-yu-any-precision.md) | 12 | Model preparation for selectable runtime precision. |
+| [`heusel2017fid`](papers/2017-heusel-frechet-inception-distance.md) | 13 | Distributional image quality, distinct from reference-output similarity. |
+| [`li2023qdiffusion`](papers/2023-li-q-diffusion.md) | 13 | Full-trajectory calibration and diffusion activation structure. |
+| [`he2023ptqd`](papers/2023-he-ptqd.md) | 13 | Quantization noise and trajectory-level correction. |
+| [`huang2024vbench`](papers/2024-huang-vbench.md) | 13 | Multidimensional video quality and temporal consistency. |
+| [`ryu2026qdrift`](papers/2026-ryu-q-drift.md) | 13 | Sampler-side correction and task-quality versus trajectory similarity. |
