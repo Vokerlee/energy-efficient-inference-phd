@@ -16,6 +16,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 07 — Quantization and structured sparsity | Reviewed 2026-11-08 | [Review](topics/07-quantization-and-structured-sparsity.md) |
 | 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08 | [Review](topics/08-accumulation-and-block-scaling.md) |
 | 09 — Adaptive low-rank computation | Reviewed 2026-11-08 | [Review](topics/09-adaptive-low-rank-computation.md) |
+| 10 — Fast matrix multiplication | Reviewed 2026-11-08 | [Review](topics/10-fast-matrix-multiplication.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -100,3 +101,8 @@ Records awaiting full-text review are explicitly marked.
 | [`garcia2025rana`](papers/2025-garcia-rana.md) | 09 | Input-dependent rank allocation with learned adapters. |
 | [`wang2025nalr`](papers/2025-wang-noise-adaptive-low-rank.md) | 09 | Noise-conditioned rank schedules for diffusion. |
 | [`chang2025palu`](papers/2025-chang-palu.md) | 09 | Projection/reconstruction trade-offs in a memory-focused workload. |
+| [`demmel2007stable`](papers/2007-demmel-fast-linear-algebra.md) | 10 | Stability assumptions for fast numerical algorithms. |
+| [`huang2016strassen`](papers/2016-huang-strassen-reloaded.md) | 10 | Practical Strassen fusion and workspace costs. |
+| [`lavin2016fastconv`](papers/2016-lavin-fast-convolution.md) | 10 | Small-filter convolution with transform overhead. |
+| [`barabasz2019winograd`](papers/2019-barabasz-winograd-error.md) | 10 | Numerical cost of larger/faster convolution transforms. |
+| [`fawzi2022alphatensor`](papers/2022-fawzi-alphatensor.md) | 10 | Algorithm search with domain and hardware constraints. |
