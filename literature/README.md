@@ -12,6 +12,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08 | [Review](topics/03-im2col-and-convolution-mapping.md) |
 | 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08 | [Review](topics/04-dynamic-activation-quantization.md) |
 | 05 — Outliers and selective precision | Reviewed 2026-11-08 | [Review](topics/05-outliers-and-selective-precision.md) |
+| 06 — Range prediction and tracking | Reviewed 2026-11-08 | [Review](topics/06-range-prediction-and-tracking.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -79,3 +80,8 @@ Records awaiting full-text review are explicitly marked.
 | [`ramachandran2025microscopiq`](papers/2025-ramachandran-microscopiq.md) | 05 | Weight-outlier representation and reconstruction hardware. |
 | [`li2025svdquant`](papers/2025-li-svdquant.md) | 05 | Diffusion outlier handling through a fused low-rank branch. |
 | [`meng2026sharq`](papers/2026-meng-sharq.md) | 05 | Online sparse–dense FP4 activation decomposition. |
+| [`koster2017flexpoint`](papers/2017-koster-flexpoint.md) | 06 | Bounded-history exponent prediction and initialization. |
+| [`dunning2019tdigest`](papers/2019-dunning-t-digest.md) | 06 | Streaming quantile reference; hardware cost remains open. |
+| [`micikevicius2022fp8`](papers/2022-micikevicius-fp8-formats.md) | 06 | FP8 representation and the separate scale-selection problem. |
+| [`li2026scalepredictor`](papers/2026-li-scale-predictor.md) | 06 | Instance-aware prediction of deeper quantization scales. |
+| [`chen2024mixq`](papers/2024-chen-mixq.md) | 06 | Online outlier-prediction competitor; full text pending. |
