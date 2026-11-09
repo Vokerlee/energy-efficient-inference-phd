@@ -18,6 +18,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 09 — Adaptive low-rank computation | Reviewed 2026-11-08 | [Review](topics/09-adaptive-low-rank-computation.md) |
 | 10 — Fast matrix multiplication | Reviewed 2026-11-08 | [Review](topics/10-fast-matrix-multiplication.md) |
 | 11 — Operator fusion and streaming inference | Reviewed 2026-11-08 | [Review](topics/11-operator-fusion-and-streaming.md) |
+| 12 — Hardware control for adaptive execution | Reviewed 2026-11-08 | [Review](topics/12-adaptive-execution-control.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -78,8 +79,8 @@ Records awaiting full-text review are explicitly marked.
 | [`rouhani2023mx`](papers/2023-rouhani-microscaling.md) | 04, 08 | Microscaling representation and conversion foundations. |
 | [`abdelmaksoud2026adip`](papers/2026-abdelmaksoud-adip.md) | 04 | Precision-scalable systolic execution; controller distinction. |
 | [`fasoli2026microscaling`](papers/2026-fasoli-microscaling-limits.md) | 04 | Scale quantization can defeat finer grouping. |
-| [`song2020drq`](papers/2020-song-drq.md) | 04 | Priority dynamic-quantization competitor; full text pending. |
-| [`liu2024drift`](papers/2024-liu-drift.md) | 04 | Distribution-based adaptation competitor; full text pending. |
+| [`song2020drq`](papers/2020-song-drq.md) | 04, 12 | Priority dynamic-quantization competitor; full text pending. |
+| [`liu2024drift`](papers/2024-liu-drift.md) | 04, 12 | Distribution-based adaptation competitor; full text pending. |
 | [`dettmers2022llmint8`](papers/2022-dettmers-llm-int8.md) | 05 | Activation outliers routed to a higher-precision feature path. |
 | [`guo2023olive`](papers/2023-guo-olive.md) | 05 | Locally aligned outlier encoding with lossy victims. |
 | [`ramachandran2025microscopiq`](papers/2025-ramachandran-microscopiq.md) | 05 | Weight-outlier representation and reconstruction hardware. |
@@ -88,10 +89,10 @@ Records awaiting full-text review are explicitly marked.
 | [`koster2017flexpoint`](papers/2017-koster-flexpoint.md) | 06 | Bounded-history exponent prediction and initialization. |
 | [`dunning2019tdigest`](papers/2019-dunning-t-digest.md) | 06 | Streaming quantile reference; hardware cost remains open. |
 | [`micikevicius2022fp8`](papers/2022-micikevicius-fp8-formats.md) | 06 | FP8 representation and the separate scale-selection problem. |
-| [`li2026scalepredictor`](papers/2026-li-scale-predictor.md) | 06 | Instance-aware prediction of deeper quantization scales. |
-| [`chen2024mixq`](papers/2024-chen-mixq.md) | 06 | Online outlier-prediction competitor; full text pending. |
+| [`li2026scalepredictor`](papers/2026-li-scale-predictor.md) | 06, 12 | Instance-aware prediction of deeper quantization scales. |
+| [`chen2024mixq`](papers/2024-chen-mixq.md) | 06, 12 | Online outlier-prediction competitor; full text pending. |
 | [`parashar2017scnn`](papers/2017-parashar-scnn.md) | 07 | Compressed sparse operands and specialized accumulation. |
-| [`shomron2021sparq`](papers/2021-shomron-sparsity-aware-quantization.md) | 07 | Runtime bit-window and zero-aware activation quantization. |
+| [`shomron2021sparq`](papers/2021-shomron-sparsity-aware-quantization.md) | 07, 12 | Runtime bit-window and zero-aware activation quantization. |
 | [`wu2022sparseloop`](papers/2022-wu-sparseloop.md) | 07 | Sparse action modeling with format and skipping overhead. |
 | [`kam2025panacea`](papers/2025-kam-panacea.md) | 07 | Asymmetric quantization and structured bit-slice opportunities. |
 | [`blanchard2020blockfma`](papers/2020-blanchard-block-fma.md) | 08 | Numerical semantics of mixed-precision block accumulation. |
@@ -112,3 +113,6 @@ Records awaiting full-text review are explicitly marked.
 | [`nayak2024fusemax`](papers/2024-nayak-fusemax.md) | 11 | Attention mapping across matrix and reduction stages. |
 | [`shah2024flashattention3`](papers/2024-shah-flashattention-3.md) | 11 | Low-precision attention with asynchronous execution. |
 | [`zadouri2026flashattention4`](papers/2026-zadouri-flashattention-4.md) | 11 | Pipeline redesign when matrix and nonlinear throughput scale differently. |
+| [`albericio2016pragmatic`](papers/2016-albericio-bit-pragmatic.md) | 12 | Data-dependent hardware work and synchronization costs. |
+| [`wang2019haq`](papers/2019-wang-haq.md) | 12 | Offline hardware-aware mixed-precision search. |
+| [`yu2021anyprecision`](papers/2021-yu-any-precision.md) | 12 | Model preparation for selectable runtime precision. |
