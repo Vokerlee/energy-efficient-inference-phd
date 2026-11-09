@@ -11,6 +11,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08 | [Review](topics/02-matrix-multiplier-architectures.md) |
 | 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08 | [Review](topics/03-im2col-and-convolution-mapping.md) |
 | 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08 | [Review](topics/04-dynamic-activation-quantization.md) |
+| 05 — Outliers and selective precision | Reviewed 2026-11-08 | [Review](topics/05-outliers-and-selective-precision.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -73,3 +74,8 @@ Records awaiting full-text review are explicitly marked.
 | [`fasoli2026microscaling`](papers/2026-fasoli-microscaling-limits.md) | 04 | Scale quantization can defeat finer grouping. |
 | [`song2020drq`](papers/2020-song-drq.md) | 04 | Priority dynamic-quantization competitor; full text pending. |
 | [`liu2024drift`](papers/2024-liu-drift.md) | 04 | Distribution-based adaptation competitor; full text pending. |
+| [`dettmers2022llmint8`](papers/2022-dettmers-llm-int8.md) | 05 | Activation outliers routed to a higher-precision feature path. |
+| [`guo2023olive`](papers/2023-guo-olive.md) | 05 | Locally aligned outlier encoding with lossy victims. |
+| [`ramachandran2025microscopiq`](papers/2025-ramachandran-microscopiq.md) | 05 | Weight-outlier representation and reconstruction hardware. |
+| [`li2025svdquant`](papers/2025-li-svdquant.md) | 05 | Diffusion outlier handling through a fused low-rank branch. |
+| [`meng2026sharq`](papers/2026-meng-sharq.md) | 05 | Online sparse–dense FP4 activation decomposition. |
