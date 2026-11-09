@@ -13,6 +13,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08 | [Review](topics/04-dynamic-activation-quantization.md) |
 | 05 — Outliers and selective precision | Reviewed 2026-11-08 | [Review](topics/05-outliers-and-selective-precision.md) |
 | 06 — Range prediction and tracking | Reviewed 2026-11-08 | [Review](topics/06-range-prediction-and-tracking.md) |
+| 07 — Quantization and structured sparsity | Reviewed 2026-11-08 | [Review](topics/07-quantization-and-structured-sparsity.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -45,7 +46,7 @@ Records awaiting full-text review are explicitly marked.
 | [`parashar2019timeloop`](papers/2019-parashar-timeloop.md) | 01, 02 | Mapping-dependent activity and cost modeling. |
 | [`wu2019accelergy`](papers/2019-wu-accelergy.md) | 01 | Action-specific component-energy estimation. |
 | [`jouppi2021tpuv4i`](papers/2021-jouppi-tpuv4i.md) | 01, 02 | Production inference design and unequal energy scaling. |
-| [`liu2022s2ta`](papers/2022-liu-s2ta.md) | 01, 02, 03 | INT8 array buffering costs and sparsity overhead. |
+| [`liu2022s2ta`](papers/2022-liu-s2ta.md) | 01, 02, 03, 07 | INT8 array buffering costs and sparsity overhead. |
 | [`patel2024splitwise`](papers/2024-patel-splitwise.md) | 01 | Different inference phases and power sensitivities. |
 | [`yang2024parttime`](papers/2024-yang-power-measurements.md) | 01 | Validation limits of software-visible GPU power sensors. |
 | [`gregersen2024inputpower`](papers/2024-gregersen-input-dependent-power.md) | 01 | Operand patterns affect GEMM power. |
@@ -60,12 +61,12 @@ Records awaiting full-text review are explicitly marked.
 | [`chen2019eyerissv2`](papers/2019-chen-eyeriss-v2.md) | 02 | Flexible operand delivery, sparse execution, and utilization analysis. |
 | [`qin2020sigma`](papers/2020-qin-sigma.md) | 02 | Flexible dot-product/reduction architecture for irregular matrices. |
 | [`genc2021gemmini`](papers/2021-genc-gemmini.md) | 02, 03 | Full-stack matrix accelerator, DMA, memory, and software integration. |
-| [`munoz2023flexagon`](papers/2023-munoz-martinez-flexagon.md) | 02 | Sparse dataflow flexibility and merging/reduction costs. |
+| [`munoz2023flexagon`](papers/2023-munoz-martinez-flexagon.md) | 02, 07 | Sparse dataflow flexibility and merging/reduction costs. |
 | [`cho2017mec`](papers/2017-cho-mec.md) | 03 | Compact lowering with multiple smaller matrix multiplications. |
 | [`dukhan2019indirect`](papers/2019-dukhan-indirect-convolution.md) | 03 | Pointer-based convolution without expanded activation copies. |
-| [`liu2020ssta`](papers/2020-liu-sparse-systolic-tensor-array.md) | 03 | Late hardware lowering reduces local-SRAM delivery demand. |
+| [`liu2020ssta`](papers/2020-liu-sparse-systolic-tensor-array.md) | 03, 07 | Late hardware lowering reduces local-SRAM delivery demand. |
 | [`selvam2021fuseconv`](papers/2021-selvam-fuseconv.md) | 03 | Depthwise utilization and the boundary between mapping and operator changes. |
-| [`soltaniyeh2022spots`](papers/2022-soltaniyeh-spots.md) | 03 | Pipelined hardware im2col, overlap reuse, and zero-block skipping. |
+| [`soltaniyeh2022spots`](papers/2022-soltaniyeh-spots.md) | 03, 07 | Pipelined hardware im2col, overlap reuse, and zero-block skipping. |
 | [`fornt2023im2col`](papers/2023-fornt-on-the-fly-im2col.md) | 03 | On-the-fly feeder with stride/dilation and explicit overhead accounting. |
 | [`dai2021vsquant`](papers/2021-dai-vs-quant.md) | 04 | Vector scales and their numerical/hardware trade-off. |
 | [`keller2022vsqchip`](papers/2022-keller-vector-scaled-accelerator.md) | 04 | Prototype evidence for low-bit vector-scaled inference. |
@@ -79,9 +80,13 @@ Records awaiting full-text review are explicitly marked.
 | [`guo2023olive`](papers/2023-guo-olive.md) | 05 | Locally aligned outlier encoding with lossy victims. |
 | [`ramachandran2025microscopiq`](papers/2025-ramachandran-microscopiq.md) | 05 | Weight-outlier representation and reconstruction hardware. |
 | [`li2025svdquant`](papers/2025-li-svdquant.md) | 05 | Diffusion outlier handling through a fused low-rank branch. |
-| [`meng2026sharq`](papers/2026-meng-sharq.md) | 05 | Online sparse–dense FP4 activation decomposition. |
+| [`meng2026sharq`](papers/2026-meng-sharq.md) | 05, 07 | Online sparse–dense FP4 activation decomposition. |
 | [`koster2017flexpoint`](papers/2017-koster-flexpoint.md) | 06 | Bounded-history exponent prediction and initialization. |
 | [`dunning2019tdigest`](papers/2019-dunning-t-digest.md) | 06 | Streaming quantile reference; hardware cost remains open. |
 | [`micikevicius2022fp8`](papers/2022-micikevicius-fp8-formats.md) | 06 | FP8 representation and the separate scale-selection problem. |
 | [`li2026scalepredictor`](papers/2026-li-scale-predictor.md) | 06 | Instance-aware prediction of deeper quantization scales. |
 | [`chen2024mixq`](papers/2024-chen-mixq.md) | 06 | Online outlier-prediction competitor; full text pending. |
+| [`parashar2017scnn`](papers/2017-parashar-scnn.md) | 07 | Compressed sparse operands and specialized accumulation. |
+| [`shomron2021sparq`](papers/2021-shomron-sparsity-aware-quantization.md) | 07 | Runtime bit-window and zero-aware activation quantization. |
+| [`wu2022sparseloop`](papers/2022-wu-sparseloop.md) | 07 | Sparse action modeling with format and skipping overhead. |
+| [`kam2025panacea`](papers/2025-kam-panacea.md) | 07 | Asymmetric quantization and structured bit-slice opportunities. |
