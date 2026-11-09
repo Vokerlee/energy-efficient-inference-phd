@@ -17,6 +17,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08 | [Review](topics/08-accumulation-and-block-scaling.md) |
 | 09 — Adaptive low-rank computation | Reviewed 2026-11-08 | [Review](topics/09-adaptive-low-rank-computation.md) |
 | 10 — Fast matrix multiplication | Reviewed 2026-11-08 | [Review](topics/10-fast-matrix-multiplication.md) |
+| 11 — Operator fusion and streaming inference | Reviewed 2026-11-08 | [Review](topics/11-operator-fusion-and-streaming.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -70,7 +71,7 @@ Records awaiting full-text review are explicitly marked.
 | [`liu2020ssta`](papers/2020-liu-sparse-systolic-tensor-array.md) | 03, 07 | Late hardware lowering reduces local-SRAM delivery demand. |
 | [`selvam2021fuseconv`](papers/2021-selvam-fuseconv.md) | 03 | Depthwise utilization and the boundary between mapping and operator changes. |
 | [`soltaniyeh2022spots`](papers/2022-soltaniyeh-spots.md) | 03, 07 | Pipelined hardware im2col, overlap reuse, and zero-block skipping. |
-| [`fornt2023im2col`](papers/2023-fornt-on-the-fly-im2col.md) | 03 | On-the-fly feeder with stride/dilation and explicit overhead accounting. |
+| [`fornt2023im2col`](papers/2023-fornt-on-the-fly-im2col.md) | 03, 11 | On-the-fly feeder with stride/dilation and explicit overhead accounting. |
 | [`dai2021vsquant`](papers/2021-dai-vs-quant.md) | 04, 08 | Vector scales and their numerical/hardware trade-off. |
 | [`keller2022vsqchip`](papers/2022-keller-vector-scaled-accelerator.md) | 04 | Prototype evidence for low-bit vector-scaled inference. |
 | [`yao2022zeroquant`](papers/2022-yao-zeroquant.md) | 04 | Software runtime quantization and conversion-overhead baseline. |
@@ -82,7 +83,7 @@ Records awaiting full-text review are explicitly marked.
 | [`dettmers2022llmint8`](papers/2022-dettmers-llm-int8.md) | 05 | Activation outliers routed to a higher-precision feature path. |
 | [`guo2023olive`](papers/2023-guo-olive.md) | 05 | Locally aligned outlier encoding with lossy victims. |
 | [`ramachandran2025microscopiq`](papers/2025-ramachandran-microscopiq.md) | 05 | Weight-outlier representation and reconstruction hardware. |
-| [`li2025svdquant`](papers/2025-li-svdquant.md) | 05, 09 | Diffusion outlier handling through a fused low-rank branch. |
+| [`li2025svdquant`](papers/2025-li-svdquant.md) | 05, 09, 11 | Diffusion outlier handling through a fused low-rank branch. |
 | [`meng2026sharq`](papers/2026-meng-sharq.md) | 05, 07 | Online sparse–dense FP4 activation decomposition. |
 | [`koster2017flexpoint`](papers/2017-koster-flexpoint.md) | 06 | Bounded-history exponent prediction and initialization. |
 | [`dunning2019tdigest`](papers/2019-dunning-t-digest.md) | 06 | Streaming quantile reference; hardware cost remains open. |
@@ -106,3 +107,8 @@ Records awaiting full-text review are explicitly marked.
 | [`lavin2016fastconv`](papers/2016-lavin-fast-convolution.md) | 10 | Small-filter convolution with transform overhead. |
 | [`barabasz2019winograd`](papers/2019-barabasz-winograd-error.md) | 10 | Numerical cost of larger/faster convolution transforms. |
 | [`fawzi2022alphatensor`](papers/2022-fawzi-alphatensor.md) | 10 | Algorithm search with domain and hardware constraints. |
+| [`alwani2016fused`](papers/2016-alwani-fused-layer-cnn.md) | 11 | Hardware inter-layer fusion and local intermediate storage. |
+| [`dao2022flashattention`](papers/2022-dao-flashattention.md) | 11 | Tiled attention with bounded intermediate storage. |
+| [`nayak2024fusemax`](papers/2024-nayak-fusemax.md) | 11 | Attention mapping across matrix and reduction stages. |
+| [`shah2024flashattention3`](papers/2024-shah-flashattention-3.md) | 11 | Low-precision attention with asynchronous execution. |
+| [`zadouri2026flashattention4`](papers/2026-zadouri-flashattention-4.md) | 11 | Pipeline redesign when matrix and nonlinear throughput scale differently. |
