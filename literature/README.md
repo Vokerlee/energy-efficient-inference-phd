@@ -20,6 +20,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 11 — Operator fusion and streaming inference | Reviewed 2026-11-08 | [Review](topics/11-operator-fusion-and-streaming.md) |
 | 12 — Hardware control for adaptive execution | Reviewed 2026-11-08 | [Review](topics/12-adaptive-execution-control.md) |
 | 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09 | [Review](topics/13-end-to-end-quality.md) |
+| 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -49,15 +50,15 @@ Records awaiting full-text review are explicitly marked.
 | [`chen2016eyeriss`](papers/2016-chen-eyeriss.md) | 01 | Matched-resource dataflow energy comparison. |
 | [`jouppi2017tpu`](papers/2017-jouppi-tpu.md) | 01, 02 | Systolic inference rooflines and utilization measurements. |
 | [`ghane2018energyroofline`](papers/2018-ghane-energy-roofline.md) | 01 | Energy/power extension of roofline reasoning. |
-| [`parashar2019timeloop`](papers/2019-parashar-timeloop.md) | 01, 02 | Mapping-dependent activity and cost modeling. |
-| [`wu2019accelergy`](papers/2019-wu-accelergy.md) | 01 | Action-specific component-energy estimation. |
+| [`parashar2019timeloop`](papers/2019-parashar-timeloop.md) | 01, 02, 14 | Mapping-dependent activity and cost modeling. |
+| [`wu2019accelergy`](papers/2019-wu-accelergy.md) | 01, 14 | Action-specific component-energy estimation. |
 | [`jouppi2021tpuv4i`](papers/2021-jouppi-tpuv4i.md) | 01, 02 | Production inference design and unequal energy scaling. |
 | [`liu2022s2ta`](papers/2022-liu-s2ta.md) | 01, 02, 03, 07 | INT8 array buffering costs and sparsity overhead. |
 | [`patel2024splitwise`](papers/2024-patel-splitwise.md) | 01 | Different inference phases and power sensitivities. |
-| [`yang2024parttime`](papers/2024-yang-power-measurements.md) | 01 | Validation limits of software-visible GPU power sensors. |
+| [`yang2024parttime`](papers/2024-yang-power-measurements.md) | 01, 14 | Validation limits of software-visible GPU power sensors. |
 | [`gregersen2024inputpower`](papers/2024-gregersen-input-dependent-power.md) | 01 | Operand patterns affect GEMM power. |
 | [`zhao2025viditq`](papers/2025-zhao-vidit-q.md) | 01, 04, 13 | Diffusion precision, conversion, latency, and quality. |
-| [`chung2025mlenergy`](papers/2025-chung-ml-energy-benchmark.md) | 01 | Generative-inference energy measurement and accounting. |
+| [`chung2025mlenergy`](papers/2025-chung-ml-energy-benchmark.md) | 01, 14 | Generative-inference energy measurement and accounting. |
 | [`chung2026joules`](papers/2026-chung-where-joules-go.md) | 01, 04 | Recent batch/precision energy trade-offs. |
 | [`cai2026mobilenpu`](papers/2026-cai-mobile-npu-efficiency.md) | 01 | NPU phase behavior and host/control energy. |
 | [`bonazzi2026tinyml`](papers/2026-bonazzi-tinyml-memory-wall.md) | 01 | Edge traffic bottlenecks and measurement-boundary caveats. |
@@ -94,7 +95,7 @@ Records awaiting full-text review are explicitly marked.
 | [`chen2024mixq`](papers/2024-chen-mixq.md) | 06, 12 | Online outlier-prediction competitor; full text pending. |
 | [`parashar2017scnn`](papers/2017-parashar-scnn.md) | 07 | Compressed sparse operands and specialized accumulation. |
 | [`shomron2021sparq`](papers/2021-shomron-sparsity-aware-quantization.md) | 07, 12 | Runtime bit-window and zero-aware activation quantization. |
-| [`wu2022sparseloop`](papers/2022-wu-sparseloop.md) | 07 | Sparse action modeling with format and skipping overhead. |
+| [`wu2022sparseloop`](papers/2022-wu-sparseloop.md) | 07, 14 | Sparse action modeling with format and skipping overhead. |
 | [`kam2025panacea`](papers/2025-kam-panacea.md) | 07 | Asymmetric quantization and structured bit-slice opportunities. |
 | [`blanchard2020blockfma`](papers/2020-blanchard-block-fma.md) | 08 | Numerical semantics of mixed-precision block accumulation. |
 | [`colbert2023a2q`](papers/2023-colbert-a2q.md) | 08 | Overflow bounds and training-constrained accumulation. |
@@ -122,3 +123,7 @@ Records awaiting full-text review are explicitly marked.
 | [`he2023ptqd`](papers/2023-he-ptqd.md) | 13 | Quantization noise and trajectory-level correction. |
 | [`huang2024vbench`](papers/2024-huang-vbench.md) | 13 | Multidimensional video quality and temporal consistency. |
 | [`ryu2026qdrift`](papers/2026-ryu-q-drift.md) | 13 | Sampler-side correction and task-quality versus trajectory similarity. |
+| [`chen2018tvm`](papers/2018-chen-tvm.md) | 14 | Portable computation, schedules, and extensible tensor primitives. |
+| [`reddi2020mlperf`](papers/2020-reddi-mlperf-inference.md) | 14 | Scenario-defined performance and task-quality evaluation. |
+| [`tschand2025mlperfpower`](papers/2025-tschand-mlperf-power.md) | 14 | Measured energy, instrumentation, and workload boundaries. |
+| [`raj2025scalesimv3`](papers/2025-raj-scale-sim-v3.md) | 14 | Systolic timing, memory effects, and bounded validation evidence. |
