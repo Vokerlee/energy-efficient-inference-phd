@@ -127,3 +127,19 @@ path, not the array's issued computation. Include feeder and transfer costs
 when comparing architectures. Systolic arrays remain central: these sources
 supply packing precedents and alternative delivery/reduction comparisons,
 not a reason to assume our array has their sparse capabilities.
+
+## Encoding and gating within the same array
+
+Supplement reviewed **2026-11-14**. [Peltekis et al.](../papers/2023-peltekis-systolic-bus-invert.md)
+encode selected BF16 fields and gate zero-valued activation work.
+[Bamberg et al.](../papers/2023-bamberg-neural-statistics-coding.md)
+separate physical bit coding from integer and real-value interpretation.
+
+These mechanisms can change energy without changing the matrix algorithm.
+Place encoders/decoders at explicit boundaries and verify that arithmetic
+receives the intended values. If arithmetic consumes an encoded representation
+directly, its datapath and correction logic must implement that contract.
+
+Zero gating and compaction are different: retaining an empty scheduled slot
+may save switching while leaving latency unchanged. Compare both within the
+same physical resources before attributing a throughput gain to sparsity.
