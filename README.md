@@ -15,10 +15,8 @@ and build instructions.
 
 ## Notes
 
-Standalone mathematical notes include LaTeX sources and compiled PDFs:
-
-- [Activation-error direction and matrix-output error](notes/activation-error-direction.pdf)
-  ([LaTeX source](notes/activation-error-direction.tex)).
+The [notes index](notes/README.md) describes each standalone mathematical note
+and links its LaTeX source and compiled PDF.
 
 ## Experiments
 
