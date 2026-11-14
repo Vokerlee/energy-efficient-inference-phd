@@ -113,3 +113,17 @@ establish inference-energy gains. Analog/in-memory and optical designs need a
 separate scope decision before extending this comparison.
 
 No experiment was run and no architecture or novelty claim was selected.
+
+## Sparse packing and operand delivery comparisons
+
+Supplement reviewed **2026-11-14**. [Column combining](../papers/2019-kung-column-combining.md)
+packs prepared filters for systolic execution, with conflict pruning and
+retraining. [Dual-side Sparse Tensor Core](../papers/2021-wang-dual-side-sparse-tensor-core.md)
+uses bitmap operands and an outer-product primitive. They expose different
+trade-offs in regularity, routing, and preparation.
+
+[Compressing DMA](../papers/2018-rhu-compressing-dma.md) changes a transfer
+path, not the array's issued computation. Include feeder and transfer costs
+when comparing architectures. Systolic arrays remain central: these sources
+supply packing precedents and alternative delivery/reduction comparisons,
+not a reason to assume our array has their sparse capabilities.
