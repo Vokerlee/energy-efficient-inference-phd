@@ -103,6 +103,21 @@ These papers narrow the comparison needed before any novelty claim. Separate
 the scientific policy from its hardware realization, and include both
 preparation costs and runtime overhead in the appropriate evaluation.
 
+## Controllers for temporal diffusion execution
+
+Supplement reviewed **2026-11-14**. [Ditto](../papers/2025-kim-ditto.md)
+contains both a width/zero classifier and execution-flow control informed by
+observed layer cycles. [EXION](../papers/2025-heo-exion.md) combines prepared
+thresholds, refresh iterations, and sparse execution. [SQ-DM](../papers/2025-fan-sq-dm.md)
+routes channels online but does not freshly optimize its bitwidth table per input.
+[Cambricon-D](../papers/2024-kong-cambricon-d.md) needs full-text assessment.
+
+These are essential competitors for autonomous adaptive hardware. Specify
+which decision is live, its frequency, its state, and its deadline. Compare
+fixed, simple live, and stateful policies on the same supported actions.
+Temporal similarity is an empirical input property, not permission to omit
+nonlinear updates or reconstruction without checking the complete trajectory.
+
 ## Search and limits
 
 Web searches on **2026-11-08** covered hardware-aware policy search,

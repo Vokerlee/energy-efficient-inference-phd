@@ -117,6 +117,23 @@ selector on the altered trajectory. Quantization can change rankings and
 therefore the selected computation. Measure this interaction rather than
 assuming the two approximations are independent.
 
+## Diffusion accelerator comparisons
+
+Supplement reviewed **2026-11-14** from original methods, with one explicit
+full-text dependency.
+
+| Source | Existing combination | Required comparison distinction |
+|---|---|---|
+| [Ditto](../papers/2025-kim-ditto.md) | Width classification and zero skipping on differences | History, encoder, reordering, reconstruction |
+| [SQ-DM](../papers/2025-fan-sq-dm.md) | Prepared precision and live channel routing | ReLU replacement/fine-tuning versus unchanged checkpoint |
+| [EXION](../papers/2025-heo-exion.md) | Output reuse/prediction and compaction | An omitted output is not a zero input |
+| [Cambricon-D](../papers/2024-kong-cambricon-d.md) | Differential dataflow | Full-text details pending |
+
+The generic idea of one hardware observation supporting precision and skipping
+already has relevant prior art. Compare a specific new policy at matched
+hardware resources and full-model quality. Include dense refresh and metadata;
+do not credit checkpoint modifications to the runtime selector.
+
 ## Search record
 
 Web searches on **2026-11-08** covered post-training sparsity-aware

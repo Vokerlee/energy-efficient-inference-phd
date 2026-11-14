@@ -11,7 +11,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08 | [Review](topics/02-matrix-multiplier-architectures.md) |
 | 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08 | [Review](topics/03-im2col-and-convolution-mapping.md) |
 | 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/04-dynamic-activation-quantization.md) |
-| 05 — Outliers and selective precision | Reviewed 2026-11-08 | [Review](topics/05-outliers-and-selective-precision.md) |
+| 05 — Outliers and selective precision | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/05-outliers-and-selective-precision.md) |
 | 06 — Range prediction and tracking | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/06-range-prediction-and-tracking.md) |
 | 07 — Quantization and structured sparsity | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/07-quantization-and-structured-sparsity.md) |
 | 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08 | [Review](topics/08-accumulation-and-block-scaling.md) |
@@ -135,3 +135,7 @@ Records awaiting full-text review are explicitly marked.
 | [`venieris2023nawqsr`](papers/2023-venieris-nawq-sr.md) | 04, 06, 12 | Offline precision schedule versus live range estimation on an NPU. |
 | [`abati2023resq`](papers/2023-abati-resq.md) | 04, 06, 12 | Error-bound-based dynamic residual activation quantization. |
 | [`moitra2024pivot`](papers/2024-moitra-pivot.md) | 12 | Input-dependent execution path with charged second-pass fallback. |
+| [`kim2025ditto`](papers/2025-kim-ditto.md) | 05, 06, 07, 12 | Hardware temporal-difference width selection and zero skipping. |
+| [`heo2025exion`](papers/2025-heo-exion.md) | 05, 06, 07, 12 | Temporal FFN reuse and compacted output-sparse execution. |
+| [`fan2025sqdm`](papers/2025-fan-sq-dm.md) | 05, 06, 07, 12 | Prepared low precision plus live sparse/dense channel routing. |
+| [`kong2024cambricond`](papers/2024-kong-cambricon-d.md) | 05, 06, 07, 12 | Differential-execution competitor; full text still pending. |
