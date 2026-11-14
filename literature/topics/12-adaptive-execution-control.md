@@ -126,6 +126,17 @@ provides a live block-precision comparator with prepared sensitivity metadata.
 [IGQ-ViT](../papers/2024-moon-igq-vit.md) has live group assignments with
 prepared quantizers. Preserve these distinctions in controller comparisons.
 
+## Randomized observations and feedback
+
+Supplement reviewed **2026-11-15**. [Slalom](../papers/2019-tramer-slalom.md)
+uses projected neural-operator checks; [SProbe](../papers/2026-napolean-sprobe.md)
+checks quantized GEMMs and illustrates the traffic cost of trailing observation.
+These are verification mechanisms, not automatically real-error precision
+selectors. [Hardt and Woodruff](../papers/2012-hardt-adaptive-sketches.md)
+show why guarantees for fixed inputs need not survive adaptive sketch queries.
+[Probabilistic range prediction](../papers/2025-santini-probabilistic-quantization.md)
+is another runtime-observation comparator with distinct calibrated preparation.
+
 ## Search and limits
 
 Web searches on **2026-11-08** covered hardware-aware policy search,

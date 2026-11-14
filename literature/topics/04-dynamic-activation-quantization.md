@@ -136,6 +136,13 @@ baseline. [AQuant](../papers/2023-li-aquant.md) changes activation rounding.
 Compare their decision/action boundaries separately; output-error awareness,
 sensitivity weighting, and dynamic grouping are established ingredients.
 
+## Probabilistic range prediction
+
+Supplement reviewed **2026-11-15**. [Santini et al.](../papers/2025-santini-probabilistic-quantization.md)
+predict output ranges from live inputs and weight statistics using a surrogate
+model. Its interval parameters are calibrated; keep that preparation distinct
+from runtime measurement and from precision selection.
+
 ## Search record
 
 Web searches on **2026-11-08** covered dynamic region/distribution quantization,
