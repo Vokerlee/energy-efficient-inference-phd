@@ -95,6 +95,34 @@ conversions, accumulator-buffer accesses, and fallback.
 Quantization-aware retraining is a separate comparison category. Keep it out
 of the primary fixed-weight activation experiment unless explicitly introduced.
 
+## Additional accumulator and native-MX baselines
+
+Supplement reviewed **2026-11-14**. The September report supplied discovery
+leads; its numerical percentages and novelty verdicts are not imported.
+
+| Source | Existing result | Transfer condition |
+|---|---|---|
+| [WrapNet](../papers/2021-ni-wrapnet.md) | Train for narrow wrap-around accumulation | Modified network/training, not exact unchanged inference |
+| [Sakr et al.](../papers/2019-sakr-accumulation-width.md) | Model variance retention, chunking, and sparse reduction lengths | Statistical assumptions and training setting |
+| [MXDOTP](../papers/2025-islamoglu-mxdotp.md) | Native scaled dot product with early accumulation | Wide internal representation and defined final rounding |
+| [MX robotics hardware](../papers/2025-cuyckens-mx-robotics.md) | Precision-scalable arithmetic and component costs | Specified implementation and input activity |
+
+A proposed runtime accumulator policy must distinguish three objectives:
+exact bounded integer reduction, controlled floating-point information loss,
+and task-tolerated approximation. A bound for one objective does not prove
+another. Changing block length or skipping terms also changes reduction
+semantics; a density-adjusted statistical estimate is not a worst-case bound.
+
+Use the declared physical reduction order and scale alignment when testing
+width changes. Compare conservative fixed width, a proven-bound mode where
+applicable, and any approximate mode separately. Include promotion, state
+transfer, and rounding costs, then evaluate full-model outputs.
+
+Native MX support is an important baseline: comparison against repeated
+software format conversion can exaggerate the headroom of a proposed
+hardware policy. Component breakdowns motivate characterization; they do not
+supply universal whole-array energy coefficients.
+
 ## Search and limits
 
 Web searches on **2026-11-08** covered accumulator-aware quantization, A2Q+,

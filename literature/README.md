@@ -14,7 +14,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 05 — Outliers and selective precision | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/05-outliers-and-selective-precision.md) |
 | 06 — Range prediction and tracking | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/06-range-prediction-and-tracking.md) |
 | 07 — Quantization and structured sparsity | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/07-quantization-and-structured-sparsity.md) |
-| 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08 | [Review](topics/08-accumulation-and-block-scaling.md) |
+| 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/08-accumulation-and-block-scaling.md) |
 | 09 — Adaptive low-rank computation | Reviewed 2026-11-08 | [Review](topics/09-adaptive-low-rank-computation.md) |
 | 10 — Fast matrix multiplication | Reviewed 2026-11-08 | [Review](topics/10-fast-matrix-multiplication.md) |
 | 11 — Operator fusion and streaming inference | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/11-operator-fusion-and-streaming.md) |
@@ -139,3 +139,7 @@ Records awaiting full-text review are explicitly marked.
 | [`heo2025exion`](papers/2025-heo-exion.md) | 05, 06, 07, 12 | Temporal FFN reuse and compacted output-sparse execution. |
 | [`fan2025sqdm`](papers/2025-fan-sq-dm.md) | 05, 06, 07, 12 | Prepared low precision plus live sparse/dense channel routing. |
 | [`kong2024cambricond`](papers/2024-kong-cambricon-d.md) | 05, 06, 07, 12 | Differential-execution competitor; full text still pending. |
+| [`ni2021wrapnet`](papers/2021-ni-wrapnet.md) | 08 | Training-assisted narrow wrap-around accumulation. |
+| [`sakr2019accumulation`](papers/2019-sakr-accumulation-width.md) | 08 | Statistical precision analysis with explicit distributional assumptions. |
+| [`islamoglu2025mxdotp`](papers/2025-islamoglu-mxdotp.md) | 08 | Native scaled dot-product semantics and wide internal accumulation. |
+| [`cuyckens2025mxrobot`](papers/2025-cuyckens-mx-robotics.md) | 08 | Implementation-specific MX accumulation and grouping costs. |
