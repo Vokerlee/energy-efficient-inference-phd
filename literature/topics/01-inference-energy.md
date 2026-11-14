@@ -261,3 +261,23 @@ English-language and public-access biased; GPU serving evidence is richer here
 than internal energy decompositions of current inference ASICs. Recent preprints
 may change. Historical workspace reviews supplied search leads only; their
 old scope exclusions and novelty verdicts were not adopted.
+
+## Lossless coding and value-dependent energy
+
+Supplement reviewed **2026-11-14**. [Selective bus-invert and zero gating](../papers/2023-peltekis-systolic-bus-invert.md)
+provide a BF16 systolic implementation baseline. [Statistics-aware coding](../papers/2023-bamberg-neural-statistics-coding.md)
+targets physical bit probabilities and transitions at memory and interconnect
+boundaries. Their evidence is component/design-specific, not measured savings
+for our NPU.
+
+Numerically identical inference can use different physical encodings and
+switching activity. Conversely, narrower values need not reduce every
+component's energy equally. Distinguish bit transitions, stored-bit probability,
+transferred bytes, arithmetic actions, and elapsed time.
+
+A proposed comparison holds input order, schedule, clock/voltage, and quality
+fixed while varying precision and lossless encoding separately. Charge
+encoder/decoder logic and metadata, and report static/background energy as
+well as dynamic energy. Activation statistics should come from the actual
+adapted trajectory. Do not reuse ReLU-derived savings for SiLU/GELU workloads
+without new characterization.

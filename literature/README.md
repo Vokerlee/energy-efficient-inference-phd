@@ -7,7 +7,7 @@ research, centered on systolic hardware and portable numerical experiments.
 
 | Topic | Status | Synthesis |
 |---|---|---|
-| 01 — Energy of compute-bound versus memory-bound inference | Reviewed 2026-11-08; 17 papers | [Review](topics/01-inference-energy.md) |
+| 01 — Energy of compute-bound versus memory-bound inference | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/01-inference-energy.md) |
 | 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/02-matrix-multiplier-architectures.md) |
 | 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/03-im2col-and-convolution-mapping.md) |
 | 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/04-dynamic-activation-quantization.md) |
@@ -146,3 +146,5 @@ Records awaiting full-text review are explicitly marked.
 | [`kung2019packing`](papers/2019-kung-column-combining.md) | 02, 07 | Training-assisted filter packing and physical systolic utilization. |
 | [`wang2021dualside`](papers/2021-wang-dual-side-sparse-tensor-core.md) | 02, 03, 07 | Bitmap im2col co-designed with dual-side sparse outer products. |
 | [`rhu2018cdma`](papers/2018-rhu-compressing-dma.md) | 02, 07 | Transfer-boundary activation compression with explicit upstream bandwidth. |
+| [`peltekis2023bic`](papers/2023-peltekis-systolic-bus-invert.md) | 01, 02 | BF16 systolic switching reduction, distinct from cycle skipping. |
+| [`bamberg2023nnstats`](papers/2023-bamberg-neural-statistics-coding.md) | 01, 02 | Data-dependent memory/interconnect coding with explicit scope limits. |
