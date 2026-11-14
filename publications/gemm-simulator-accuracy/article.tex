@@ -1,10 +1,24 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper, 12pt]{article}
 
-\usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[russian]{babel}
-\pagestyle{empty}
+%% Required GOST style
+\bibliographystyle{ugost2008l}
+
+\input{include/preambule.tex}
+\linespread{1.1}
 
 \begin{document}
-\null
+    \input{include/title.tex}
+    \input{parts/Abstract.tex}
+
+    \input{parts/S1_intro.tex}        %% Введение
+    \input{parts/S2_related.tex}      %% Связанные работы
+    \input{parts/S3_model.tex}        %% Постановка задачи и модель накопления
+    \input{parts/S4_method.tex}       %% Методология измерения
+    \input{parts/S5_results.tex}      %% Результаты
+    \input{parts/S6_discussion.tex}   %% Обсуждение
+    \input{parts/S7_conclusion.tex}   %% Заключение
+
+    \clearpage
+    \addcontentsline{toc}{section}{Список литературы}
+    \bibliography{literature}
 \end{document}
