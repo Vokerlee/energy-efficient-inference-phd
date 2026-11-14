@@ -1,0 +1,281 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={Systematic and random components of propagated error}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Cov}{Cov}
+\newtheorem{proposition}{Proposition}
+\title{Systematic and random components of propagated error}
+\author{}
+\date{15 November 2026}
+
+\begin{document}
+\maketitle
+\noindent\textbf{Status:} established moment identities with a conditional
+first-order network interpretation. No novelty or empirical claim is made.
+
+\section{Context and notation}
+We study how local numerical errors combine at a common receiving output.
+A local error is the difference between an approximate value and its reference
+value, measured at the same point in the computation. It may arise from
+quantization, rounding, or physical noise; no particular mechanism is assumed.
+
+There are $L\geq1$ error locations, indexed by $o,p\in\{1,\ldots,L\}$.
+At location $o$, the error is a column vector $\delta_o\in\R^{n_o}$;
+$n_o\geq1$ is its number of scalar entries. Tensors are flattened using a fixed
+ordering. The common receiving output has $m\geq1$ entries.
+Here $\R$ denotes the real numbers, $T$ denotes transpose, and $I_n$ is the
+$n\times n$ identity matrix. All transport arithmetic below is over real
+numbers; any additional arithmetic error must be included as another error
+contribution if it is to be covered.
+
+The symbol $\E$ denotes expectation over one explicitly specified ensemble
+of errors. Every mean and covariance below uses that same ensemble and is
+assumed finite. For random column vectors $a,b$, define
+$\Cov(a,b)=\E[(a-\E a)(b-\E b)^T]$ and $\Cov(a)=\Cov(a,a)$.
+For a scalar random variable $z$, $\operatorname{Var}(z)=\E[(z-\E z)^2]$.
+The root-mean-square (RMS) vector magnitude is $\sqrt{\E\norm{a}_2^2}$;
+it is not divided by the vector length. For a vector $a$,
+$\norm{a}_2=\sqrt{a^Ta}$ is its Euclidean norm. For a matrix $A$,
+$\tr(A)$ is its diagonal sum when $A$ is square,
+$\norm{A}_F=\sqrt{\tr(AA^T)}$ is its Frobenius norm, and
+$\norm{A}_2=\sup_{\norm{u}_2=1}\norm{Au}_2$ is its spectral norm.
+
+\section{Two components and the transport being studied}
+For a declared ensemble of local errors at operator $o$, write
+\begin{equation}
+ \delta_o=\mu_o+\xi_o,\qquad
+ \mu_o=\E\delta_o,\qquad \E\xi_o=0,\qquad
+ C_{op}=\E[\xi_o\xi_p^T],\quad\Sigma_o=C_{oo}.
+ \label{sr:decomposition}
+\end{equation}
+The systematic component $\mu_o\in\R^{n_o}$ is the mean error;
+$\xi_o=\delta_o-\mu_o\in\R^{n_o}$ is the centered fluctuation.
+The matrix $C_{op}\in\R^{n_o\times n_p}$ is the cross-covariance between
+locations $o$ and $p$; $\Sigma_o\in\R^{n_o\times n_o}$ is the covariance
+at location $o$. This decomposition is exact whenever second moments exist.
+The expectation must identify its ensemble: repeated physical noise, rounding
+randomness, or a specified input population. Deterministic quantization of a
+fixed input does not automatically produce random, unbiased noise.
+
+Let $M_o\in\R^{m\times n_o}$ be a fixed matrix mapping local error $\delta_o$
+to the common output space. Define the total transported error $d\in\R^m$ by
+\begin{equation}
+ d=\sum_{o=1}^L M_o\delta_o.
+ \label{sr:transport}
+\end{equation}
+For a network example, let $h_0\in\R^{n_0}$ be a fixed reference input and
+$h_o=f_o(h_{o-1})\in\R^{n_o}$ its reference intermediate values, with
+$n_L=m$. The differentiable map $f_o:\R^{n_{o-1}}\to\R^{n_o}$ is operator
+$o$. Consider the perturbed computation
+$\widetilde h_0=h_0$ and
+$\widetilde h_o=f_o(\widetilde h_{o-1})+\delta_o$:
+the local error is injected at the \emph{output} of that operator, and may
+depend on preceding errors. Its reference Jacobian is
+$J_o=\left.\partial f_o/\partial h\right|_{h=h_{o-1}}
+\in\R^{n_o\times n_{o-1}}$, where $h$ is the input argument of $f_o$.
+The first-order transport is $M_o=J_L\cdots J_{o+1}$ for $o<L$, and
+$M_L=I_m$. The actual final-output error is
+$\Delta=\widetilde h_L-h_L\in\R^m$; write $\Delta=d+R$, with
+$R=\Delta-d\in\R^m$ the linearization remainder containing nonlinear effects.
+The identities below are exact for $d$, not a universal exact law for $\Delta$.
+If inputs vary, the Jacobians also vary: condition on the reference input or
+retain their joint dependence when averaging.
+This is a chain-rule specialization of first-order uncertainty propagation;
+see~\cite[Sections 5.1--5.2, Eqs.~(10), (13)]{jcgm2008gum}.
+
+\section{Mean direction and covariance propagate differently}
+\begin{proposition}[General second-moment identity]
+With fixed $M_o$ and finite second moments,
+\begin{align}
+ \E\norm{d}_2^2
+ &=\left\lVert\sum_o M_o\mu_o\right\rVert_2^2
+   +\sum_o\tr(M_o\Sigma_o M_o^T) \notag\\
+ &\quad+2\sum_{o<p}\tr(M_o C_{op}M_p^T).
+ \label{sr:general}
+\end{align}
+Here $\sum_o$ means $\sum_{o=1}^L$, and $\sum_{o<p}$ sums once over every
+pair $1\leq o<p\leq L$.
+\end{proposition}
+\begin{proof}
+Write $d=\bar d+\eta$, where $\bar d=\E d=\sum_oM_o\mu_o\in\R^m$ is its
+mean and $\eta=d-\bar d=\sum_oM_o\xi_o\in\R^m$ its centered fluctuation.
+Since $\E\eta=0$,
+$\E\norm{d}_2^2=\norm{\bar d}_2^2+\tr\Cov(\eta)$.
+Expanding $\Cov(\eta)$ gives~\eqref{sr:general}.
+\end{proof}
+The covariance and quadratic-moment identities used in this proof are standard;
+see~\cite[Section 6.2, Eqs.~(313)--(314), (327)--(329)]{petersen2012matrixcookbook}.
+
+The systematic contributions add as vectors before taking their norm.
+Their transported directions may reinforce, oppose, or be annihilated.
+Fluctuations propagate through covariance, including correlations between
+operators. Zero mean alone does not remove the cross-covariance terms.
+
+If fluctuations at different operators are uncorrelated ($C_{op}=0$ for
+$o\ne p$), their contributions add in squared norm. Independence is sufficient
+but stronger than necessary. With the additional isotropic assumption
+$\Sigma_o=\sigma_o^2 I_{n_o}$, where $\sigma_o\geq0$ is the common standard
+deviation of coordinates at location $o$, the expression reduces to
+\begin{equation}
+ \E\norm{d}_2^2=
+ \left\lVert\sum_o M_o\mu_o\right\rVert_2^2
+ +\sum_o\sigma_o^2\norm{M_o}_F^2.
+ \label{sr:isotropic}
+\end{equation}
+This is the systematic/centered-fluctuation split under explicit assumptions.
+Isotropy and zero cross-covariance each require justification; a shared scale
+or reused hardware can introduce correlations between contributions.
+
+\section{The two gains require consistent normalization}
+For one operator, suppress its index: $n$ is its local error dimension,
+$M\in\R^{m\times n}$ its transport, $\mu\in\R^n$ its mean error,
+$\xi\in\R^n$ its centered fluctuation, and $\Sigma=\Cov(\xi)$ its covariance.
+For $\mu\ne0$, define its magnitude $\epsilon_s=\norm{\mu}_2$ and unit
+direction $u=\mu/\epsilon_s$. Its directional gain $g_s(u)$ is defined by
+\begin{equation}
+ g_s(u)=\norm{Mu}_2,\qquad \norm{M\mu}_2=\epsilon_s g_s(u).
+ \label{sr:directional-gain}
+\end{equation}
+If $\mu=0$, its transported mean is zero and no mean direction is needed.
+For isotropic fluctuations, $\sigma$ is a \emph{per-coordinate standard
+deviation}, meaning $\Sigma=\sigma^2 I_n$ with $\sigma\geq0$, whereas
+$r=\sqrt{\E\norm{\xi}_2^2}=\sigma\sqrt n$ is the RMS
+\emph{vector norm}. Consequently,
+\begin{equation}
+ \sqrt{\E\norm{M\xi}_2^2}
+ =\sigma\norm{M}_F
+ =r\,\frac{\norm{M}_F}{\sqrt n}.
+ \label{sr:isotropic-gain}
+\end{equation}
+Thus the gain relative to RMS vector error is $\norm{M}_F/\sqrt n$.
+Comparing $\norm{Mu}$ with unnormalized $\norm{M}_F$ at supposedly equal
+vector-error magnitude mixes conventions. The spectral norm is a worst-direction
+bound; $\norm{M}_F/\sqrt n\leq\norm{M}_2$.
+For general covariance with $\tr\Sigma>0$, define the RMS gain
+$g_{\Sigma}$ as output fluctuation RMS divided by input fluctuation RMS:
+\begin{equation}
+ g_{\Sigma}=\sqrt{\frac{\tr(M\Sigma M^T)}{\tr\Sigma}}.
+ \label{sr:covariance-gain}
+\end{equation}
+
+\paragraph{Equal-size example.}
+Set $n=2$ and $m=1$. Take a deterministic error $\mu=a(1,1)^T$, where $a>0$
+is an arbitrary scalar amplitude, and compare it with a separate zero-mean
+random error $\xi$ having covariance $\Sigma=a^2I_2$.
+Both input errors have RMS vector magnitude
+$\sqrt2a$. With $M_+=\begin{bmatrix}1&1\end{bmatrix}$, the systematic output
+magnitude is $2a$ and the fluctuation RMS is $\sqrt2a$. With
+$M_-=\begin{bmatrix}1&-1\end{bmatrix}$, the systematic output vanishes while
+the fluctuation RMS remains $\sqrt2a$. A bias is not intrinsically more harmful:
+its direction and the receiving map matter.
+
+\section{When linear and square-root growth hold}
+Suppose $M_o\mu_o=v$ for every $o$, where $v\in\R^m$ is a fixed vector.
+Suppose each transported centered fluctuation has the same RMS norm
+$s=\sqrt{\E\norm{M_o\xi_o}_2^2}>0$, with zero cross-covariance between
+different transported fluctuations. Then
+\begin{equation}
+ \left\lVert\sum_oM_o\mu_o\right\rVert_2=L\norm{v}_2,
+ \qquad
+ \sqrt{\E\left\lVert\sum_oM_o\xi_o\right\rVert_2^2}=\sqrt L\,s.
+ \label{sr:depth}
+\end{equation}
+Only in this equal-contribution, aligned-mean case does mean error dominate
+when $\norm{v}_2/s>1/\sqrt L$. These are conditional scaling laws, not a
+universal bias-versus-noise ordering.
+
+Two counterexamples delimit the claim. Transported means $v$ and $-v$ cancel.
+Conversely, if every transported fluctuation is the same random vector $Zv$,
+where $Z$ is one shared scalar random variable with $\E Z=0$ and $\E Z^2=1$,
+their sum has RMS norm $L\norm{v}_2$.
+It is zero-mean but perfectly correlated and therefore has linear RMS growth.
+The word \emph{coherent} describes alignment/correlation after transport;
+nonzero local mean does not itself guarantee such alignment across layers.
+
+The same accounting applies to a finite dot product. Let $K\geq1$ be the
+number of reduction terms, $w=(w_1,\ldots,w_K)^T\in\R^K$ the fixed weights,
+and $e=(e_1,\ldots,e_K)^T\in\R^K$ the random errors in their corresponding
+operands. Define the scalar output error $z=\sum_{k=1}^K w_ke_k=w^Te$.
+Suppose $\E e=\beta\mathbf1_K$ and $\Cov(e)=\sigma^2I_K$, where
+$\beta\in\R$ is the common coordinate mean, $\mathbf1_K$ is the vector of
+$K$ ones, and $\sigma\geq0$ is the common coordinate standard deviation.
+Then
+\begin{equation}
+ \E z=\beta\sum_{k=1}^K w_k,\qquad
+ \sqrt{\operatorname{Var}(z)}=\sigma\sqrt{\sum_{k=1}^K w_k^2}.
+ \label{sr:reduction}
+\end{equation}
+The familiar $K\beta$ versus $\sqrt K\,\sigma$ follows for $w_k=1$;
+arbitrary weights can change the comparison or cancel its mean term.
+These additive-error RMS identities differ from the probabilistic
+backward-error bounds for computed inner products
+in~\cite[Section 3.1]{higham2019probabilistic}.
+
+\section{What the distinction supports}
+Mean, variance, and relevant correlations describe different parts of an error;
+one mean-squared-error (MSE) number generally cannot identify their downstream
+effect. Here MSE means a squared error averaged over the declared ensemble,
+with any coordinate normalization stated explicitly. A practical
+estimator must specify its ensemble, normalization, and available observations.
+These identities do not supply downstream Jacobians for free or establish an
+online control algorithm. Final task quality requires separate evaluation of
+the actual perturbed computation, including nonlinear and input-dependent effects.
+
+The companion note
+\href{activation-error-direction.pdf}{\emph{Activation-error direction and
+matrix-output error}} gives the deterministic, single-matrix counterpart.
+Both notes are mathematical background, with no claim that cancellation is
+frequent in trained networks or that a particular compensation policy helps.
+
+\section{Literature and provenance}
+\paragraph{Established identities.}
+Petersen and Pedersen~\cite{petersen2012matrixcookbook} collect the moment
+identities used in~\eqref{sr:general}; Section 10.4 supplies the matrix norms.
+Equations~\eqref{sr:isotropic}--\eqref{sr:covariance-gain},
+\eqref{sr:depth}, and~\eqref{sr:reduction} are algebraic specializations
+derived here. The examples and counterexamples are constructed illustrations.
+
+\paragraph{First-order interpretation.}
+JCGM~\cite{jcgm2008gum} gives the correlated-input uncertainty framework.
+Its Annex E.3.2 distinguishes uncertainty from realized error; applying
+the framework to local numerical errors requires the declared ensemble
+and linearization, rather than a neural-network accuracy guarantee.
+
+\paragraph{Assumptions and rounding models.}
+Higham and Mary~\cite[Model 2.1; Sections 3.1, 4.2]{higham2019probabilistic}
+analyze bounded, independent, mean-zero rounding errors and give failure cases.
+They do not establish isotropic neural quantization noise or the depth law
+in~\eqref{sr:depth}. Isotropy, uncorrelated errors, and aligned equal
+contributions are chosen assumptions here, requiring separate validation.
+
+\renewcommand{\refname}{References}
+\begin{thebibliography}{9}
+\bibitem{petersen2012matrixcookbook}
+K.~B. Petersen and M.~S. Pedersen.
+\emph{The Matrix Cookbook}. Version 15 November 2012.
+Sections 6.2 and 10.4.
+\href{https://www2.imm.dtu.dk/pubdb/edoc/imm3274.pdf}{Author PDF}.
+
+\bibitem{jcgm2008gum}
+Joint Committee for Guides in Metrology.
+\emph{Evaluation of measurement data---Guide to the expression of
+uncertainty in measurement}. JCGM 100:2008, corrected version 2010.
+Sections 5.1--5.2 and Annex E.3.2.
+\href{https://doi.org/10.59161/JCGM100-2008E}{doi:10.59161/JCGM100-2008E}.
+
+\bibitem{higham2019probabilistic}
+N.~J. Higham and T.~Mary.
+A new approach to probabilistic rounding error analysis.
+\emph{SIAM Journal on Scientific Computing}, 41(5):A2815--A2835, 2019.
+\href{https://doi.org/10.1137/18M1226312}{doi:10.1137/18M1226312}.
+\href{https://eprints.maths.manchester.ac.uk/2731/1/paper.pdf}{Author manuscript},
+18 March 2019; Model 2.1 and Sections 3.1, 4.2.
+\end{thebibliography}
+\end{document}
