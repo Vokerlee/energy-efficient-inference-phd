@@ -123,6 +123,13 @@ software format conversion can exaggerate the headroom of a proposed
 hardware policy. Component breakdowns motivate characterization; they do not
 supply universal whole-array energy coefficients.
 
+## Statistical rounding assumptions
+
+Supplement reviewed **2026-11-15**. [Higham and Mary](../papers/2019-higham-mary-probabilistic-rounding.md)
+make their rounding model explicit before deriving probabilistic bounds.
+Distinguish such backward-error bounds from RMS identities for additive errors;
+neither makes zero mean or independence automatic on an accelerator.
+
 ## Search and limits
 
 Web searches on **2026-11-08** covered accumulator-aware quantization, A2Q+,
