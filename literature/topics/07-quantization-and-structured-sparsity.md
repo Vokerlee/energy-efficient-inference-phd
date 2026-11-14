@@ -134,6 +134,23 @@ already has relevant prior art. Compare a specific new policy at matched
 hardware resources and full-model quality. Include dense refresh and metadata;
 do not credit checkpoint modifications to the runtime selector.
 
+## Packing, compression, and actual skipped work
+
+Supplement reviewed **2026-11-14**.
+
+- [Column combining](../papers/2019-kung-column-combining.md) improves systolic occupancy through prepared weight packing and model changes.
+- [Dual-side Sparse Tensor Core](../papers/2021-wang-dual-side-sparse-tensor-core.md) pairs sparse operands with bitmap lowering and outer-product execution.
+- [Compressing DMA](../papers/2018-rhu-compressing-dma.md) reduces traffic on a particular transfer path, without by itself changing array cycles.
+
+Keep these benefits separate in a runtime activation experiment. Account for
+packing/index generation, order restoration, metadata, additional source reads,
+and the supported sparse operand/dimension. A smaller stored tensor, fewer
+useful MACs, and fewer issued physical blocks are three different observations.
+
+Compare prepared weight mechanisms as baselines while keeping weights fixed
+for the proposed activation-only policy. Do not silently charge their model
+changes to one system and omit them from another.
+
 ## Search record
 
 Web searches on **2026-11-08** covered post-training sparsity-aware

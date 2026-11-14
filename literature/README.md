@@ -8,8 +8,8 @@ research, centered on systolic hardware and portable numerical experiments.
 | Topic | Status | Synthesis |
 |---|---|---|
 | 01 — Energy of compute-bound versus memory-bound inference | Reviewed 2026-11-08; 17 papers | [Review](topics/01-inference-energy.md) |
-| 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08 | [Review](topics/02-matrix-multiplier-architectures.md) |
-| 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08 | [Review](topics/03-im2col-and-convolution-mapping.md) |
+| 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/02-matrix-multiplier-architectures.md) |
+| 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/03-im2col-and-convolution-mapping.md) |
 | 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/04-dynamic-activation-quantization.md) |
 | 05 — Outliers and selective precision | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/05-outliers-and-selective-precision.md) |
 | 06 — Range prediction and tracking | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/06-range-prediction-and-tracking.md) |
@@ -143,3 +143,6 @@ Records awaiting full-text review are explicitly marked.
 | [`sakr2019accumulation`](papers/2019-sakr-accumulation-width.md) | 08 | Statistical precision analysis with explicit distributional assumptions. |
 | [`islamoglu2025mxdotp`](papers/2025-islamoglu-mxdotp.md) | 08 | Native scaled dot-product semantics and wide internal accumulation. |
 | [`cuyckens2025mxrobot`](papers/2025-cuyckens-mx-robotics.md) | 08 | Implementation-specific MX accumulation and grouping costs. |
+| [`kung2019packing`](papers/2019-kung-column-combining.md) | 02, 07 | Training-assisted filter packing and physical systolic utilization. |
+| [`wang2021dualside`](papers/2021-wang-dual-side-sparse-tensor-core.md) | 02, 03, 07 | Bitmap im2col co-designed with dual-side sparse outer products. |
+| [`rhu2018cdma`](papers/2018-rhu-compressing-dma.md) | 02, 07 | Transfer-boundary activation compression with explicit upstream bandwidth. |

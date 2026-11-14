@@ -141,3 +141,20 @@ Their search visibility is recorded without adopting their numerical claims.
 No common-hardware experiment was performed. Cross-paper figures cannot
 identify a global winner, and the combination of feeder reuse and adaptation
 requires a dedicated novelty search before a PhD claim.
+
+## Bitmap lowering and the sparse multiplier
+
+Supplement reviewed **2026-11-14**. [Dual-side Sparse Tensor Core](../papers/2021-wang-dual-side-sparse-tensor-core.md)
+performs im2col on bitmap structure and fetches corresponding nonzeros for an
+outer-product-oriented consumer. It demonstrates that sparse lowering must
+match the compute primitive and sparse format.
+
+Its bitmap-lowering comparison is faster than the tested CSR alternative,
+but does not make sparse lowering universally cheaper than dense lowering.
+Compare the entire convolution path, including formation, metadata, index
+work, traffic, and matrix execution at the actual activation pattern.
+
+For quantized activations, regenerate the sparse representation at the stage
+where zeros are defined, preserve zero-point semantics, and keep physical
+padding separate. Short spatial windows do not by themselves establish either
+compressibility or profitable sparse execution.
