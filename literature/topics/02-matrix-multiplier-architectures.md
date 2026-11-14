@@ -4,6 +4,9 @@ Reviewed: **2026-11-08**. Targeted primary-source review. Systolic arrays are
 the central target; alternatives test the limits and portability of our ideas.
 Seven new paper notes complement the shared evidence from topic 01.
 
+For surrounding memory hierarchies, DMA, and matrix/vector producer-consumer
+paths, see [topic 15](15-accelerator-memory-and-execution.md).
+
 ## Main finding
 
 The useful comparison is not simply “systolic versus other.” Physical
