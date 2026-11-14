@@ -1,2 +1,6 @@
 # Generated publication PDFs.
 /*.pdf
+
+# Keep LaTeX sources visible despite the repository's Python ignore rules.
+!*/parts/
+!*/parts/*.tex
