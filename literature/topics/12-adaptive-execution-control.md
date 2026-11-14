@@ -85,6 +85,24 @@ Use an unattainable oracle only to estimate headroom and label it clearly.
 A learned policy's measured average performance does not prove safety or
 optimality on every input.
 
+## Prepared choices and decisions made during inference
+
+Supplement reviewed **2026-11-14**. The additional controller baselines are:
+
+- [CADyQ](../papers/2022-hong-cadyq.md): train a selector, then choose feature precision online.
+- [NAWQ-SR](../papers/2023-venieris-nawq-sr.md): prepare precision/DRE placement, then update selected ranges online.
+- [ResQ](../papers/2023-abati-resq.md): use an error surrogate to select residual precision.
+- [PIVOT](../papers/2024-moitra-pivot.md): use a completed low-effort prediction to decide on a second inference.
+
+A signal can be causal yet expensive. PIVOT's low-effort logits are available
+at its decision point, but this does not make them available to an earlier
+tile quantizer. Likewise, estimating every candidate's error has work that a
+small history predictor might avoid.
+
+These papers narrow the comparison needed before any novelty claim. Separate
+the scientific policy from its hardware realization, and include both
+preparation costs and runtime overhead in the appropriate evaluation.
+
 ## Search and limits
 
 Web searches on **2026-11-08** covered hardware-aware policy search,

@@ -105,6 +105,26 @@ The [2026 energy study](../papers/2026-chung-where-joules-go.md) reinforces the
 need to measure the complete execution path. No energy saving follows merely
 from selecting fewer bits.
 
+## Additional input-dependent precision baselines
+
+Supplement reviewed **2026-11-14**, using the September corpus as discovery
+leads and rechecking original methods.
+
+[CADyQ](../papers/2022-hong-cadyq.md) chooses feature precision from a trained
+patch/layer selector. [NAWQ-SR](../papers/2023-venieris-nawq-sr.md) instead
+prepares wordlengths offline and measures ranges at runtime for selected layers.
+Its deployment is evidence for a runtime framework, not automatically a
+hardware-autonomous bit selector.
+
+[Dynamic ResQ](../papers/2023-abati-resq.md) uses a local output-error bound
+to choose activation precision for temporal residuals. Error-derived runtime
+selection therefore already has relevant prior art. A future contribution must
+specify what differs in observations, bound, physical granularity, or cost,
+then demonstrate full-model quality.
+
+Do not replace these distinctions with the older report's blanket labels for
+runtime adaptation. Preserve preparation and model changes in comparisons.
+
 ## Search record
 
 Web searches on **2026-11-08** covered dynamic region/distribution quantization,

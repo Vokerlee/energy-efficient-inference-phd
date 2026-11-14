@@ -95,6 +95,22 @@ No current source proves the best predictor for our chip or a novel smoothing
 rule. Training-history mechanisms and model-specific image predictors are
 transfer candidates, not inference guarantees.
 
+## Measured range, predicted sensitivity, and residual error
+
+Supplement reviewed **2026-11-14**. These additional baselines use different
+signals and should not all be described as range predictors:
+
+| Source | Signal and action | Cost to charge |
+|---|---|---|
+| [NAWQ-SR](../papers/2023-venieris-nawq-sr.md) | Current min/max updates a prepared layer's scale/zero point | Tensor capture, scan, conversion |
+| [CADyQ](../papers/2022-hong-cadyq.md) | Feature deviation and image gradients select precision | Statistics, learned selector, training |
+| [ResQ](../papers/2023-abati-resq.md) | Current residual quantization error and weight norm select precision | Candidate error evaluation, history, reconstruction |
+
+Temporal residuals can have different ranges from original activations.
+Compare a range-history predictor against these mechanisms without giving it
+reference activations from an unmodified future pass. Test changes in scene,
+request, timestep, and residual reconstruction state separately.
+
 ## Search record
 
 Web searches on **2026-11-08** covered ScalePredictor, MixQ online prediction,

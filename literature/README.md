@@ -10,15 +10,15 @@ research, centered on systolic hardware and portable numerical experiments.
 | 01 — Energy of compute-bound versus memory-bound inference | Reviewed 2026-11-08; 17 papers | [Review](topics/01-inference-energy.md) |
 | 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08 | [Review](topics/02-matrix-multiplier-architectures.md) |
 | 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08 | [Review](topics/03-im2col-and-convolution-mapping.md) |
-| 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08 | [Review](topics/04-dynamic-activation-quantization.md) |
+| 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/04-dynamic-activation-quantization.md) |
 | 05 — Outliers and selective precision | Reviewed 2026-11-08 | [Review](topics/05-outliers-and-selective-precision.md) |
-| 06 — Range prediction and tracking | Reviewed 2026-11-08 | [Review](topics/06-range-prediction-and-tracking.md) |
+| 06 — Range prediction and tracking | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/06-range-prediction-and-tracking.md) |
 | 07 — Quantization and structured sparsity | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/07-quantization-and-structured-sparsity.md) |
 | 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08 | [Review](topics/08-accumulation-and-block-scaling.md) |
 | 09 — Adaptive low-rank computation | Reviewed 2026-11-08 | [Review](topics/09-adaptive-low-rank-computation.md) |
 | 10 — Fast matrix multiplication | Reviewed 2026-11-08 | [Review](topics/10-fast-matrix-multiplication.md) |
 | 11 — Operator fusion and streaming inference | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/11-operator-fusion-and-streaming.md) |
-| 12 — Hardware control for adaptive execution | Reviewed 2026-11-08 | [Review](topics/12-adaptive-execution-control.md) |
+| 12 — Hardware control for adaptive execution | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/12-adaptive-execution-control.md) |
 | 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09 | [Review](topics/13-end-to-end-quality.md) |
 | 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
 
@@ -131,3 +131,7 @@ Records awaiting full-text review are explicitly marked.
 | [`zhang2025sta`](papers/2025-zhang-sliding-tile-attention.md) | 07, 11 | Tile-aligned video attention with dense computation inside retained blocks. |
 | [`yuan2025nsa`](papers/2025-yuan-native-sparse-attention.md) | 07, 11 | Natively trained hierarchical block selection; distinct from post-training replacement. |
 | [`dai2026gsrs`](papers/2026-dai-growing-sparsity-reduced-search.md) | 07, 11 | Temporal sparse-mask adaptation with charged search and normalization timing. |
+| [`hong2022cadyq`](papers/2022-hong-cadyq.md) | 04, 06, 12 | Learned patch/layer activation-precision selection. |
+| [`venieris2023nawqsr`](papers/2023-venieris-nawq-sr.md) | 04, 06, 12 | Offline precision schedule versus live range estimation on an NPU. |
+| [`abati2023resq`](papers/2023-abati-resq.md) | 04, 06, 12 | Error-bound-based dynamic residual activation quantization. |
+| [`moitra2024pivot`](papers/2024-moitra-pivot.md) | 12 | Input-dependent execution path with charged second-pass fallback. |
