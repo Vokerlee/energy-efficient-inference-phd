@@ -99,6 +99,13 @@ residual of an outlier decomposition.
 record pending full text. Compare these interventions separately from outlier
 routing so that retained state, model changes, and approximation are visible.
 
+## Spectral decomposition comparison
+
+Supplement reviewed **2026-11-15**. [SpecQuant](../papers/2025-zhao-specquant.md)
+adds a Fourier-derived decomposition comparator. Keep its branch execution and
+reconstruction costs explicit; reconcile its allocation descriptions before
+treating it as evidence of autonomous runtime precision control.
+
 ## Search and limits
 
 Web discovery on **2026-11-08** covered LLM.int8, OliVe, MicroScopiQ,

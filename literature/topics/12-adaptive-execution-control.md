@@ -118,6 +118,14 @@ fixed, simple live, and stateful policies on the same supported actions.
 Temporal similarity is an empirical input property, not permission to omit
 nonlinear updates or reconstruction without checking the complete trajectory.
 
+## Sensitivity and grouping comparisons
+
+Supplement reviewed **2026-11-15**. [FGMP](../papers/2025-hooper-fgmp.md)
+provides a live block-precision comparator with prepared sensitivity metadata.
+[QBitOpt](../papers/2023-peters-qbitopt.md) is a training-time allocator;
+[IGQ-ViT](../papers/2024-moon-igq-vit.md) has live group assignments with
+prepared quantizers. Preserve these distinctions in controller comparisons.
+
 ## Search and limits
 
 Web searches on **2026-11-08** covered hardware-aware policy search,

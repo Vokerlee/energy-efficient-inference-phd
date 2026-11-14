@@ -125,6 +125,17 @@ then demonstrate full-model quality.
 Do not replace these distinctions with the older report's blanket labels for
 runtime adaptation. Preserve preparation and model changes in comparisons.
 
+## Additional activation-quantization mechanisms
+
+Supplement reviewed **2026-11-15**; source versions and focused reading scopes
+are recorded in the canonical notes.
+
+[FGMP](../papers/2025-hooper-fgmp.md) is a hardware-backed live precision
+baseline. [AQuant](../papers/2023-li-aquant.md) changes activation rounding.
+[IGQ-ViT](../papers/2024-moon-igq-vit.md) changes group membership per instance.
+Compare their decision/action boundaries separately; output-error awareness,
+sensitivity weighting, and dynamic grouping are established ingredients.
+
 ## Search record
 
 Web searches on **2026-11-08** covered dynamic region/distribution quantization,
