@@ -1,0 +1,166 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={Activation-error direction and matrix-output error}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+\newtheorem{proposition}{Proposition}
+
+\title{Activation-error direction and matrix-output error}
+\author{}
+\date{15 November 2026}
+
+\begin{document}
+\maketitle
+\noindent\textbf{Status:} mathematical observation; established linear algebra.
+No novelty or empirical performance claim is made.
+
+\section{Statement and scope}
+Two activation errors of the same magnitude can affect the receiving matrix
+multiplication very differently: their contributions can reinforce or cancel.
+The relevant quantity depends on both the error vector and the receiving
+weights, rather than on activation error magnitude alone.
+
+Let a fixed affine operation be
+\begin{equation}
+  y=Wx+b,\qquad W\in\R^{m\times n},\quad x\in\R^n,\quad b\in\R^m.
+  \label{aed:operation}
+\end{equation}
+An approximation, such as quantization, replaces $x$ by $\widehat{x}=x+e$.
+Compare outputs with the same $W$ and $b$ in exact real arithmetic. The newly
+introduced local output error is exactly
+\begin{equation}
+  d=\widehat{y}-y=W(\widehat{x}-x)=We.
+  \label{aed:local-error}
+\end{equation}
+Here all vector norms are Euclidean. This isolates activation approximation:
+weight changes, finite-precision accumulation, and error arriving from earlier
+operations are not included in $d$.
+
+\section{The receiving matrix defines an error geometry}
+\begin{proposition}
+Let $w_i$ denote column $i$ of $W$, and let $G=W^TW$. Then
+\begin{align}
+  \norm{d}_2^2
+    &=e^TGe \label{aed:gram}\\
+    &=\sum_{i=1}^n\norm{w_i}_2^2 e_i^2
+      +2\sum_{i<j}(w_i^Tw_j)e_i e_j.
+      \label{aed:cross-terms}
+\end{align}
+\end{proposition}
+\begin{proof}
+Substitute $d=We$ into $d^Td$ and expand the symmetric quadratic form.
+\end{proof}
+
+The diagonal terms measure individual contributions; the cross terms describe
+their interaction. A negative cross term reduces the combined squared error,
+while a positive one increases it. Even a weight-aware diagonal score
+$\sum_i\norm{w_i}_2^2 e_i^2$ discards these interactions and is not, in
+general, an upper bound.
+
+Since $G$ is positive semidefinite,
+\begin{equation}
+  \lambda_{\min}(G)\norm{e}_2^2
+  \leq\norm{We}_2^2
+  \leq\lambda_{\max}(G)\norm{e}_2^2.
+  \label{aed:spectral-bounds}
+\end{equation}
+Thus direction matters whenever $G$ has unequal eigenvalues. In particular,
+an error in the null space of $W$ has zero local output effect, however large
+its norm; an error of the same norm in a sensitive direction need not.
+If $G=cI$, output error depends only on the input error norm instead.
+
+\section{A quantization example with equal activation MSE}
+Choose $W=\begin{bmatrix}1&1\end{bmatrix}$ and $b=0$. Use unit-step
+round-to-nearest quantization $Q(t)=\operatorname{round}(t)$, without clipping.
+Consider the two inputs
+\begin{equation}
+  x_+=\begin{bmatrix}1/4\\1/4\end{bmatrix},\qquad
+  x_-=\begin{bmatrix}1/4\\-1/4\end{bmatrix}.
+  \label{aed:example-inputs}
+\end{equation}
+Both quantize to zero. Their activation errors satisfy
+\begin{equation}
+  e_+=\begin{bmatrix}-1/4\\-1/4\end{bmatrix},\qquad
+  e_-=\begin{bmatrix}-1/4\\1/4\end{bmatrix},\qquad
+  \norm{e_+}_2^2=\norm{e_-}_2^2=\frac18.
+  \label{aed:example-residuals}
+\end{equation}
+Their elementwise mean squared error is therefore $1/16$ in both cases.
+Nevertheless,
+\begin{equation}
+  We_+=-\frac12,\qquad We_-=0,
+  \qquad \norm{We_+}_2^2=\frac14,\quad\norm{We_-}_2^2=0.
+  \label{aed:example-outputs}
+\end{equation}
+For $e_+$ the two contributions reinforce; for $e_-$ they cancel exactly.
+The diagonal score is $1/8$ for both, so it underestimates the first output
+error and overestimates the second. This is an exact counterexample to using
+activation MSE alone to determine the receiving operation's output error.
+
+\section{The same issue across finite matrix blocks}
+Partition the reduction dimension into disjoint groups:
+\begin{equation}
+  W=\begin{bmatrix}W_1&\cdots&W_B\end{bmatrix},\qquad
+  e=\begin{bmatrix}e_1^T&\cdots&e_B^T\end{bmatrix}^T,\qquad
+  d_g=W_g e_g.
+  \label{aed:blocks}
+\end{equation}
+Then
+\begin{equation}
+  d=\sum_{g=1}^B d_g,\qquad
+  \norm{d}_2^2=\sum_g\norm{d_g}_2^2
+                +2\sum_{g<h}d_g^Td_h.
+  \label{aed:block-interactions}
+\end{equation}
+Adding squared block errors omits the interaction terms and is not a general
+upper bound. A conservative bound that requires no independence assumption is
+\begin{equation}
+  \norm{d}_2\leq\sum_g\norm{d_g}_2.
+  \label{aed:triangle-bound}
+\end{equation}
+The algebra applies to finite reduction blocks, but does not specify their
+physical layout, scale handling, or accumulator arithmetic. A causal decision
+can use observed contributions; it cannot rely on cancellation from unseen
+future blocks.
+
+\section{Interpretation and limits}
+The example establishes a possibility, not how frequently useful cancellation
+occurs in trained networks. Quantization errors are functions of current values;
+zero mean, independence, and favorable directions must not be assumed without
+evidence. Local output error also does not determine final task quality after
+nonlinear operations or an iterative inference trajectory.
+
+Related methods already exploit aspects of this problem: ResQ uses a local
+norm-based surrogate for dynamic residual precision~\cite{resq}; AQuant adjusts
+activation rounding to improve output error~\cite{aquant}; FGMP weights live
+activation quantization differences with prepared sensitivity~\cite{fgmp}.
+The identities above are reusable mathematical background, not a claim to
+introduce those objectives or a new precision-selection algorithm.
+
+\begin{thebibliography}{3}
+\bibitem{resq}
+D. Abati et al.
+\emph{ResQ: Residual Quantization for Video Perception}.
+ICCV, 2023, Sec.~4.2.
+\url{https://arxiv.org/abs/2308.09511v1}.
+
+\bibitem{aquant}
+Z. Li et al.
+\emph{Efficient Adaptive Activation Rounding for Post-Training Quantization}.
+Author preprint, version 3, 2023, Secs.~3--4.
+\url{https://arxiv.org/abs/2208.11945v3}.
+
+\bibitem{fgmp}
+C. Hooper et al.
+\emph{FGMP: Fine-Grained Mixed-Precision Weight and Activation Quantization
+for Hardware-Accelerated LLM Inference}.
+Author preprint, version 1, 2025, Secs.~3--4.
+\url{https://arxiv.org/abs/2504.14152v1}.
+\end{thebibliography}
+\end{document}

@@ -13,6 +13,13 @@ reviews, source versions, and the shared bibliography.
 The [publications directory](publications/README.md) contains manuscript sources
 and build instructions.
 
+## Notes
+
+Standalone mathematical notes include LaTeX sources and compiled PDFs:
+
+- [Activation-error direction and matrix-output error](notes/activation-error-direction.pdf)
+  ([LaTeX source](notes/activation-error-direction.tex)).
+
 ## Experiments
 
 Reproducible experiment code lives in the
