@@ -109,6 +109,15 @@ an explicit probabilistic rounding model. These sources support analytical
 diagnostics, not an unqualified inference-quality guarantee. Separate cited
 identities from chosen noise assumptions and validate the actual task.
 
+## Projected error estimates
+
+Supplement reviewed **2026-11-15**. [Hutch++](../papers/2021-meyer-hutchplusplus.md)
+reviews standard stochastic trace identities; [Hutch#](../papers/2026-chen-hutchsharp.md)
+provides a recent two-sided Frobenius-norm estimator. Such estimates concern a
+declared fixed matrix, not final task quality. [Adaptive-input limitations](../papers/2012-hardt-adaptive-sketches.md)
+mean that a selector's own observed score needs independent assessment when
+its choices change the error being estimated.
+
 ## Search and limits
 
 Primary web discovery on **2026-11-08**, with focused reading completed

@@ -124,6 +124,14 @@ quantized, or reconstructed values and how it is reset. Include history reads,
 writes, subtraction, refresh, and recovery. Test the policy on its own evolving
 state; an unmodified reference trajectory supplies unavailable information.
 
+## Surrogate-based output-range estimation
+
+Supplement reviewed **2026-11-15**. [Probabilistic dynamic quantization](../papers/2025-santini-probabilistic-quantization.md)
+already estimates output moments before full output observation and subsamples
+input patches to trade observation work against quality. Its trained-weight
+surrogate and calibrated coverage parameters limit claims of calibration-free
+range prediction.
+
 ## Search record
 
 Web searches on **2026-11-08** covered ScalePredictor, MixQ online prediction,

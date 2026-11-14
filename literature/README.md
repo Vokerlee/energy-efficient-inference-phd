@@ -20,7 +20,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 11 — Operator fusion and streaming inference | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/11-operator-fusion-and-streaming.md) |
 | 12 — Hardware control for adaptive execution | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/12-adaptive-execution-control.md) |
 | 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09; expanded 2026-11-15 | [Review](topics/13-end-to-end-quality.md) |
-| 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
+| 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09; expanded 2026-11-15 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
 | 15 — Modern accelerator memory hierarchies and matrix/vector execution | Initial review 2026-11-14 | [Review](topics/15-accelerator-memory-and-execution.md) |
 
 Other agreed topics are added when their reviews are performed.
@@ -164,3 +164,9 @@ or access date and a distinct documentation-reading status.
 | [`petersen2012matrixcookbook`](papers/2012-petersen-matrix-cookbook.md) | 13 | Linear covariance transport, quadratic-form expectations, and matrix norms. |
 | [`jcgm2008gum`](papers/2008-jcgm-uncertainty-propagation.md) | 13 | First-order uncertainty propagation with explicit input correlations. |
 | [`higham2019probabilistic`](papers/2019-higham-mary-probabilistic-rounding.md) | 08, 13 | Conditional probabilistic rounding bounds, distinct from additive-error RMS identities. |
+| [`tramer2019slalom`](papers/2019-tramer-slalom.md) | 12, 14 | Projected verification of neural linear operators and preprocessing costs. |
+| [`hardt2012adaptivesketches`](papers/2012-hardt-adaptive-sketches.md) | 12, 13 | Failure of fixed-input sketch guarantees under adaptive queries. |
+| [`meyer2021hutchplusplus`](papers/2021-meyer-hutchplusplus.md) | 13 | Established stochastic trace identities and variance reduction. |
+| [`santini2025probabilistic`](papers/2025-santini-probabilistic-quantization.md) | 04, 06, 12 | Live output-range prediction with calibrated interval parameters. |
+| [`chen2026hutchsharp`](papers/2026-chen-hutchsharp.md) | 13 | Recent two-sided implicit norm estimation and dependency qualifications. |
+| [`napolean2026sprobe`](papers/2026-napolean-sprobe.md) | 12, 14 | Quantized-GEMM fault verification and observation traffic. |

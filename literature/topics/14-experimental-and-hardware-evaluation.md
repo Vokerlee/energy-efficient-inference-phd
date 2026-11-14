@@ -117,6 +117,15 @@ Measure quality first, then estimate the hardware cost of acceptable candidates.
 Record failures and include fallback in the totals. Add sparsity, low-rank
 execution, or broader model coverage only as separate, justified experiments.
 
+## Cost of observing a matrix product
+
+Supplement reviewed **2026-11-15**. [Slalom](../papers/2019-tramer-slalom.md)
+distinguishes preprocessing from online projected verification.
+[SProbe](../papers/2026-napolean-sprobe.md) contrasts trailing verification,
+which rereads matrix data, with fused checksums. Their verification goals
+and arithmetic differ, but both reinforce the need to count observation
+traffic and auxiliary computation rather than treating them as free.
+
 ## Search and limits
 
 Primary web searches on **2026-11-09** covered TVM, MLPerf Inference, MLPerf
