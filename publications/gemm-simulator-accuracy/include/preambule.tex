@@ -1,0 +1,135 @@
+%%% For Russian language
+\usepackage{cmap}
+\usepackage{mathtext}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+%%% For maths
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+\usepackage{icomma}
+
+%% Векторы -- стрелкой (единая нотация работы)
+\providecommand{\Vec}[1]{\vec{#1}}
+
+%% Ужать содержимое до ширины текста, только если оно шире (иначе оставить как есть)
+\newcommand{\fitwidth}[1]{%
+    \resizebox{\ifdim\width>\linewidth \linewidth\else \width\fi}{!}{#1}}
+
+%% Теоремоподобные окружения
+\newtheorem{statement}{Утверждение}
+
+%% Formulas' enumeration
+%\mathtoolsset{showonlyrefs=true} % only if \eqref{} uses the formula.
+%\usepackage{leqno}
+
+%% Fonts
+\usepackage{euscript}
+\usepackage{mathrsfs}
+
+%% Page geometry
+\usepackage[left=3cm,right=1.5cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+
+%% Russian lists
+\usepackage{enumitem}
+\makeatletter
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ}
+\makeatother
+
+\usepackage{tcolorbox}
+\usepackage{url}
+\usepackage{svg}
+
+\usepackage[ddmmyyyy,hhmmss]{datetime}
+\renewcommand{\dateseparator}{.}
+
+%%% For images
+\usepackage{caption}
+\captionsetup{justification=centering} % центрирование подписей к картинкам
+\usepackage{graphicx}                  % Для вставки рисунков
+\graphicspath{{images/}{images2/}}     % папки с картинками
+\setlength\fboxsep{3pt}                % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt}               % Толщина линий рамки \fbox{}
+\usepackage{wrapfig}                   % Обтекание рисунков и таблиц текстом
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs} % Useful features for work with tables
+\usepackage{longtable}                        % Long tables
+\usepackage{multirow}                         % Merge string in tables
+
+%% Red string
+\setlength{\parindent}{2em}
+\usepackage{indentfirst}
+
+%% Ranges
+\linespread{1}
+\usepackage{multirow}
+
+%% TikZ
+\usepackage{tikz}
+\usetikzlibrary{graphs,graphs.standard,shapes.geometric,arrows.meta,positioning,fit,backgrounds,decorations.pathreplacing}
+
+%% Цвета и макросы для диаграмм, перенесённых из презентации
+\definecolor{faeng_blue}{HTML}{09246F}
+\definecolor{cvut_navy}{HTML}{0065BD}
+\definecolor{babyblue}{rgb}{0.54, 0.81, 0.94}
+\definecolor{columbiablue}{rgb}{0.61, 0.87, 1.0}
+\definecolor{corn}{rgb}{0.98, 0.93, 0.36}
+% \alert -- акцент (аналог beamer); в статье -- выделение цветом
+\newcommand{\alert}[1]{\textcolor{faeng_blue}{\textbf{#1}}}
+
+%% Верхний колонтитул
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%% дополнения
+\usepackage{float}
+\usepackage{gensymb}
+\usepackage{caption}
+\usepackage{listings}
+
+%% Точка после номера секции (перед заголовком); для \paragraph -- точка в конце
+\usepackage{titlesec}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{\thesection.}{1ex}{}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{\thesubsection.}{1ex}{}
+\titleformat{\subsubsection}[block]{\normalfont\normalsize\bfseries}{\thesubsubsection.}{1ex}{}
+\titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0pt}{}[.]
+\usepackage{xcolor}
+\usepackage[noadjust]{cite}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=true,
+    columns=flexible,
+    breaklines=true,
+    captionpos=t,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+
+\lstset{style=mystyle}
+
+% Microtype: character protrusion and font expansion to reduce overfull hboxes
+\usepackage[stretch=10,shrink=10]{microtype}
+\emergencystretch=1em
+
+% Hyperrefs inside pdf
+\usepackage[unicode, pdftex]{hyperref}
