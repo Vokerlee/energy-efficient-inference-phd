@@ -86,6 +86,19 @@ A useful research question is whether a causal bounded-cost detector can
 achieve a better complete-model quality–energy trade-off than these baselines.
 This review does not establish its novelty or feasibility.
 
+## Temporal differences as a separate comparison
+
+Supplement reviewed **2026-11-14**. [Ditto](../papers/2025-kim-ditto.md)
+classifies temporal differences for low/full-width execution and zero skipping.
+Such a residual is a change from stored history, not the exceptional-value
+residual of an outlier decomposition.
+
+[EXION](../papers/2025-heo-exion.md) reuses selected outputs, while
+[SQ-DM](../papers/2025-fan-sq-dm.md) changes activations through ReLU fine-tuning.
+[Cambricon-D](../papers/2024-kong-cambricon-d.md) remains a publisher-abstract
+record pending full text. Compare these interventions separately from outlier
+routing so that retained state, model changes, and approximation are visible.
+
 ## Search and limits
 
 Web discovery on **2026-11-08** covered LLM.int8, OliVe, MicroScopiQ,

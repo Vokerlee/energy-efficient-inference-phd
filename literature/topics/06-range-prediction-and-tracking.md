@@ -111,6 +111,19 @@ Compare a range-history predictor against these mechanisms without giving it
 reference activations from an unmodified future pass. Test changes in scene,
 request, timestep, and residual reconstruction state separately.
 
+## Temporal reuse is not a free range predictor
+
+Supplement reviewed **2026-11-14**. [Ditto](../papers/2025-kim-ditto.md)
+uses measured current differences and stored history. [EXION](../papers/2025-heo-exion.md)
+uses dense refresh iterations to prepare reuse decisions. [SQ-DM](../papers/2025-fan-sq-dm.md)
+detects channel sparsity at runtime under prepared quantization choices.
+[Cambricon-D](../papers/2024-kong-cambricon-d.md) is a pending full-text lead.
+
+For a proposed history-based policy, define whether history stores original,
+quantized, or reconstructed values and how it is reset. Include history reads,
+writes, subtraction, refresh, and recovery. Test the policy on its own evolving
+state; an unmodified reference trajectory supplies unavailable information.
+
 ## Search record
 
 Web searches on **2026-11-08** covered ScalePredictor, MixQ online prediction,
