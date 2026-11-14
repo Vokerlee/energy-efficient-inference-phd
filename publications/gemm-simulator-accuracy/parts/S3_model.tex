@@ -1,0 +1,242 @@
+\section{Постановка задачи и модель накопления расхождений}
+\label{sec:model}
+
+\subsection{Объект, обозначения и метрики}
+
+Рассматривается функциональный симулятор, в котором GEMM
+\begin{equation} \label{eq:gemm}
+    C \leftarrow A \cdot B, \quad
+    A\in\mathbb{R}^{M\times K},\;
+    B\in\mathbb{R}^{K\times N},\;
+    C\in\mathbb{R}^{M\times N},
+\end{equation}
+выполняется одной из трёх реализаций: последовательной CPU-реализацией,
+библиотекой cuBLAS или специализированным CUDA-ядром. Все входы и веса~--- в
+формате \texttt{FP32}. Полносвязные слои, свёртки (через
+im2col~\cite{Chellapilla2006}) и вычисление матрицы внимания $QK^\top$ в
+трансформерах~\cite{Vaswani2017} сводятся к~\eqref{eq:gemm}; различие реализаций
+состоит в порядке накопления $K$ частичных произведений, что вследствие
+неассоциативности \texttt{FP32} даёт численно различные результаты.
+
+Теоретическая величина расхождения определяется размерностью редукции $K$ и
+характером ошибок округления. При случайном (некоррелированном) порядке
+накопления дисперсия суммы $K$ слагаемых растёт как $K$, и стандартное
+отклонение~--- как $\sqrt{K}$; при систематическом смещении, когда реализация
+устойчиво округляет в одну сторону, ошибки складываются
+линейно~\cite[§\,2.9, теор.~3.1]{Higham2002}:
+\begin{equation} \label{eq:scaling}
+    d_{\text{rel}} \propto \varepsilon\sqrt{K} \;\;\text{(случайная)},
+    \qquad
+    d_{\text{rel}} \propto \varepsilon K \;\;\text{(смещённая)},
+\end{equation}
+где $\varepsilon$~--- машинный эпсилон формата. Законы~\eqref{eq:scaling}
+описывают \emph{потенциальный} вклад собственно GEMM-арифметики; на практике его
+способны перекрыть $K$-независимые источники~--- оптимизации компилятора (слияние
+операций, переупорядочивание редукции) и неявное использование форматов
+пониженной разрядности. Какой из вкладов доминирует, устанавливается
+экспериментально (раздел~\ref{sec:results}); это разграничение мотивирует
+введение диагностики типа ошибки.
+
+\textbf{Точка отсчёта.} Основной реализацией принята последовательная CPU,
+запускаемая средствами PyTorch напрямую, минуя компилятор XLA и симулятор
+(\emph{CPU-эталон}). Обозначение «эталон» используется в смысле опорной
+воспроизводимой реализации, а не математически точного результата: любая
+\texttt{FP32}-реализация вносит собственные ошибки округления. GPU-реализации
+оцениваются как отклонение от этой точки отсчёта; такой выбор позволяет
+изолировать вклад компилятора от вклада реализации GEMM при попарных сравнениях.
+
+\textbf{Метрики.} Основная характеристика расхождения~--- относительное
+отклонение выхода слоя $l$ (норма Фробениуса):
+\begin{equation} \label{eq:drel}
+    d_{\text{rel}}^{(l)} =
+    \frac{\bigl\|\tilde{\Vec{y}}^{(l)} - \Vec{y}^{(l)}\bigr\|_F}
+         {\bigl\|\Vec{y}^{(l)}\bigr\|_F + \varepsilon_0},
+    \quad \varepsilon_0 = 10^{-8},
+\end{equation}
+где $\Vec{y}^{(l)}$~--- выход эталонной, $\tilde{\Vec{y}}^{(l)}$~--- целевой
+реализации, $\varepsilon_0$~--- константа стабилизации знаменателя. Та же метрика,
+вычисленная для выходного тензора всей сети, обозначается
+$\rho\triangleq d_{\text{rel}}^{\text{сеть}}$ и служит итоговым показателем
+расхождения. По эмпирическим порогам~\cite{Micikevicius2018}: при
+$\rho\le10^{-5}$ расхождения не влияют на обучение, при $\rho\ge10^{-3}$ могут
+проявляться в метриках качества, при $\rho\ge10^{-1}$ ведут к деградации модели.
+
+\subsection{Распространение расхождений по слоям}
+
+Рассмотрим сеть как композицию слоёв $f^{(1)},\dots,f^{(L)}$. Слой $f^{(l)}$
+вносит собственное аппаратное расхождение $\Delta\tilde f^{(l)}$; возмущение
+входа переносится якобианом $J^{(l)}=\partial f^{(l)}/\partial\Vec{x}$. В
+линейном приближении (при $\|\Delta\tilde f\|\ll\|f\|$ и слабой зависимости
+ошибки от входа)
+\begin{equation*}
+    \tilde f(\Vec{x} + \Delta\Vec{x}) \approx
+        f(\Vec{x}) + \underbrace{\Delta\tilde f(\Vec{x})}_{\text{собственное}}
+        + \underbrace{J_f(\Vec{x})\,\Delta\Vec{x}}_{\text{приходящее}}.
+\end{equation*}
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.62\textwidth}{!}{%
+\begin{tikzpicture}[
+    lbox/.style = {rectangle, rounded corners=3pt, draw=black!60, fill=babyblue!30,
+        minimum width=14mm, minimum height=9mm, font=\normalsize},
+    arr/.style = {-{Stealth[length=6pt]}, line width=0.9pt},
+    meas/.style = {densely dotted, blue!55!black, line width=0.8pt}
+]
+    \node[lbox] (l1) {$f^{(1)}$};
+    \node[lbox, right=14mm of l1] (l2) {$f^{(2)}$};
+    \node[right=10mm of l2, font=\normalsize] (d) {$\cdots$};
+    \node[lbox, right=10mm of d] (lL) {$f^{(L)}$};
+    \node[right=14mm of lL, font=\normalsize] (y) {$\Vec{y}^{(L)},\ \tilde{\Vec{y}}^{(L)}$};
+    \draw[arr] (l1)--(l2); \draw[arr] (l2)--(d); \draw[arr] (d)--(lL); \draw[arr] (lL)--(y);
+    \draw[-{Stealth[length=5pt]}, red!70!black, line width=0.9pt]
+        ([yshift=6mm]l2.north) node[above, font=\small, red!70!black, inner sep=1pt] {$\Delta\tilde f^{(2)}$} -- (l2.north);
+    \draw[-{Stealth[length=5pt]}, red!70!black, line width=0.9pt]
+        ([yshift=6mm]lL.north) node[above, font=\small, red!70!black, inner sep=1pt] {$\Delta\tilde f^{(L)}$} -- (lL.north);
+    \node[below=6mm of l1, font=\small, blue!55!black, inner sep=1pt] (m1) {$d_{\text{rel}}^{(1)}$};
+    \node[below=6mm of l2, font=\small, blue!55!black, inner sep=1pt] (m2) {$d_{\text{rel}}^{(2)}$};
+    \node[below=6mm of lL, font=\small, blue!55!black, inner sep=1pt] (mL) {$d_{\text{rel}}^{(L)}$};
+    \draw[meas] (l1.south)--(m1); \draw[meas] (l2.south)--(m2); \draw[meas] (lL.south)--(mL);
+\end{tikzpicture}}
+\caption{Распространение аппаратных расхождений при прямом проходе. Каждый слой
+    $f^{(l)}$ вносит собственное расхождение $\Delta\tilde f^{(l)}$ (красные
+    стрелки), переносимое к выходу произведением якобианов последующих слоёв;
+    пунктиром показано измеряемое послойное отклонение $d_{\text{rel}}^{(l)}$.}
+\label{fig:fwd}
+\end{figure}
+
+Суммируя вклады всех слоёв (рис.~\ref{fig:fwd}), распространённые через
+последующие якобианы, получаем расхождение на выходе сети и
+\textbf{коэффициент накопления} $R$:
+\begin{equation} \label{eq:accum}
+    \Delta\Vec{y}^{\text{сеть}} \approx
+        \sum_{l=1}^{L} \Biggl(\prod_{m=l+1}^{L} J^{(m)}\Biggr)\Delta\tilde f^{(l)},
+    \qquad
+    R = \frac{d_{\text{rel}}^{\text{сеть}}}{\max_l d_{\text{rel}}^{(l)}}.
+\end{equation}
+При $R\gg1$ ошибки ранних слоёв усиливаются последующими; при $R\approx1$
+накопление минимально; при $R<1$ в сети присутствуют \emph{стоки} расхождений.
+
+\subsection{Стоки расхождений}
+
+\begin{statement}[Стоки расхождений]\label{st:sink}
+Если спектральная норма якобиана слоя $\|J^{(m)}\|_2<1$, слой сжимает передаваемое
+расхождение. Для нормализационного слоя $y_i=\gamma\hat x_i+\beta$ якобиан имеет
+вид $J=\tfrac{\gamma}{\sigma}(I-P)$, где $\gamma$~--- обучаемый масштаб,
+$\sigma$~--- масштаб нормировки (стандартное отклонение входа для LayerNorm,
+среднеквадратичное значение для RMSNorm), $P$~--- ортогональный проектор на
+устраняемые нормализацией составляющие ($\mathrm{rank}\,P=2$ для LayerNorm,
+вычитающего среднее; $\mathrm{rank}\,P=1$ для RMSNorm). Поскольку
+$\|I-P\|_2\le1$, выполняется
+\begin{equation} \label{eq:sink}
+    \|J\|_2 \le \frac{\gamma}{\sigma},
+\end{equation}
+и при $\sigma>\gamma$ слой строго сжимает расхождение.
+\end{statement}
+
+Стоком может служить любой слой с $\|J\|_2<1$: нормализация (LayerNorm, RMSNorm),
+насыщающиеся нелинейности (Sigmoid, Tanh), усреднения (AvgPool). Усиление,
+напротив, ограничено числом обусловленности весовой матрицы $\kappa(W)$
+(отношением наибольшего и наименьшего сингулярных чисел $W$):
+$\|\Delta\Vec{y}\|/\|\Vec{y}\| \le \kappa(W)\,\|\Delta\Vec{x}\|/\|\Vec{x}\|$;
+в обученных моделях со стандартной нормализацией $\kappa(W)$ остаётся умеренным,
+что обосновывает применимость линейного приближения.
+
+\subsection{Обратный проход}
+
+При обучении градиент потерь $\Vec{g}^{(l)}=\nabla_{\Vec{y}^{(l)}}\mathcal{L}$
+распространяется от $\mathcal{L}$ к первому слою умножением на транспонированные
+якобианы $J^{(l)\top}$, и каждый шаг вносит собственные ошибки вычисления
+градиентов по входу $\delta^{(l)}_{\Vec{x}}$ и по параметрам
+$\delta^{(l)}_{\Vec{w}}$ (на рис.~\ref{fig:bwd} обозначены общим $\delta^{(l)}$).
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.68\textwidth}{!}{%
+\begin{tikzpicture}[
+    lbox/.style = {rectangle, rounded corners=3pt, draw=black!60, fill=columbiablue!40,
+        minimum width=13mm, minimum height=9mm, font=\normalsize},
+    lossbox/.style = {rectangle, rounded corners=3pt, draw=black!60, fill=corn!60,
+        minimum width=10mm, minimum height=9mm, font=\normalsize},
+    barr/.style = {-{Stealth[length=6pt]}, line width=0.9pt}
+]
+    \node[lbox] (l1) {$f^{(1)}$};
+    \node[lbox, right=18mm of l1] (l2) {$f^{(2)}$};
+    \node[right=12mm of l2, font=\normalsize] (d) {$\cdots$};
+    \node[lbox, right=12mm of d] (lL) {$f^{(L)}$};
+    \node[lossbox, right=18mm of lL] (loss) {$\mathcal{L}$};
+    \node[right=12mm of loss, font=\normalsize, align=center] (yout) {$\Vec{y}^{(L)},\,\tilde{\Vec{y}}^{(L)}$};
+    \draw[barr] (yout)-- (loss);
+    \draw[barr] (loss)-- node[above,font=\small]{$J^{(L)\top}$} node[below,font=\small]{$\Vec{g}^{(L)}$} (lL);
+    \draw[barr] (lL)-- (d);
+    \draw[barr] (d)-- node[above,font=\small]{$J^{(2)\top}$} node[below,font=\small]{$\Vec{g}^{(2)}$} (l2);
+    \draw[barr] (l2)-- node[above,font=\small]{$J^{(1)\top}$} node[below,font=\small]{$\Vec{g}^{(1)}$} (l1);
+    \draw[-{Stealth[length=5pt]}, red!70!black, line width=0.9pt]
+        ([yshift=-6mm]l2.south) node[below, font=\small, red!70!black, inner sep=1pt] {$\delta^{(2)}$} -- (l2.south);
+    \draw[-{Stealth[length=5pt]}, red!70!black, line width=0.9pt]
+        ([yshift=-6mm]lL.south) node[below, font=\small, red!70!black, inner sep=1pt] {$\delta^{(L)}$} -- (lL.south);
+    \draw[-{Stealth[length=5pt]}, green!45!black, line width=0.9pt]
+        (l1.north) -- ([yshift=6mm]l1.north) node[above, font=\small, green!45!black, inner sep=1pt] {$\Vec{g}_{\Vec{w}}^{(1)}$};
+    \draw[-{Stealth[length=5pt]}, green!45!black, line width=0.9pt]
+        (l2.north) -- ([yshift=6mm]l2.north) node[above, font=\small, green!45!black, inner sep=1pt] {$\Vec{g}_{\Vec{w}}^{(2)}$};
+    \draw[-{Stealth[length=5pt]}, green!45!black, line width=0.9pt]
+        (lL.north) -- ([yshift=6mm]lL.north) node[above, font=\small, green!45!black, inner sep=1pt] {$\Vec{g}_{\Vec{w}}^{(L)}$};
+\end{tikzpicture}}
+\caption{Распространение расхождений при обратном проходе. Градиент потерь
+    $\Vec{g}^{(l)}$ переносится транспонированными якобианами $J^{(l)\top}$ от
+    функции потерь $\mathcal{L}$ к первому слою; $\delta^{(l)}$~--- собственные
+    ошибки градиентных вычислений слоёв (красные), $\Vec{g}_{\Vec{w}}^{(l)}$~---
+    градиенты параметров (зелёные).}
+\label{fig:bwd}
+\end{figure}
+
+Ошибка градиента параметров слоя $l$ складывается из собственной ошибки и
+вкладов последующих слоёв, перенесённых цепочкой транспонированных якобианов:
+\begin{equation} \label{eq:bwd}
+    \tilde{\Vec{g}}_{\Vec{w}}^{(l)} \approx
+        J^{(l)\top}_{\Vec{w}}\Biggl(\Vec{g}^{(l)}
+        + \sum_{m=l+1}^{L}\Biggl(\prod_{k=l+1}^{m} J^{(k)\top}\Biggr)\delta^{(k)}_{\Vec{x}}\Biggr)
+        + \delta^{(l)}_{\Vec{w}}.
+\end{equation}
+Это позволяет, как и для прямого прохода, оценить вклад каждого слоя в искажение
+градиентов.
+
+При измерении расхождений обратного прохода полная ошибка градиента параметров
+раскладывается на две аддитивные составляющие различной природы. Обозначим через
+$\tilde{\nabla}^{\text{bwd}}_{\Vec{w}}\mathcal{L}$ градиент целевой реализации,
+вычисленный на \emph{эталонных} промежуточных тензорах прямого прохода, а через
+$\tilde{\nabla}_{\Vec{w}}\mathcal{L}$~--- на собственных (уже отклонённых). Тогда
+\begin{equation} \label{eq:grad-decomp}
+    \tilde{\nabla}_{\Vec{w}}\mathcal{L} - \nabla_{\Vec{w}}\mathcal{L}
+    = \underbrace{\bigl(\tilde{\nabla}^{\text{bwd}}_{\Vec{w}}\mathcal{L}
+        - \nabla_{\Vec{w}}\mathcal{L}\bigr)}_{\Delta_{\text{bwd}}}
+    + \underbrace{\bigl(\tilde{\nabla}_{\Vec{w}}\mathcal{L}
+        - \tilde{\nabla}^{\text{bwd}}_{\Vec{w}}\mathcal{L}\bigr)}_{\Delta_{\text{fwd}}},
+\end{equation}
+где $\Delta_{\text{bwd}}$~--- ошибка собственно градиентных вычислений, а
+$\Delta_{\text{fwd}}$~--- искажение, унаследованное от отклонённого прямого прохода
+через изменённые якобианы. По неравенству треугольника относительная ошибка
+градиента ограничена сверху:
+$\rho_{\text{grad}}\le\rho_{\text{grad}}^{\text{bwd}}+\rho_{\text{grad}}^{\text{fwd}}$,
+где $\rho_{\text{grad}}^{\bullet}=\|\Delta_{\bullet}\|/\|\nabla_{\Vec{w}}\mathcal{L}\|$.
+Поскольку обе составляющие, как правило, не компенсируют друг друга, оценка
+практически достижима. Разделение объясняет различие двух режимов измерения
+обратного прохода: \emph{изолированного} (вносится только $\Delta_{\text{bwd}}$) и
+\emph{совместного} (присутствуют обе составляющие)~--- и предсказывает более
+интенсивное накопление во втором (раздел~\ref{sec:results}).
+
+\subsection{Диагностика природы расхождения}
+
+Норма~\eqref{eq:drel} характеризует величину, но не природу ошибки. Для
+различения случайной и систематической составляющих вводятся
+\textbf{метрика смещения} и \textbf{метрика мультипликативности}:
+\begin{equation} \label{eq:diag}
+    b^{(l)} = \frac{1}{n}\sum_{i=1}^{n}\mathbf{1}\bigl[\tilde y^{(l)}_i > y^{(l)}_i\bigr],
+    \qquad
+    c^{(l)} = \operatorname{corr}\bigl(\tilde y^{(l)}_i - y^{(l)}_i,\; y^{(l)}_i\bigr).
+\end{equation}
+При $b\approx0.5$ знаки отклонений уравновешены (случайный шум); при
+$b\to0$ или $b\to1$ ошибка систематически смещена. По размеру эффекта
+Коэна~\cite{Cohen1988} рабочий порог смещённости~--- $|b-0.5|\ge0.1$. Малое
+$c\approx0$ отвечает аддитивной ошибке округления, $|c|\to1$~--- мультипликативной.
+Обе метрики вычисляются за один прямой проход.
