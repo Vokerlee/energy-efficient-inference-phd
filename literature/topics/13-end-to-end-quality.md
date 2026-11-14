@@ -99,6 +99,16 @@ Only candidates meeting the task-quality requirement proceed to a credible
 hardware cost comparison. Report Pareto trade-offs when tolerances differ;
 do not rank policies using energy savings obtained at incomparable quality.
 
+## Mathematical sources for error diagnostics
+
+Supplement reviewed **2026-11-15**. [The Matrix Cookbook](../papers/2012-petersen-matrix-cookbook.md)
+supports the moment algebra; [JCGM 100](../papers/2008-jcgm-uncertainty-propagation.md)
+provides a first-order propagation reference with correlations;
+[Higham and Mary](../papers/2019-higham-mary-probabilistic-rounding.md) provide
+an explicit probabilistic rounding model. These sources support analytical
+diagnostics, not an unqualified inference-quality guarantee. Separate cited
+identities from chosen noise assumptions and validate the actual task.
+
 ## Search and limits
 
 Primary web discovery on **2026-11-08**, with focused reading completed
