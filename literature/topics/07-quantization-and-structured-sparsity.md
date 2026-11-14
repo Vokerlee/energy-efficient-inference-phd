@@ -89,6 +89,34 @@ The [action-model approach](../papers/2022-wu-sparseloop.md) can support early
 evaluation, but measured correlated patterns and a valid hardware contract are
 required. No joint algorithm or energy result has been validated here.
 
+## Sparse attention and activation sparsity
+
+Supplement reviewed **2026-11-14** from original full texts. Attention sparsity
+removes selected token interactions; it does not require Q, K, or V to contain
+numerical zeros. Retained blocks can still use dense matrix multiplication.
+
+| Method | Selection | Preparation and transfer limit |
+|---|---|---|
+| [STA](../papers/2025-zhang-sliding-tile-attention.md) | Spatial-temporal tile windows | Profiled per-head choices; optional fine-tuning is a separate variant |
+| [SpargeAttention](../papers/2025-zhang-spargeattention.md) | Live block prediction plus a later softmax-aware filter | Quantized implementation already exists; charge preparation |
+| [NSA](../papers/2025-yuan-native-sparse-attention.md) | Compressed context, selected blocks, local window | Native model training, not an interchangeable post-training baseline |
+| [GSRS](../papers/2026-dai-growing-sparsity-reduced-search.md) | Step-dependent Top-p with candidate reuse | Early search and retained state; persistence is empirical |
+
+The generic combination of quantization and sparse attention is established.
+A proposed policy needs a more specific contribution and matched baselines.
+
+For a systolic target, count **issued physical blocks** in both QK and PV,
+including partial occupancy. A token mask may save no array work if every
+physical block retains something. Include index generation, gather/reordering,
+mask storage, selection latency, and any dense fallback.
+
+A proposed ablation uses dense BF16, dense low precision, sparse BF16, and
+sparse low precision under the same full-model quality requirement.
+First freeze a common mask to isolate arithmetic error; then run the live
+selector on the altered trajectory. Quantization can change rankings and
+therefore the selected computation. Measure this interaction rather than
+assuming the two approximations are independent.
+
 ## Search record
 
 Web searches on **2026-11-08** covered post-training sparsity-aware

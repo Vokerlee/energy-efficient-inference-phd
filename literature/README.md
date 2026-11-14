@@ -13,11 +13,11 @@ research, centered on systolic hardware and portable numerical experiments.
 | 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08 | [Review](topics/04-dynamic-activation-quantization.md) |
 | 05 — Outliers and selective precision | Reviewed 2026-11-08 | [Review](topics/05-outliers-and-selective-precision.md) |
 | 06 — Range prediction and tracking | Reviewed 2026-11-08 | [Review](topics/06-range-prediction-and-tracking.md) |
-| 07 — Quantization and structured sparsity | Reviewed 2026-11-08 | [Review](topics/07-quantization-and-structured-sparsity.md) |
+| 07 — Quantization and structured sparsity | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/07-quantization-and-structured-sparsity.md) |
 | 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08 | [Review](topics/08-accumulation-and-block-scaling.md) |
 | 09 — Adaptive low-rank computation | Reviewed 2026-11-08 | [Review](topics/09-adaptive-low-rank-computation.md) |
 | 10 — Fast matrix multiplication | Reviewed 2026-11-08 | [Review](topics/10-fast-matrix-multiplication.md) |
-| 11 — Operator fusion and streaming inference | Reviewed 2026-11-08 | [Review](topics/11-operator-fusion-and-streaming.md) |
+| 11 — Operator fusion and streaming inference | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/11-operator-fusion-and-streaming.md) |
 | 12 — Hardware control for adaptive execution | Reviewed 2026-11-08 | [Review](topics/12-adaptive-execution-control.md) |
 | 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09 | [Review](topics/13-end-to-end-quality.md) |
 | 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
@@ -127,3 +127,7 @@ Records awaiting full-text review are explicitly marked.
 | [`reddi2020mlperf`](papers/2020-reddi-mlperf-inference.md) | 14 | Scenario-defined performance and task-quality evaluation. |
 | [`tschand2025mlperfpower`](papers/2025-tschand-mlperf-power.md) | 14 | Measured energy, instrumentation, and workload boundaries. |
 | [`raj2025scalesimv3`](papers/2025-raj-scale-sim-v3.md) | 14 | Systolic timing, memory effects, and bounded validation evidence. |
+| [`zhang2025spargeattn`](papers/2025-zhang-spargeattention.md) | 07, 11 | Online sparse/quantized attention and distinct QK/PV skipping decisions. |
+| [`zhang2025sta`](papers/2025-zhang-sliding-tile-attention.md) | 07, 11 | Tile-aligned video attention with dense computation inside retained blocks. |
+| [`yuan2025nsa`](papers/2025-yuan-native-sparse-attention.md) | 07, 11 | Natively trained hierarchical block selection; distinct from post-training replacement. |
+| [`dai2026gsrs`](papers/2026-dai-growing-sparsity-reduced-search.md) | 07, 11 | Temporal sparse-mask adaptation with charged search and normalization timing. |
