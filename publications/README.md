@@ -1,9 +1,10 @@
 # Publications
 
 Manuscript sources are kept in one directory per article. The current
-`gemm-simulator-accuracy` manuscript is an empty, buildable LaTeX document.
+`gemm-simulator-accuracy` manuscript is the existing Russian article draft.
 
-Requires GNU Make, `latexmk`, and pdfLaTeX with Russian language and T2A font support.
+Requires GNU Make, `latexmk`, pdfLaTeX, BibTeX, and the LaTeX packages used by
+the manuscript preamble, including Russian language/T2A fonts and TikZ.
 The publications Makefile builds all articles; each article also has its own Makefile.
 Generated PDFs are written directly to this directory, named after the article
 (for example, `gemm-simulator-accuracy.pdf`). Auxiliary files stay in each
