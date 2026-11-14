@@ -1,0 +1,340 @@
+\section{Методология измерения}
+\label{sec:method}
+
+\subsection{Источники расхождения: компилятор и реализация GEMM}
+\label{sec:sources}
+
+Расхождение симулятора с эталоном порождается двумя независимыми источниками~---
+компилятором нейросетей, преобразующим описание модели в исполняемый код, и
+конкретной реализацией матричного умножения. Их раздельная оценка~--- цель
+методики, поэтому ниже описаны оба.
+
+\textbf{Компилятор как источник.} Фреймворки (PyTorch, JAX, TensorFlow) задают
+модель высокоуровневыми операциями над тензорами; исполнение на устройстве
+требует их преобразования компилятором нейросетей. OpenXLA строит граф HLO
+(High-Level Operations)~--- аппаратно-независимое представление модели в виде
+направленного ациклического графа операций~--- и применяет к нему оптимизации:
+свёртку констант, слияние операций, разбиение на плитки и переупорядочивание.
+Каждая меняет численные свойства вычисления: слияние сдвигает порядок округлений,
+переупорядочивание нарушает ассоциативность сложения с плавающей точкой,
+разбиение на плитки задаёт порядок накопления частичных произведений GEMM, а
+выбор формата аккумулятора определяет точность накопления. Потенциальным
+источником служит и \emph{понижение разрядности типов}: ради скорости компилятор
+способен выполнять отдельные операции (в первую очередь GEMM) в формате меньшей
+разрядности, чем \texttt{FP32} (например, \texttt{TF32}, \texttt{BF16} или ниже),
+что напрямую увеличивает ошибку округления; настоящие измерения проведены целиком
+в \texttt{FP32}, и этот режим обсуждается отдельно (раздел~\ref{sec:discussion}).
+В совокупности это
+систематически отклоняет результат скомпилированной модели от пооперационного
+вычисления на CPU в полной точности; именно это отклонение далее называется
+\emph{компиляторным вкладом}. Поскольку для фиксированного графа и устройства
+генерируемый код воспроизводится точно, расхождения стабильны и измеримы
+(рис.~\ref{fig:pipeline}).
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.52\textwidth}{!}{%
+\begin{tikzpicture}[
+    mbox/.style = {rectangle, rounded corners=4pt, draw=black, line width=0.8pt, fill=black!7,
+        text width=64mm, align=center, minimum height=8mm, inner sep=3pt, font=\scriptsize},
+    obox/.style = {rectangle, rounded corners=3pt, draw=black!55, line width=0.6pt, fill=white,
+        text width=58mm, align=center, minimum height=6mm, inner sep=2pt, font=\tiny},
+    gbox/.style = {rectangle, rounded corners=5pt, draw=black!40, line width=0.7pt, dashed,
+        fill=black!3, inner xsep=5pt, inner ysep=4pt},
+    arr/.style = {-{Stealth[length=5pt,width=4pt]}, line width=0.8pt}
+]
+    \node[mbox] (fw) {Описание модели\\ \tiny PyTorch / JAX / TensorFlow};
+    \node[mbox, below=6mm of fw] (hlo) {Граф HLO\\ \tiny направленный ациклический граф операций};
+    \node[obox, below=9mm of hlo] (o1) {слияние операций (порядок округлений)};
+    \node[obox, below=1.5mm of o1] (o2) {тайлинг и переупорядочивание (порядок накопления, ассоциативность)};
+    \node[obox, below=1.5mm of o2] (o3) {понижение разрядности типов (напр.\ \texttt{FP32}~$\to$~\texttt{BF16} и ниже)};
+    \begin{scope}[on background layer]
+        \node[gbox, fit=(o1)(o2)(o3)] (og) {};
+    \end{scope}
+    \node[mbox, below=9mm of o3] (cg) {Генерация кода для устройства\\ \tiny единая для всех трёх реализаций GEMM};
+    \draw[arr] (fw)--(hlo);
+    \draw[arr] (hlo)--(og.north);
+    \draw[arr] (og.south)--(cg);
+    \node[font=\tiny, text=black!60, fill=black!3, inner sep=1.5pt, anchor=south] at (og.north)
+        {аппаратно-независимые оптимизации};
+\end{tikzpicture}}
+\caption{Цепочка компиляции нейросети: на этапе оптимизаций граф HLO
+    преобразуется с изменением порядка округлений и накопления, что и порождает
+    компиляторный вклад. Реализация GEMM подставляется ниже, на общей для всех
+    трёх вариантов генерации кода.}
+\label{fig:pipeline}
+\end{figure}
+
+\textbf{Реализация матричного умножения.} Операция GEMM~\eqref{eq:gemm}
+абстрагирована внутри симулятора и выбирается до запуска, не затрагивая остальную
+модель. Рассматриваются три варианта:
+\begin{itemize}
+    \item \emph{CPU-реализация} (эталон)~--- последовательное вычисление в
+        \texttt{FP32}; принята точкой отсчёта, так как не зависит от компилятора и
+        воспроизводима между платформами;
+    \item \emph{cuBLAS}~--- библиотека NVIDIA, выбирающая алгоритм автоматически по
+        размерам матриц и характеристикам GPU; порядок накопления и формат
+        аккумулятора не раскрываются. Даёт наибольшее ускорение при неопределённой
+        близости к арифметике устройства;
+    \item \emph{специализированное CUDA-ядро}~--- реализация с явным управлением
+        порядком суммирования, воспроизводящим блочное разбиение вычислительного
+        блока целевого устройства; ближе к его арифметике, чем cuBLAS, при
+        сопоставимом ускорении.
+\end{itemize}
+Все три исполняются поверх одной цепочки компиляции, поэтому различаются только
+GEMM-арифметикой~--- это и позволяет изолировать её вклад отдельно от
+компиляторного.
+
+\subsection{Сравниваемые конфигурации и разделение вкладов}
+
+Поскольку все три реализации (\texttt{xla\_cpu}, \texttt{xla\_cublas},
+\texttt{xla\_cuda}) проходят одну цепочку компиляции и порождают идентичный граф
+HLO (раздел~\ref{sec:sources}), при попарном сравнении двух XLA-реализаций
+компиляторный вклад взаимно уничтожается, и наблюдаемое расхождение отражает
+только разницу реализаций GEMM, тогда как сравнение с CPU-эталоном включает весь
+стек (рис.~\ref{fig:configs}).
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.88\textwidth}{!}{%
+\begin{tikzpicture}[
+    mbox/.style = {rectangle, rounded corners=4pt, draw=black, line width=0.8pt, fill=black!7,
+        text width=62mm, align=center, minimum height=8mm, inner sep=3pt, font=\scriptsize},
+    pbox/.style = {rectangle, rounded corners=4pt, draw=black!70, line width=0.7pt,
+        text width=38mm, align=center, minimum height=10mm, inner sep=3pt, font=\scriptsize},
+    gbox/.style = {rectangle, rounded corners=3pt, draw=black!60, line width=0.6pt,
+        text width=22mm, align=center, minimum height=8mm, inner sep=2pt, font=\scriptsize},
+    arr/.style = {-{Stealth[length=5pt,width=4pt]}, line width=0.8pt}
+]
+    \node[mbox] (pt) {Описание модели (PyTorch)};
+    \node[pbox, fill=blue!6] (cpu) at ([xshift=-34mm, yshift=-18mm]pt)
+        {\textbf{CPU-эталон}\\ \tiny пооперационно, \texttt{FP32}, без компилятора};
+    \node[pbox, fill=black!4] (xla) at ([xshift=34mm, yshift=-18mm]pt)
+        {\textbf{Компилятор XLA}\\ \tiny граф HLO};
+    \node[pbox, fill=black!4, below=4mm of xla] (sim) {\textbf{Симулятор устройства}};
+    \node[gbox, fill=blue!6]   (c1) at ([xshift=-28mm, yshift=-16mm]sim) {CPU};
+    \node[gbox, fill=green!6]  (c2) at ([yshift=-16mm]sim) {cuBLAS};
+    \node[gbox, fill=orange!8] (c3) at ([xshift=28mm, yshift=-16mm]sim) {CUDA-ядро};
+    \coordinate (fork) at ([yshift=-7mm]pt.south);
+    \draw[line width=0.8pt] (pt.south) -- (fork);
+    \draw[arr, rounded corners=2pt] (fork) -| (cpu.north);
+    \draw[arr, rounded corners=2pt] (fork) -| (xla.north);
+    \draw[arr] (xla)--(sim);
+    \draw[arr] (sim.south) to[out=-90,in=90,looseness=0.9] (c1.north);
+    \draw[arr] (sim.south)--(c2.north);
+    \draw[arr] (sim.south) to[out=-90,in=90,looseness=0.9] (c3.north);
+    \draw[<->, dashed, line width=0.55pt, gray!75]
+        (c1.south) to[out=-60, in=-120, looseness=0.7] (c2.south);
+    \draw[<->, dashed, line width=0.55pt, gray!75]
+        (c2.south) to[out=-60, in=-120, looseness=0.7] (c3.south);
+    \draw[<->, dashed, line width=0.55pt, gray!75]
+        (c1.south) to[out=-85, in=-95, looseness=1.4] (c3.south);
+    \draw[<->, dashed, line width=0.55pt, gray!75]
+        (cpu.south) to[out=-60, in=180, looseness=0.7] ([xshift=-2mm]c1.west);
+    \node[font=\scriptsize, gray!80, below=14mm of c2] (cmplabel) {\emph{4 пары сравнения}};
+\end{tikzpicture}}
+\caption{Два пути исполнения модели и четыре пары сравнения: CPU-эталон против
+    реализаций в симуляторе и попарные сравнения XLA-реализаций между собой.}
+\label{fig:configs}
+\end{figure}
+
+\subsection{Измерительный конвейер}
+
+Конвейер состоит из четырёх этапов и не модифицирует модель
+(рис.~\ref{fig:measure}).
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.80\textwidth}{!}{%
+\begin{tikzpicture}[
+    node distance = 4mm,
+    sbox/.style = {
+        rectangle, rounded corners = 3pt,
+        draw = black!60, line width = 0.6pt, fill = white,
+        text width = 36mm, align = center,
+        minimum height = 8mm, inner sep = 3pt, font = \footnotesize
+    },
+    grpbox/.style = {
+        rectangle, rounded corners = 5pt,
+        draw = black!50, dashed, fill = black!4,
+        inner xsep = 5pt, inner ysep = 8pt, line width = 0.7pt
+    },
+    arr/.style  = {-{Stealth[length=5pt,width=4pt]}, line width=0.8pt},
+    larr/.style = {-{Stealth[length=6pt,width=5pt]}, line width=1pt}
+]
+    %% Стадия 1: Захват
+    \node[sbox] (s1a) {Модель и входные данные};
+    \node[sbox, below=of s1a] (s1b) {Прямые и обратные\\ хуки};
+    \node[sbox, below=of s1b] (s1c) {Сохранение тензоров\\ на диск};
+    \draw[arr] (s1a)--(s1b); \draw[arr] (s1b)--(s1c);
+    \begin{scope}[on background layer]
+        \node[grpbox, fit=(s1a)(s1b)(s1c)] (g1) {};
+    \end{scope}
+    \node[font=\footnotesize\bfseries, fill=black!4, inner sep=2pt, anchor=south]
+        at (g1.north) {\textcircled{1}~Захват};
+
+    %% Стадия 2: Сравнение и диагностика
+    \node[sbox, right=16mm of s1a] (s2a) {Эталонный запуск};
+    \node[sbox, right=4mm of s2a]  (s2b) {Целевой запуск};
+    \node[sbox, anchor=north]      (s2c)
+        at ([xshift=20mm, yshift=-12mm]s2a.south)
+        {$d_{\text{rel}}^{(l)}$,\quad $b^{(l)}$,\quad $c^{(l)}$};
+    \draw[arr] (s2a.south) -- (s2c.north);
+    \draw[arr] (s2b.south) -- (s2c.north);
+    \begin{scope}[on background layer]
+        \node[grpbox, fit=(s2a)(s2b)(s2c)] (g2) {};
+    \end{scope}
+    \node[font=\footnotesize\bfseries, fill=black!4, inner sep=2pt, anchor=south]
+        at (g2.north) {\textcircled{2}~Сравнение и диагностика};
+
+    %% Стадия 3: Распространение
+    \node[sbox, below=16mm of s2c] (s3a) {$\{\Delta\tilde{f}^{(l)}\}$, $\{\delta^{(l)}_{\Vec{x}}\}$};
+    \node[sbox, below=of s3a] (s3b) {запуск с введением\\ аппаратных расхождений};
+    \node[sbox, below=of s3b] (s3c) {$R = d_{\text{rel}}^{\text{сеть}} \;/\; \max_l d_{\text{rel}}^{(l)}$};
+    \draw[arr] (s3a)--(s3b); \draw[arr] (s3b)--(s3c);
+    \begin{scope}[on background layer]
+        \node[grpbox, fit=(s3a)(s3b)(s3c)] (g3) {};
+    \end{scope}
+    \node[font=\footnotesize\bfseries, fill=black!4, inner sep=2pt, anchor=north]
+        at (g3.south) {\textcircled{3}~Распространение};
+
+    \draw[larr] (g1.east) -- node[above,font=\scriptsize]{данные} (g2.west);
+    \draw[larr] (g2.south) -- node[right,font=\scriptsize]{$\Delta\tilde{f}^{(l)},\;\delta^{(l)}_{\Vec{x}}$} (g3.north);
+\end{tikzpicture}}
+\caption{Измерительный конвейер: захват тензоров хуками~(1), послойное сравнение
+    эталонного и целевого запусков с диагностикой типа ошибки~(2), внедрение
+    собственных расхождений слоёв в чистый прогон и оценка коэффициента
+    накопления $R$~(3).}
+\label{fig:measure}
+\end{figure}
+
+\textbf{1. Захват тензоров.} Промежуточные тензоры прямого ($\Vec{y}^{(l)}$) и
+обратного ($\Vec{g}^{(l)}$) проходов снимаются неинвазивными хуками PyTorch. При
+отложенном исполнении XLA применяется двухпроходная стратегия: первый проход
+строит граф и фиксирует точки захвата, второй извлекает материализованные
+значения.
+
+\textbf{2. Послойный повтор как изоляция измерения.} Каждый слой воспроизводится
+на целевой реализации с \emph{эталонным} входом (рис.~\ref{fig:replay}). Это даёт
+собственное аппаратное расхождение слоя $\Delta\tilde f^{(l)}$ и его
+$d_{\text{rel}}^{(l)}$ без эффекта накопления с предыдущих слоёв.
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.88\textwidth}{!}{%
+\begin{tikzpicture}[
+    node distance = 4mm,
+    laybox/.style = {
+        rectangle, rounded corners = 3pt,
+        draw = black!60, line width = 0.6pt, fill = black!6,
+        text width = 38mm, align = center,
+        minimum height = 8mm, inner sep = 3pt, font = \footnotesize
+    },
+    tgtbox/.style = {
+        rectangle, rounded corners = 3pt,
+        draw = black!60, line width = 0.6pt, fill = orange!10,
+        text width = 38mm, align = center,
+        minimum height = 8mm, inner sep = 3pt, font = \footnotesize
+    },
+    cmpbox/.style = {
+        rectangle, rounded corners = 4pt,
+        draw = black, line width = 0.8pt, fill = black!8,
+        text width = 20mm, align = center,
+        minimum height = 16mm, inner sep = 4pt, font = \footnotesize
+    },
+    grpbox/.style = {
+        rectangle, rounded corners = 5pt,
+        draw = black!50, dashed, fill = black!2,
+        inner xsep = 5pt, inner ysep = 8pt, line width = 0.7pt
+    },
+    arr/.style = {-{Stealth[length=5pt,width=4pt]}, line width=0.8pt}
+]
+    %% Эталон (CPU)
+    \node[laybox] (b0) {Слой $l{=}0$:\; $\Vec{x}_0 \to \Vec{y}^{(0)}$};
+    \node[laybox, below=of b0] (b1) {Слой $l{=}1$:\; $\Vec{x}_1 \to \Vec{y}^{(1)}$};
+    \node[below=1mm of b1, inner sep=0pt] (bdots) {\large$\vdots$};
+    \node[laybox, below=1mm of bdots] (bL) {Слой $l{=}L$:\; $\Vec{x}_L \to \Vec{y}^{(L)}$};
+    \draw[arr](b0)--(b1);
+    \begin{scope}[on background layer]
+        \node[grpbox, fit=(b0)(b1)(bdots)(bL)] (gb) {};
+    \end{scope}
+    \node[font=\footnotesize\bfseries, fill=black!2, inner sep=2pt, anchor=south]
+        at (gb.north) {Эталонный запуск (CPU)};
+
+    %% Повтор на целевой реализации
+    \node[tgtbox, right=18mm of b0] (t0) {Повтор $l{=}0$:\; $\Vec{x}_0 \to \tilde{\Vec{y}}^{(0)}$};
+    \node[tgtbox, right=18mm of b1] (t1) {Повтор $l{=}1$:\; $\Vec{x}_1 \to \tilde{\Vec{y}}^{(1)}$};
+    \node[inner sep=0pt] (tdots) at (bdots -| t0) {\large$\vdots$};
+    \node[tgtbox, right=18mm of bL] (tL) {Повтор $l{=}L$:\; $\Vec{x}_L \to \tilde{\Vec{y}}^{(L)}$};
+    \begin{scope}[on background layer]
+        \node[grpbox, fit=(t0)(t1)(tdots)(tL)] (gt) {};
+    \end{scope}
+    \node[font=\footnotesize\bfseries, fill=black!2, inner sep=2pt, anchor=south, align=center]
+        at (gt.north) {Послойный повтор\\(целевая реализация)};
+
+    %% Сравнение
+    \node[cmpbox, right=14mm of t1] (cmp)
+        {Сравнение:\\ $\Delta\tilde{f}^{(l)} =$\\ $\tilde{\Vec{y}}^{(l)} - \Vec{y}^{(l)}$};
+
+    \draw[arr] (b0.east) -- node[above,font=\scriptsize]{$\Vec{x}_0$} (t0.west);
+    \draw[arr] (b1.east) -- node[above,font=\scriptsize]{$\Vec{x}_1$} (t1.west);
+    \draw[arr] (bL.east) -- node[above,font=\scriptsize]{$\Vec{x}_L$} (tL.west);
+
+    \draw[arr] (t0.east) -- (cmp.north west);
+    \draw[arr] (t1.east) -- (cmp.west);
+    \draw[arr] (tL.east) -- (cmp.south west);
+\end{tikzpicture}}
+\caption{Послойный повтор как изоляция измерения: каждый слой воспроизводится на
+    целевой реализации с \emph{эталонным} входом $\Vec{x}_l$, а его собственное
+    расхождение $\Delta\tilde f^{(l)}=\tilde{\Vec{y}}^{(l)}-\Vec{y}^{(l)}$
+    измеряется без накопления с предыдущих слоёв.}
+\label{fig:replay}
+\end{figure}
+
+\textbf{3. Оценка накопления $R$.} Собственные расхождения слоёв
+$\Delta\tilde f^{(l)}$ внедряются в чистый прогон эталона; суммарное расхождение
+на выходе сети, отнесённое к $\max_l d_{\text{rel}}^{(l)}$, даёт
+$R$~\eqref{eq:accum}. Для обратного прохода различаются два режима: \emph{обратный}
+(вносятся только градиентные отклонения при чистом прямом проходе) и
+\emph{совместный} (вносятся отклонения обоих проходов).
+
+\textbf{4. Диагностика типа ошибки} по метрикам $b$ и $c$~\eqref{eq:diag} за один
+прямой проход.
+
+\textbf{Детерминизм.} Эксперименты проведены в режиме одного запуска при
+фиксированной инициализации генератора: значения $d_{\text{rel}}^{(l)}$
+воспроизводятся побитово. Для GEMM-слоёв исследуемого размерного режима этого
+достаточно~--- эффект самоусреднения по $K$ делает $d_{\text{rel}}^{(l)}$
+нечувствительным к выбору начального значения; для агрегированных метрик ($R$,
+$b$, $c$) ограничение обсуждается в разделе~\ref{sec:discussion}.
+
+\subsection{Исследуемые компоненты}
+
+Набор из 14 компонентов охватывает ключевые механизмы современных трансформеров
+(пропорционально LLaMA-3 8B) и свёрточную архитектуру (табл.~\ref{tab:components}).
+Принцип формирования~--- варьировать по одному архитектурному фактору (тип
+нормализации, позиционное кодирование, структура K/V, функция вентиля FFN) при
+фиксированных прочих, чтобы изолировать влияние \emph{архитектуры} на накопление.
+
+\begin{table}[htbp]
+\centering
+\caption{Набор из 14 исследуемых компонентов нейросетевых архитектур.}
+\label{tab:components}
+\fitwidth{\begin{tabular}{l l l}
+    \hline
+    \textbf{Группа} & \textbf{Компоненты} & \textbf{Варьируемый фактор} \\
+    \hline
+    Базовые (2)      & LeNet                              & свёрточная сеть (Sigmoid, AvgPool) \\
+                     & RoBERTa                            & Pre-Norm LayerNorm, двунапр.\ внимание \\
+    \hline
+    Внимание (8)     & RoPE, ALiBi                        & позиционное кодирование \\
+                     & GQA, KV-кеш, Sliding-window, Flash & структура и вычисление K/V \\
+                     & QK-norm, Softcapping               & стабилизация softmax \\
+    \hline
+    FFN (2)          & SwiGLU, GeGLU                      & функция вентиля (SiLU / GELU) \\
+    \hline
+    Нормализация (2) & RMSNorm FFN                        & Pre-Norm RMSNorm (без вычитания среднего) \\
+                     & DeepNorm                           & масштабированный Post-LN \\
+    \hline
+\end{tabular}}
+\end{table}
