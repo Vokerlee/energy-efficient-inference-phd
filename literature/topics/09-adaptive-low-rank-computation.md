@@ -78,6 +78,14 @@ Separate post-training approximations from retrained/adapted models. A
 quantization combination can be investigated later, after establishing the
 low-rank mechanism's independent value.
 
+## Spectral representation versus rank selection
+
+Supplement reviewed **2026-11-15**. [SpecQuant](../papers/2025-zhao-specquant.md)
+is a spectral-decomposition contrast, not interchangeable with SVD rank
+selection. Before comparison, specify the represented object, preparation,
+retained components, and actual branch computation; neither spectral energy
+nor low rank alone proves a useful inference trade-off.
+
 ## Search and limits
 
 Web searches on **2026-11-08** covered adaptive rank allocation/RaNA,

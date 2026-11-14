@@ -10,15 +10,15 @@ research, centered on systolic hardware and portable numerical experiments.
 | 01 — Energy of compute-bound versus memory-bound inference | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/01-inference-energy.md) |
 | 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/02-matrix-multiplier-architectures.md) |
 | 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/03-im2col-and-convolution-mapping.md) |
-| 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/04-dynamic-activation-quantization.md) |
-| 05 — Outliers and selective precision | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/05-outliers-and-selective-precision.md) |
+| 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/04-dynamic-activation-quantization.md) |
+| 05 — Outliers and selective precision | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/05-outliers-and-selective-precision.md) |
 | 06 — Range prediction and tracking | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/06-range-prediction-and-tracking.md) |
 | 07 — Quantization and structured sparsity | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/07-quantization-and-structured-sparsity.md) |
 | 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/08-accumulation-and-block-scaling.md) |
-| 09 — Adaptive low-rank computation | Reviewed 2026-11-08 | [Review](topics/09-adaptive-low-rank-computation.md) |
+| 09 — Adaptive low-rank computation | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/09-adaptive-low-rank-computation.md) |
 | 10 — Fast matrix multiplication | Reviewed 2026-11-08 | [Review](topics/10-fast-matrix-multiplication.md) |
 | 11 — Operator fusion and streaming inference | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/11-operator-fusion-and-streaming.md) |
-| 12 — Hardware control for adaptive execution | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/12-adaptive-execution-control.md) |
+| 12 — Hardware control for adaptive execution | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/12-adaptive-execution-control.md) |
 | 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09 | [Review](topics/13-end-to-end-quality.md) |
 | 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
 | 15 — Modern accelerator memory hierarchies and matrix/vector execution | Initial review 2026-11-14 | [Review](topics/15-accelerator-memory-and-execution.md) |
@@ -156,3 +156,8 @@ or access date and a distinct documentation-reading status.
 | [`jax2026tpupipelining`](papers/2026-jax-tpu-pipelining.md) | 15 | Explicit memory spaces, asynchronous transfers, and pipeline storage. |
 | [`aws2026trainium2architecture`](papers/2026-aws-trainium2-architecture.md) | 15 | Operand/partial-sum buffers and precision-dependent logical tiles. |
 | [`nvidia2026blackwelltmem`](papers/2026-nvidia-blackwell-tensor-memory.md) | 15 | Accumulator transport and matrix/vector epilogue resource competition. |
+| [`hooper2025fgmp`](papers/2025-hooper-fgmp.md) | 04, 12 | Calibrated sensitivity with live activation-block precision selection and hardware support. |
+| [`li2023aquant`](papers/2023-li-aquant.md) | 04 | Activation-dependent rounding borders targeting output error. |
+| [`peters2023qbitopt`](papers/2023-peters-qbitopt.md) | 12 | Sensitivity-based training-time allocation and its activation extension. |
+| [`moon2024igqvit`](papers/2024-moon-igq-vit.md) | 04, 12 | Live channel/token assignment to prepared quantizer groups. |
+| [`zhao2025specquant`](papers/2025-zhao-specquant.md) | 05, 09 | Fourier-derived weight/residual decomposition; runtime interpretation requires care. |
