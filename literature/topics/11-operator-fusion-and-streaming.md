@@ -77,6 +77,38 @@ has the same memory capacity and reasonable fusion opportunities.
 
 This is a proposed evaluation sequence, not an implementation task.
 
+## Sparse attention within tiled execution
+
+Supplement reviewed **2026-11-14**. Sparse attention chooses interactions to
+retain; FlashAttention-style tiling and online normalization organize execution.
+The two can coexist. Dense attention remains a useful reference for measuring
+the approximation introduced by interaction removal.
+
+[STA](../papers/2025-zhang-sliding-tile-attention.md) keeps dense work inside
+selected tiles. [SpargeAttention](../papers/2025-zhang-spargeattention.md)
+distinguishes skipping QK and PV together from skipping PV only after scores
+have been computed. The second decision cannot retroactively save QK.
+
+[NSA](../papers/2025-yuan-native-sparse-attention.md) is a separate trained
+architecture comparison. [GSRS](../papers/2026-dai-growing-sparsity-reduced-search.md)
+provides a temporal-search baseline: exact current block importance is recovered
+after row normalization completes. This is not a statistic available for free
+before the score computation that produced it.
+
+Record whether blocks are excluded before normalization or contributions are
+omitted later; preserve each method's denominator and output-update semantics.
+Also record initialization, empty-row handling, and rescaling when the running
+maximum changes. A correct mask alone does not define correct streaming output.
+
+For portable experiments, first implement a fixed block mask with explicit
+normalization semantics and full-forward evaluation. Next add one causal
+selector, with its search passes and state charged. Finally vary retained-block
+precision. Compare whole-model quality, QK/PV blocks, softmax work, live storage,
+traffic, latency, and modeled energy. GPU results motivate candidates; they do
+not validate a new systolic implementation.
+
+This supplement is targeted, not an exhaustive sparse-attention survey.
+
 ## Search and limits
 
 Web searches on **2026-11-08** covered fused-layer CNN accelerators,
