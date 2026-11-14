@@ -21,6 +21,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 12 — Hardware control for adaptive execution | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/12-adaptive-execution-control.md) |
 | 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09 | [Review](topics/13-end-to-end-quality.md) |
 | 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
+| 15 — Modern accelerator memory hierarchies and matrix/vector execution | Initial review 2026-11-14 | [Review](topics/15-accelerator-memory-and-execution.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -42,17 +43,19 @@ Links point to original papers; original annotations here are our own writing.
 
 Reading status, source version, and review date are recorded in each paper note.
 Records awaiting full-text review are explicitly marked.
+Official technical documentation is indexed alongside papers, with its version
+or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
 | [`williams2009roofline`](papers/2009-williams-roofline.md) | 01 | Performance bottlenecks and operational intensity. |
 | [`horowitz2014energy`](papers/2014-horowitz-computing-energy.md) | 01 | Historical component-energy and locality foundations. |
 | [`chen2016eyeriss`](papers/2016-chen-eyeriss.md) | 01 | Matched-resource dataflow energy comparison. |
-| [`jouppi2017tpu`](papers/2017-jouppi-tpu.md) | 01, 02 | Systolic inference rooflines and utilization measurements. |
+| [`jouppi2017tpu`](papers/2017-jouppi-tpu.md) | 01, 02, 15 | Systolic inference rooflines and utilization measurements. |
 | [`ghane2018energyroofline`](papers/2018-ghane-energy-roofline.md) | 01 | Energy/power extension of roofline reasoning. |
 | [`parashar2019timeloop`](papers/2019-parashar-timeloop.md) | 01, 02, 14 | Mapping-dependent activity and cost modeling. |
 | [`wu2019accelergy`](papers/2019-wu-accelergy.md) | 01, 14 | Action-specific component-energy estimation. |
-| [`jouppi2021tpuv4i`](papers/2021-jouppi-tpuv4i.md) | 01, 02 | Production inference design and unequal energy scaling. |
+| [`jouppi2021tpuv4i`](papers/2021-jouppi-tpuv4i.md) | 01, 02, 15 | Production inference design and unequal energy scaling. |
 | [`liu2022s2ta`](papers/2022-liu-s2ta.md) | 01, 02, 03, 07 | INT8 array buffering costs and sparsity overhead. |
 | [`patel2024splitwise`](papers/2024-patel-splitwise.md) | 01 | Different inference phases and power sensitivities. |
 | [`yang2024parttime`](papers/2024-yang-power-measurements.md) | 01, 14 | Validation limits of software-visible GPU power sensors. |
@@ -67,7 +70,7 @@ Records awaiting full-text review are explicitly marked.
 | [`kwon2018maeri`](papers/2018-kwon-maeri.md) | 02 | Flexible interconnect as an alternative to rigid mappings. |
 | [`chen2019eyerissv2`](papers/2019-chen-eyeriss-v2.md) | 02 | Flexible operand delivery, sparse execution, and utilization analysis. |
 | [`qin2020sigma`](papers/2020-qin-sigma.md) | 02 | Flexible dot-product/reduction architecture for irregular matrices. |
-| [`genc2021gemmini`](papers/2021-genc-gemmini.md) | 02, 03 | Full-stack matrix accelerator, DMA, memory, and software integration. |
+| [`genc2021gemmini`](papers/2021-genc-gemmini.md) | 02, 03, 15 | Full-stack matrix accelerator, DMA, memory, and software integration. |
 | [`munoz2023flexagon`](papers/2023-munoz-martinez-flexagon.md) | 02, 07 | Sparse dataflow flexibility and merging/reduction costs. |
 | [`cho2017mec`](papers/2017-cho-mec.md) | 03 | Compact lowering with multiple smaller matrix multiplications. |
 | [`dukhan2019indirect`](papers/2019-dukhan-indirect-convolution.md) | 03 | Pointer-based convolution without expanded activation copies. |
@@ -148,3 +151,8 @@ Records awaiting full-text review are explicitly marked.
 | [`rhu2018cdma`](papers/2018-rhu-compressing-dma.md) | 02, 07 | Transfer-boundary activation compression with explicit upstream bandwidth. |
 | [`peltekis2023bic`](papers/2023-peltekis-systolic-bus-invert.md) | 01, 02 | BF16 systolic switching reduction, distinct from cycle skipping. |
 | [`bamberg2023nnstats`](papers/2023-bamberg-neural-statistics-coding.md) | 01, 02 | Data-dependent memory/interconnect coding with explicit scope limits. |
+| [`jouppi2023tpuv4`](papers/2023-jouppi-tpu-v4.md) | 15 | TensorCore memory hierarchy and measured CMEM effects. |
+| [`google2026tpuarchitecture`](papers/2026-google-tpu-architecture.md) | 15 | Current TPU matrix/vector units, generation differences, and memory scopes. |
+| [`jax2026tpupipelining`](papers/2026-jax-tpu-pipelining.md) | 15 | Explicit memory spaces, asynchronous transfers, and pipeline storage. |
+| [`aws2026trainium2architecture`](papers/2026-aws-trainium2-architecture.md) | 15 | Operand/partial-sum buffers and precision-dependent logical tiles. |
+| [`nvidia2026blackwelltmem`](papers/2026-nvidia-blackwell-tensor-memory.md) | 15 | Accumulator transport and matrix/vector epilogue resource competition. |
