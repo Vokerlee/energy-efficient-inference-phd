@@ -8,6 +8,11 @@ hypotheses, findings, and publications.
 The [literature index](literature/README.md) links topic syntheses, short paper
 reviews, source versions, and the shared bibliography.
 
+## Publications
+
+The [publications directory](publications/README.md) contains manuscript sources
+and build instructions.
+
 ## Experiments
 
 Reproducible experiment code lives in the
