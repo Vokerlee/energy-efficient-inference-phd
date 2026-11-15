@@ -126,6 +126,13 @@ Keep operator replacements and retraining in a separate experimental category.
 The first portable prototype should compare a small number of these mappings;
 chip-simulator programming remains final validation work.
 
+## Implementation source for implicit lowering
+
+Supplement reviewed **2026-11-15**. The canonical [CUTLASS documentation review](../papers/2026-nvidia-cutlass-kernels.md)
+records the versioned source behind the implicit-GEMM path. It complements
+explicit bounded lowering for semantic checks; neither execution path by itself
+establishes ASIC feeder energy or a universal mapping advantage.
+
 ## Search record and limits
 
 Web searches on **2026-11-08** covered “hardware im2col,” “SPOTS,” “on-the-fly

@@ -170,3 +170,6 @@ or access date and a distinct documentation-reading status.
 | [`santini2025probabilistic`](papers/2025-santini-probabilistic-quantization.md) | 04, 06, 12 | Live output-range prediction with calibrated interval parameters. |
 | [`chen2026hutchsharp`](papers/2026-chen-hutchsharp.md) | 13 | Recent two-sided implicit norm estimation and dependency qualifications. |
 | [`napolean2026sprobe`](papers/2026-napolean-sprobe.md) | 12, 14 | Quantized-GEMM fault verification and observation traffic. |
+| [`nvidia2026cutlasskernels`](papers/2026-nvidia-cutlass-kernels.md) | 02, 03, 14 | Customizable CUDA kernel primitives and implicit convolution lowering. |
+| [`pytorch2026customcuda`](papers/2026-pytorch-custom-cuda-operators.md) | 11, 14 | C++/CUDA operator integration and explicit graph coverage. |
+| [`nvidia2026cublaslt`](papers/2026-nvidia-cublaslt-reference.md) | 14 | Configurable library comparator for custom GPU matrix kernels. |
