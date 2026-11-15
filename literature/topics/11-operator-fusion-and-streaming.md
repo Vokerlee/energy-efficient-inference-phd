@@ -109,6 +109,13 @@ not validate a new systolic implementation.
 
 This supplement is targeted, not an exhaustive sparse-attention survey.
 
+## Framework integration and operator coverage
+
+Supplement reviewed **2026-11-15**. [PyTorch custom-operator/export documentation](../papers/2026-pytorch-custom-cuda-operators.md)
+provides integration and graph-inspection mechanisms. Module replacement alone
+need not expose functional or fused products. Numerical behavior and the
+coverage of the selected operator path require explicit verification.
+
 ## Search and limits
 
 Web searches on **2026-11-08** covered fused-layer CNN accelerators,

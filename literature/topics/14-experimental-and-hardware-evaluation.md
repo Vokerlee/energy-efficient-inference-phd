@@ -126,6 +126,15 @@ which rereads matrix data, with fused checksums. Their verification goals
 and arithmetic differ, but both reinforce the need to count observation
 traffic and auxiliary computation rather than treating them as free.
 
+## CUDA execution and comparison sources
+
+Supplement reviewed **2026-11-15**. [CUTLASS](../papers/2026-nvidia-cutlass-kernels.md)
+provides source-level kernel building blocks; [PyTorch operator integration](../papers/2026-pytorch-custom-cuda-operators.md)
+connects custom execution to full models; [cuBLASLt](../papers/2026-nvidia-cublaslt-reference.md)
+provides a separate library comparator. Match arithmetic settings and include
+layout/workspace costs. Kernel speed, semantic fidelity and target-accelerator
+energy are distinct evaluation quantities.
+
 ## Search and limits
 
 Primary web searches on **2026-11-09** covered TVM, MLPerf Inference, MLPerf

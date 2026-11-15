@@ -101,6 +101,13 @@ contributions already validated by the cited papers.
 regularity; [TPUv4i](../papers/2021-jouppi-tpuv4i.md) illustrates that real
 matrix engines operate inside a larger memory and control system.
 
+## CUDA kernels as experimental execution
+
+Supplement reviewed **2026-11-15**. [CUTLASS kernel documentation](../papers/2026-nvidia-cutlass-kernels.md)
+provides programmable GPU building blocks. A fast GPU implementation can
+support numerical experiments, while a target accelerator's tile and
+accumulation contract still needs a separately declared model.
+
 ## Evidence limits and search record
 
 Web searches on **2026-11-08** covered “Why Systolic Architectures,” “MAERI,”
