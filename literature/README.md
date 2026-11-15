@@ -173,3 +173,4 @@ or access date and a distinct documentation-reading status.
 | [`nvidia2026cutlasskernels`](papers/2026-nvidia-cutlass-kernels.md) | 02, 03, 14 | Customizable CUDA kernel primitives and implicit convolution lowering. |
 | [`pytorch2026customcuda`](papers/2026-pytorch-custom-cuda-operators.md) | 11, 14 | C++/CUDA operator integration and explicit graph coverage. |
 | [`nvidia2026cublaslt`](papers/2026-nvidia-cublaslt-reference.md) | 14 | Configurable library comparator for custom GPU matrix kernels. |
+| [`nvidia2026cudaredistributables`](papers/2026-nvidia-cuda-redistributables.md) | 14 | Versioned component archives and checksums for native CUDA toolchains. |

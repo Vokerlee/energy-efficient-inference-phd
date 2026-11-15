@@ -135,6 +135,11 @@ provides a separate library comparator. Match arithmetic settings and include
 layout/workspace costs. Kernel speed, semantic fidelity and target-accelerator
 energy are distinct evaluation quantities.
 
+[CUDA component archives](../papers/2026-nvidia-cuda-redistributables.md)
+provide versioned compiler/runtime inputs. Record these alongside Python
+dependencies, source revisions and GPU architectures; a driver version alone
+does not identify the compiler used for a native kernel.
+
 ## Search and limits
 
 Primary web searches on **2026-11-09** covered TVM, MLPerf Inference, MLPerf
