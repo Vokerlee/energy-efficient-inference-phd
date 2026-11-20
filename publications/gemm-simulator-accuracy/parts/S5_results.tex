@@ -14,21 +14,23 @@
 снижает производительности.
 
 \begin{table}[htbp]
-\centering
-\caption{Ускорение симуляции при переносе GEMM на GPU.}
-\label{tab:speedup}
-\fitwidth{\begin{tabular}{l c c c c c}
-    \hline
-    & \multicolumn{3}{c}{\textbf{Время симуляции, с}}
-    & \multicolumn{2}{c}{\textbf{Ускорение к CPU}} \\
-    \cmidrule(lr){2-4}\cmidrule(lr){5-6}
-    \textbf{Модель} & \textbf{CPU} & \textbf{cuBLAS} & \textbf{CUDA} &
-    \textbf{cuBLAS} & \textbf{CUDA} \\
-    \hline
-    Трансформер (2 слоя)        & 23.03 & 11.93 & 12.07 & $1.93\times$ & $1.91\times$ \\
-    Полносвязная сеть (6 слоёв) & 14.70 & 3.84  & 3.89  & $3.83\times$ & $3.78\times$ \\
-    \hline
-\end{tabular}}
+    \centering
+    \caption{Ускорение симуляции при переносе GEMM на GPU.}
+    \label{tab:speedup}
+    \fitwidth{%
+        \begin{tabular}{l c c c c c}
+            \hline
+                                        & \multicolumn{3}{c}{\textbf{Время симуляции, с}}
+                                        & \multicolumn{2}{c}{\textbf{Ускорение к CPU}}                                                                    \\
+            \cmidrule(lr){2-4}\cmidrule(lr){5-6}
+            \textbf{Модель}             & \textbf{CPU}                                    & \textbf{cuBLAS} & \textbf{CUDA} &
+            \textbf{cuBLAS}             & \textbf{CUDA}                                                                                                   \\
+            \hline
+            Трансформер (2 слоя)        & 23.03                                           & 11.93           & 12.07         & $1.93\times$ & $1.91\times$ \\
+            Полносвязная сеть (6 слоёв) & 14.70                                           & 3.84            & 3.89          & $3.83\times$ & $3.78\times$ \\
+            \hline
+        \end{tabular}%
+    }
 \end{table}
 
 \subsection{Послойный профиль и разделение вкладов}
@@ -54,26 +56,28 @@ $\|\Vec{y}^{(l)}\|_F$ при нулевом вкладе замаскирова�
 проход).
 
 \begin{table}[htbp]
-\centering
-\caption{Послойные расхождения RoPE Attention (\texttt{cpu\_vs\_xla}), фрагмент;
-    столбцы~--- $d_{\text{rel}}$ в прямом~(пр.) и обратном~(обр.) проходе.}
-\label{tab:rope}
-\fitwidth{\begin{tabular}{l l c c}
-    \hline
-    \textbf{Модуль} & \textbf{Тип} &
-    \textbf{$d_{\text{rel}}$ (пр.)} & \textbf{$d_{\text{rel}}$ (обр.)} \\
-    \hline
-    RMSNorm             & Norm        & $7.98\cdot10^{-8}$ & $1.05\cdot10^{-7}$ \\
-    Linear (Q, K, V)    & GEMM        & ${\approx}2.21\cdot10^{-3}$ & ${\approx}2.22\cdot10^{-3}$ \\
-    ApplyRoPE           & Exact       & $0$ & $0$ \\
-    CausalAttnScores    & AttnScores  & ${\approx}0^{*}$ & $2.339\cdot10^{-3}$ \\
-    WeightedValue ($AV$) & GEMM       & $2.331\cdot10^{-3}$ & $2.337\cdot10^{-3}$ \\
-    Linear (out)        & GEMM        & $2.250\cdot10^{-3}$ & $2.222\cdot10^{-3}$ \\
-    FFN up / down       & GEMM        & ${\approx}2.26\cdot10^{-3}$ & ${\approx}2.28\cdot10^{-3}$ \\
-    Dropout             & Exact       & $0$ & $0$ \\
-    \hline
-    \multicolumn{4}{l}{\footnotesize $^{*}$~артефакт каузальной маски; по незамаскированным позициям ${\approx}2.3\cdot10^{-3}$.} \\
-\end{tabular}}
+    \centering
+    \caption{Послойные расхождения RoPE Attention (\texttt{cpu\_vs\_xla}), фрагмент;
+        столбцы~--- $d_{\text{rel}}$ в прямом~(пр.) и обратном~(обр.) проходе.}
+    \label{tab:rope}
+    \fitwidth{%
+        \begin{tabular}{l l c c}
+            \hline
+            \textbf{Модуль}                 & \textbf{Тип}                     &
+            \textbf{$d_{\text{rel}}$ (пр.)} & \textbf{$d_{\text{rel}}$ (обр.)}                                                             \\
+            \hline
+            RMSNorm                         & Norm                             & $7.98\cdot10^{-8}$          & $1.05\cdot10^{-7}$          \\
+            Linear (Q, K, V)                & GEMM                             & ${\approx}2.21\cdot10^{-3}$ & ${\approx}2.22\cdot10^{-3}$ \\
+            ApplyRoPE                       & Exact                            & $0$                         & $0$                         \\
+            CausalAttnScores                & AttnScores                       & ${\approx}0^{*}$            & $2.339\cdot10^{-3}$         \\
+            WeightedValue ($AV$)            & GEMM                             & $2.331\cdot10^{-3}$         & $2.337\cdot10^{-3}$         \\
+            Linear (out)                    & GEMM                             & $2.250\cdot10^{-3}$         & $2.222\cdot10^{-3}$         \\
+            FFN up / down                   & GEMM                             & ${\approx}2.26\cdot10^{-3}$ & ${\approx}2.28\cdot10^{-3}$ \\
+            Dropout                         & Exact                            & $0$                         & $0$                         \\
+            \hline
+            \multicolumn{4}{l}{\footnotesize $^{*}$~артефакт каузальной маски; по незамаскированным позициям ${\approx}2.3\cdot10^{-3}$.}  \\
+        \end{tabular}%
+    }
 \end{table}
 
 Уровень $2.2\cdot10^{-3}$ формируется не при умножении матриц, а при компиляции
@@ -83,57 +87,57 @@ $K$-редукции). Поскольку граф HLO одинаков для �
 (табл.~\ref{tab:levels}): он на 2--5 порядков ниже компиляторного.
 
 \begin{table}[htbp]
-\centering
-\caption{Три уровня расхождения GEMM-слоёв (прямой проход).}
-\label{tab:levels}
-\fitwidth{\begin{tabular}{l c l}
-    \hline
-    \textbf{Пара сравнения} & \textbf{$d_{\text{rel}}$} & \textbf{Источник} \\
-    \hline
-    \texttt{cpu} vs \texttt{xla\_*}        & ${\sim}2.2\cdot10^{-3}$ & Компилятор XLA (весь стек) \\
-    \texttt{xla\_cpu} vs \texttt{xla\_cuda}   & ${\sim}1.2\cdot10^{-5}$ & Реализация: CUDA-ядро \\
-    \texttt{xla\_cublas} vs \texttt{xla\_cuda} & ${\sim}1.2\cdot10^{-5}$ & Две GPU-реализации между собой \\
-    \texttt{xla\_cpu} vs \texttt{xla\_cublas} & ${\sim}9\cdot10^{-8}$     & Реализация: cuBLAS \\
-    \hline
-\end{tabular}}
+    \centering
+    \caption{Три уровня расхождения GEMM-слоёв (прямой проход).}
+    \label{tab:levels}
+    \fitwidth{%
+        \begin{tabular}{l c l}
+            \hline
+            \textbf{Пара сравнения}                    & \textbf{$d_{\text{rel}}$} & \textbf{Источник}              \\
+            \hline
+            \texttt{cpu} vs \texttt{xla\_*}            & ${\sim}2.2\cdot10^{-3}$   & Компилятор XLA (весь стек)     \\
+            \texttt{xla\_cpu} vs \texttt{xla\_cuda}    & ${\sim}1.2\cdot10^{-5}$   & Реализация: CUDA-ядро          \\
+            \texttt{xla\_cublas} vs \texttt{xla\_cuda} & ${\sim}1.2\cdot10^{-5}$   & Две GPU-реализации между собой \\
+            \texttt{xla\_cpu} vs \texttt{xla\_cublas}  & ${\sim}9\cdot10^{-8}$     & Реализация: cuBLAS             \\
+            \hline
+        \end{tabular}%
+    }
 \end{table}
 
 \begin{figure}[H]
-\centering
-\resizebox{0.92\textwidth}{!}{%
-\begin{tikzpicture}[font=\small]
-    % ось: десятичный логарифм d_rel, 2.2 см на декаду, -8 -> 0
-    \draw[-{Stealth[length=5pt]}, line width=0.8pt] (-0.3,0) -- (12.7,0)
-        node[right, font=\footnotesize] {$d_{\text{rel}}$};
-    \foreach \e/\x in {{-8}/0, {-7}/2.2, {-6}/4.4, {-5}/6.6, {-4}/8.8, {-3}/11.0} {
-        \draw[line width=0.6pt] (\x,0.08) -- (\x,-0.08) node[below, font=\scriptsize] {$10^{\e}$};
+    \centering
+    \resizebox{0.92\textwidth}{!}{%
+        \begin{tikzpicture}[font=\small]
+            \draw[-{Stealth[length=5pt]}, line width=0.8pt] (-0.3,0) -- (12.7,0)
+            node[right, font=\footnotesize] {$d_{\text{rel}}$};
+            \foreach \e/\x in {{-8}/0, {-7}/2.2, {-6}/4.4, {-5}/6.6, {-4}/8.8, {-3}/11.0} {
+                    \draw[line width=0.6pt] (\x,0.08) -- (\x,-0.08) node[below, font=\scriptsize] {$10^{\e}$};
+                }
+            % epsilon_FP32 = 1.2e-7 -> x = 2.37
+            \draw[dashed, gray, line width=0.6pt] (2.37,-0.15) -- (2.37,1.55);
+            \node[above, font=\scriptsize, gray!55!black] at (2.37,1.55) {$\varepsilon_{\texttt{FP32}}$};
+            % cuBLAS 9e-8 -> x=2.10
+            \draw[green!55!black, line width=1pt] (2.10,0) -- (2.10,0.85);
+            \fill[green!55!black] (2.10,0) circle (2.6pt);
+            \node[above, font=\scriptsize, green!45!black, align=center] at (2.10,0.85) {cuBLAS\\[-1pt]$9{\cdot}10^{-8}$};
+            % CUDA 1.2e-5 -> x=6.77
+            \draw[orange!80!black, line width=1pt] (6.77,0) -- (6.77,1.0);
+            \fill[orange!80!black] (6.77,0) circle (2.6pt);
+            \node[above, font=\scriptsize, orange!60!black, align=center] at (6.77,1.0) {CUDA-ядро\\[-1pt]$1.2{\cdot}10^{-5}$};
+            \draw[red!75!black, line width=1pt] (11.75,0) -- (11.75,1.3);
+            \fill[red!75!black] (11.75,0) circle (2.6pt);
+            \node[above, font=\scriptsize, red!60!black, align=center] at (11.4,1.3) {\textbf{Компилятор XLA}\\[-1pt]$2.2{\cdot}10^{-3}$};
+            \draw[decorate, decoration={brace, amplitude=4pt}, line width=0.6pt]
+            (2.10,-0.62) -- (6.77,-0.62)
+            node[midway, below, font=\scriptsize, yshift=-1pt, align=center] {различия реализаций GEMM};
+        \end{tikzpicture}%
     }
-    % epsilon_FP32 = 1.2e-7 -> x = 2.37
-    \draw[dashed, gray, line width=0.6pt] (2.37,-0.15) -- (2.37,1.55);
-    \node[above, font=\scriptsize, gray!55!black] at (2.37,1.55) {$\varepsilon_{\texttt{FP32}}$};
-    % cuBLAS 9e-8 -> x=2.10
-    \draw[green!55!black, line width=1pt] (2.10,0) -- (2.10,0.85);
-    \fill[green!55!black] (2.10,0) circle (2.6pt);
-    \node[above, font=\scriptsize, green!45!black, align=center] at (2.10,0.85) {cuBLAS\\[-1pt]$9{\cdot}10^{-8}$};
-    % CUDA 1.2e-5 -> x=6.77
-    \draw[orange!80!black, line width=1pt] (6.77,0) -- (6.77,1.0);
-    \fill[orange!80!black] (6.77,0) circle (2.6pt);
-    \node[above, font=\scriptsize, orange!60!black, align=center] at (6.77,1.0) {CUDA-ядро\\[-1pt]$1.2{\cdot}10^{-5}$};
-    % Компилятор 2.2e-3 -> x=11.75
-    \draw[red!75!black, line width=1pt] (11.75,0) -- (11.75,1.3);
-    \fill[red!75!black] (11.75,0) circle (2.6pt);
-    \node[above, font=\scriptsize, red!60!black, align=center] at (11.4,1.3) {\textbf{Компилятор XLA}\\[-1pt]$2.2{\cdot}10^{-3}$};
-    % брэйс: межреализационный диапазон GEMM
-    \draw[decorate, decoration={brace, amplitude=4pt}, line width=0.6pt]
-        (2.10,-0.62) -- (6.77,-0.62)
-        node[midway, below, font=\scriptsize, yshift=-1pt, align=center] {различия реализаций GEMM};
-\end{tikzpicture}}
-\caption{Иерархия источников расхождения GEMM-слоёв по величине послойного
-    отклонения $d_{\text{rel}}$ (логарифмическая шкала). Вклад компилятора XLA на
-    2--5 порядков превосходит различия между реализациями GEMM; отклонение cuBLAS
-    лежит у машинного эпсилона \texttt{FP32}, поэтому замена CPU-реализации на GPU
-    допустима по точности.}
-\label{fig:hierarchy}
+    \caption{Иерархия источников расхождения GEMM-слоёв по величине послойного
+        отклонения $d_{\text{rel}}$ (логарифмическая шкала). Вклад компилятора XLA на
+        2--5 порядков превосходит различия между реализациями GEMM; отклонение cuBLAS
+        лежит у машинного эпсилона \texttt{FP32}, поэтому замена CPU-реализации на GPU
+        допустима по точности.}
+    \label{fig:hierarchy}
 \end{figure}
 
 \textbf{Ключевой вывод:} доминирует компилятор (рис.~\ref{fig:hierarchy}).
@@ -156,19 +160,21 @@ GEMM-арифметикой.
 CUDA-ядро смещения не создаёт ни относительно CPU, ни относительно cuBLAS.
 
 \begin{table}[htbp]
-\centering
-\caption{Диагностика природы расхождений GEMM-слоёв (прямой проход).}
-\label{tab:diag}
-\fitwidth{\begin{tabular}{l c c l}
-    \hline
-    \textbf{Пара} & \textbf{$b$} & \textbf{$c$} & \textbf{Классификация} \\
-    \hline
-    \texttt{cpu\_vs\_xla}     & $0.498$--$0.522$ & $-0.06$--$0.10$ & Случайная аддитивная \\
-    \texttt{xla\_vs\_cublas}  & $0.27$--$0.34$   & $0.08$--$0.16$  & \textbf{Смещённая} аддитивная \\
-    \texttt{xla\_vs\_cuda}    & $0.49$--$0.51$   & $-0.06$--$0.10$ & Случайная аддитивная \\
-    \texttt{cublas\_vs\_cuda} & $0.49$--$0.51$   & $-0.06$--$0.10$ & Случайная аддитивная \\
-    \hline
-\end{tabular}}
+    \centering
+    \caption{Диагностика природы расхождений GEMM-слоёв (прямой проход).}
+    \label{tab:diag}
+    \fitwidth{%
+        \begin{tabular}{l c c l}
+            \hline
+            \textbf{Пара}             & \textbf{$b$}     & \textbf{$c$}    & \textbf{Классификация}        \\
+            \hline
+            \texttt{cpu\_vs\_xla}     & $0.498$--$0.522$ & $-0.06$--$0.10$ & Случайная аддитивная          \\
+            \texttt{xla\_vs\_cublas}  & $0.27$--$0.34$   & $0.08$--$0.16$  & \textbf{Смещённая} аддитивная \\
+            \texttt{xla\_vs\_cuda}    & $0.49$--$0.51$   & $-0.06$--$0.10$ & Случайная аддитивная          \\
+            \texttt{cublas\_vs\_cuda} & $0.49$--$0.51$   & $-0.06$--$0.10$ & Случайная аддитивная          \\
+            \hline
+        \end{tabular}%
+    }
 \end{table}
 
 \subsection{Накопление: прямой проход}
@@ -189,25 +195,27 @@ SwiGLU/GeGLU (нет сжимающего softmax-внимания), миним�
 Sigmoid-стоков.
 
 \begin{table}[htbp]
-\centering
-\caption{Коэффициент накопления $R_{\text{fwd}}$ по группам компонентов
-    ($^\dagger$~для \texttt{xla\_vs\_cublas} приведены оценки порядка величины:
-    сигнал на уровне $\varepsilon_{\texttt{FP32}}$).}
-\label{tab:rfwd}
-\fitwidth{\begin{tabular}{l l c c c}
-    \hline
-    \textbf{Компонент / группа} & \textbf{Нормализация} &
-    \textbf{\texttt{cpu\_vs\_xla}} & \textbf{\texttt{xla\_vs\_cuda}} &
-    \textbf{\texttt{xla\_vs\_cublas}$^\dagger$} \\
-    \hline
-    RoBERTa                & Pre-Norm LN  & $\mathbf{0.53}$ & $0.43$ & ${\sim}2.0$ \\
-    LeNet                  & нет          & $1.08$ & $0.81$ & ${\sim}1.3$ \\
-    Внимание (8 шт.)       & RMSNorm      & $1.42$--$1.46$ & $1.09$--$1.30$ & ${\sim}4.5$--$4.7$ \\
-    RMSNorm FFN            & RMSNorm      & $1.47$ & $1.32$ & ${\sim}4.7$ \\
-    SwiGLU / GeGLU FFN     & RMSNorm      & $1.70$--$1.71$ & $1.48$--$1.51$ & ${\sim}4.1$ \\
-    DeepNorm               & Post-LN      & $1.39$ & $1.15$ & ${\sim}4.2$ \\
-    \hline
-\end{tabular}}
+    \centering
+    \caption{Коэффициент накопления $R_{\text{fwd}}$ по группам компонентов
+        ($^\dagger$~для \texttt{xla\_vs\_cublas} приведены оценки порядка величины:
+        сигнал на уровне $\varepsilon_{\texttt{FP32}}$).}
+    \label{tab:rfwd}
+    \fitwidth{%
+        \begin{tabular}{l l c c c}
+            \hline
+            \textbf{Компонент / группа}    & \textbf{Нормализация}           &
+            \textbf{\texttt{cpu\_vs\_xla}} & \textbf{\texttt{xla\_vs\_cuda}} &
+            \textbf{\texttt{xla\_vs\_cublas}$^\dagger$}                                                                              \\
+            \hline
+            RoBERTa                        & Pre-Norm LN                     & $\mathbf{0.53}$ & $0.43$         & ${\sim}2.0$        \\
+            LeNet                          & нет                             & $1.08$          & $0.81$         & ${\sim}1.3$        \\
+            Внимание (8 шт.)               & RMSNorm                         & $1.42$--$1.46$  & $1.09$--$1.30$ & ${\sim}4.5$--$4.7$ \\
+            RMSNorm FFN                    & RMSNorm                         & $1.47$          & $1.32$         & ${\sim}4.7$        \\
+            SwiGLU / GeGLU FFN             & RMSNorm                         & $1.70$--$1.71$  & $1.48$--$1.51$ & ${\sim}4.1$        \\
+            DeepNorm                       & Post-LN                         & $1.39$          & $1.15$         & ${\sim}4.2$        \\
+            \hline
+        \end{tabular}%
+    }
 \end{table}
 
 Для случайной ошибки (\texttt{cpu\_vs\_xla}, \texttt{xla\_vs\_cuda}) накопление
@@ -244,20 +252,22 @@ $1/\mathrm{RMS}(\Vec{x})$, проходящий по градиентной це
 суммированием погрешностей, а не нелинейным взаимодействием.
 
 \begin{table}[htbp]
-\centering
-\caption{Коэффициент накопления $R_{\text{bwd}}$ по двум режимам
-    (\texttt{cpu\_vs\_xla}).}
-\label{tab:rbwd}
-\fitwidth{\begin{tabular}{l c c}
-    \hline
-    \textbf{Компонент / группа} & \textbf{Обратный} & \textbf{Совместный} \\
-    \hline
-    LeNet                  & $1.52$ & $5.21$ \\
-    RoBERTa                & $1.76$ & $6.31$ \\
-    Внимание (RMSNorm)     & $1.69$--$1.87$ & $5.6$--$6.5$ \\
-    SwiGLU / GeGLU FFN     & $1.39$--$1.41$ & $1.72$--$1.76$ \\
-    RMSNorm FFN            & $1.47$ & $\mathbf{17.02}$ \\
-    DeepNorm               & $\mathbf{0.35}$ & $4.03$ \\
-    \hline
-\end{tabular}}
+    \centering
+    \caption{Коэффициент накопления $R_{\text{bwd}}$ по двум режимам
+        (\texttt{cpu\_vs\_xla}).}
+    \label{tab:rbwd}
+    \fitwidth{%
+        \begin{tabular}{l c c}
+            \hline
+            \textbf{Компонент / группа} & \textbf{Обратный} & \textbf{Совместный} \\
+            \hline
+            LeNet                       & $1.52$            & $5.21$              \\
+            RoBERTa                     & $1.76$            & $6.31$              \\
+            Внимание (RMSNorm)          & $1.69$--$1.87$    & $5.6$--$6.5$        \\
+            SwiGLU / GeGLU FFN          & $1.39$--$1.41$    & $1.72$--$1.76$      \\
+            RMSNorm FFN                 & $1.47$            & $\mathbf{17.02}$    \\
+            DeepNorm                    & $\mathbf{0.35}$   & $4.03$              \\
+            \hline
+        \end{tabular}%
+    }
 \end{table}
