@@ -20,10 +20,11 @@ make -C publications docx-preview
 ```
 
 The first command installs checksum-pinned Pandoc 3.14 inside this article's
-ignored `.tools/` directory (Linux x86-64). Conversion otherwise needs Python
-3.10+, the existing LaTeX toolchain and Poppler's `pdftocairo`. No Python package
-is needed at runtime. Optional Python development tools are pinned in
-`requirements.txt`; use Ruff to format and check `scripts/`.
+ignored `.tools/` directory (Linux x86-64), creates `.tools/python/`, and installs
+`requirements.txt`: pypdf 7.1.1 for reading TikZ geometry and Ruff 0.14.5 for
+formatting/checking Python. Conversion also needs Python 3.10+, the existing
+LaTeX toolchain and Poppler's `pdftocairo`. Make targets use the local Python
+environment; do not install these dependencies globally.
 
 `docx-preview` additionally requires LibreOffice Writer. It renders the actual
 DOCX, not the original LaTeX PDF. Install Times New Roman and Cambria Math on
@@ -43,9 +44,50 @@ installed tools. Re-run export after changing the manuscript or converter.
 
 The exporter uses the compiled LaTeX labels and GOST `.bbl` bibliography to
 preserve numbering and reference order. Cross-references in Word are regenerated
-numbers, not live Word fields. TikZ figures are compiled into 300 dpi images;
-formulas and data tables remain native editable Word objects. Vector notation
+numbers, not live Word fields. All seven TikZ figures become native Word
+DrawingML canvases containing editable shapes and text. Formulas inside their
+labels use OMML; data tables also remain native Word objects. Vector notation
 uses bold symbols in the export, as requested by the journal template.
+
+### Native TikZ diagrams
+
+TikZ remains the only diagram source. During export, TeX resolves node positions
+and font sizes. pypdf extracts the painted paths from the cropped figure PDF;
+PDF glyphs are ignored. Pandoc converts the original node-label TeX into Word
+text and OMML, and the exporter combines them with native DrawingML geometry.
+Thus labels remain text, rather than outlines of individual letters. Curved
+arrows, rounded boxes, dashed boundaries and the logarithmic scale retain their
+geometry. In Word, select a drawing canvas and then its individual objects to
+edit their text, shape or position.
+
+The current manuscript produces seven canvases, 200 shape objects and 82 editable
+labels containing 65 OMML expressions. These are additional to the 290 math
+objects in the article body. The final DOCX contains no image parts or image
+relationships. PNG files in `build/docx/` are temporary Pandoc layout placeholders
+and visual references; the native objects replace them before validation.
+
+Arrows are editable freeform paths and arrowhead shapes, not attached connectors:
+moving a block does not automatically reroute its arrows. Text layout depends on
+Word's fonts and can differ from TeX. This converter supports the TikZ constructs
+used by this manuscript, including its literal coordinate-list `foreach` loop;
+it is not a general TikZ interpreter. Unsupported PDF drawing operations fail
+export rather than silently falling back to an image. New diagram constructs
+need an explicit conversion/visual check.
+
+The representation uses Microsoft's [WordprocessingML drawing extensions](https://learn.microsoft.com/en-us/openspecs/office_standards/ms-odrawxml/87221dc8-13de-4885-89b8-429c078ed191).
+The generated document was checked with Microsoft Open XML SDK 3.3.0 against
+Office 2019 schemas with zero validation errors. This checks document structure,
+not visual layout or interactive editing in Word.
+
+Regression checks, after building the DOCX:
+
+```sh
+cd publications/gemm-simulator-accuracy
+.tools/python/bin/python -m unittest discover -s scripts -p 'test_*.py' -v
+.tools/python/bin/ruff check scripts
+.tools/python/bin/ruff format --check scripts
+```
+
 
 ## Formatting sources
 
@@ -103,8 +145,9 @@ Keep third-party PDFs outside Git; retain these source links and page pointers.
 ### Export checks and final layout pass
 
 The checker compares prepared non-mathematical text against Word XML, verifies
-input hashes, editable equation counts, native table counts, embedded figure
-hashes and baseline font/spacing settings. It rejects unresolved references and
+input hashes, editable equation counts, native table counts, native diagram
+geometry/label hashes and baseline font/spacing settings. It rejects embedded
+pictures, lost shapes, altered labels and missing diagram mathematics. It rejects unresolved references and
 unconverted raw TeX. Counts do not prove mathematical equivalence or good layout.
 
 Numbered displays use separate Word text for the number and explicit center/right
@@ -121,8 +164,13 @@ probe exposed literal escaped parentheses for `\text{(…)}`; a successful expor
 alone does not establish correct visual rendering.
 
 Microsoft Word was not available for rendering in the development environment.
-LibreOffice Writer 24.2.7.2 was used for the preview checks. It still selects its
-own mathematical fonts; its output is not proof of identical Word typography.
+LibreOffice Writer 24.2.7.2 and 26.8.3.1 were used for native-diagram preview
+checks. Both open the document, but some elements of the hierarchy diagram shift
+when the canvas occurs inside the paginated full article. The same native canvas
+renders in its expected positions in an isolated DOCX. Therefore the full-article
+LibreOffice PDF is currently unsuitable for approving diagram placement. It also
+selects its own mathematical fonts. Check the final document in Microsoft Word;
+XML validation and standalone rendering do not establish Word's visual result.
 
 The current export remains a draft. The final visual pass is separate from
 content preservation: inspect page breaks, long equations, equation-number

@@ -8,6 +8,7 @@ import shutil
 import sys
 
 from latex_source import BUILD, labels_from_aux, prepare_tex, run_command
+from native_diagrams import replace_images
 from setup_docx import ARTICLE, PANDOC, VERSION
 from word_document import (
     MATH_SIZE,
@@ -116,6 +117,7 @@ def main() -> None:
             "word/settings.xml": format_math_settings,
         },
     )
+    replace_images(staged, manifest["figures"])
     manifest.update(
         pandoc=VERSION,
         math_count=sum(n["t"] == "Math" for n in walk_nodes(document)),
@@ -124,6 +126,7 @@ def main() -> None:
     inputs = [
         ARTICLE / "article.tex",
         ARTICLE / "Makefile",
+        ARTICLE / "requirements.txt",
         ARTICLE / "literature.bib",
         ARTICLE / "ugost2008l.bst",
     ]

@@ -2,6 +2,7 @@
 """Check exported content, editable equations, native tables and journal styles."""
 
 import argparse
+import copy
 import hashlib
 import json
 import re
@@ -12,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from latex_source import BUILD
+from native_diagrams import NAMESPACES, drawing_digest, tag
 from setup_docx import ARTICLE
 from word_document import MATH_FONT, MATH_SIZE, NS, W, walk_nodes
 
@@ -46,7 +48,6 @@ def source_text(document: dict[str, Any]) -> str:
 def check_content(document: ET.Element, manifest: dict[str, Any]) -> dict[str, int]:
     counts = {
         "math": len(document.findall(f".//{{{MATH}}}oMath")),
-        "figures": len(document.findall(f".//{{{DRAWING}}}blip")),
         "tables": len(document.findall(".//w:tbl", NS)),
         "bibliography": len(manifest["bibliography_keys"]),
     }
@@ -54,7 +55,6 @@ def check_content(document: ET.Element, manifest: dict[str, Any]) -> dict[str, i
         counts["math"] == manifest["math_count"],
         "A formula was lost or exported without editable OMML",
     )
-    require(counts["figures"] == len(manifest["figures"]), "Figure count changed")
     require(counts["tables"] == manifest["table_count"], "A native Word table was lost")
     ast = json.loads((BUILD / "article.json").read_text())
     expected = normalized(source_text(ast))
@@ -110,6 +110,44 @@ def check_content(document: ET.Element, manifest: dict[str, Any]) -> dict[str, i
     return counts
 
 
+def check_diagrams(document: ET.Element, manifest: dict[str, Any]) -> dict[str, int]:
+    require(
+        document.find(f".//{{{DRAWING}}}blip") is None,
+        "A TikZ diagram was exported as a picture",
+    )
+    drawings = document.findall(".//w:drawing", NS)
+    require(len(drawings) == len(manifest["figures"]), "Native diagram count changed")
+    counts = {"figures": len(drawings), "shapes": 0, "labels": 0, "diagram_math": 0}
+    for drawing, figure in zip(drawings, manifest["figures"]):
+        canvas = drawing.find(".//wpc:wpc", NAMESPACES)
+        require(canvas is not None, "Figure is not a native Word canvas")
+        native = figure["native"]
+        shapes = canvas.findall("wps:wsp", NAMESPACES)
+        require(len(shapes) == native["shape_count"], "A native shape was lost")
+        labels = {}
+        for shape in shapes:
+            text = shape.find("wps:txbx", NAMESPACES)
+            if text is not None:
+                name = shape.find("wps:cNvPr", NAMESPACES).get("name")
+                require(name not in labels, "Duplicate native label name")
+                labels[name] = "".join(
+                    n.text or ""
+                    for n in text.iter()
+                    if n.tag in (tag("w:t"), tag("m:t"))
+                )
+        require(labels == native["labels"], "An editable diagram label changed")
+        math_count = len(list(canvas.iter(tag("m:oMath"))))
+        require(math_count == native["math_count"], "Diagram mathematics was lost")
+        require(
+            drawing_digest(drawing) == native["sha256"],
+            "Native diagram geometry, text or formatting changed",
+        )
+        counts["shapes"] += len(shapes)
+        counts["labels"] += len(labels)
+        counts["diagram_math"] += math_count
+    return counts
+
+
 def check_styles(styles: ET.Element) -> None:
     defaults = styles.find("w:docDefaults/w:rPrDefault/w:rPr", NS)
     fonts = defaults.find("w:rFonts", NS)
@@ -162,16 +200,24 @@ def main() -> None:
             font is not None and font.get("{" + MATH + "}val") == MATH_FONT,
             "The document's default math font is missing",
         )
-        images = {
-            hashlib.sha256(package.read(name)).hexdigest()
-            for name in package.namelist()
-            if name.startswith("word/media/")
-        }
         require(
-            images == {figure["sha256"] for figure in manifest["figures"]},
-            "Embedded figure content differs from the compiled TikZ figures",
+            not any(name.startswith("word/media/") for name in package.namelist()),
+            "Native diagrams must not contain embedded image parts",
         )
-    counts = check_content(document, manifest)
+        relationships = ET.fromstring(package.read("word/_rels/document.xml.rels"))
+        require(
+            not any(r.get("Type", "").endswith("/image") for r in relationships),
+            "An image relationship remains in the native export",
+        )
+    diagram_counts = check_diagrams(document, manifest)
+    body = copy.deepcopy(document)
+    for parent in body.iter():
+        for drawing in parent.findall("w:drawing", NS):
+            parent.remove(drawing)
+    counts = check_content(body, manifest)
+    counts.update(diagram_counts)
+    counts["body_math"] = counts["math"]
+    counts["math"] += counts["diagram_math"]
     check_styles(styles)
     report = {
         "checks": "passed",
