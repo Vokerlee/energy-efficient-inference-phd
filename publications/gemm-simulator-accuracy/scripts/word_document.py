@@ -21,6 +21,15 @@ MATH_SIZE = 28
 
 # OOXML property elements are ordered sequences, not unordered mappings.
 PROPERTY_ORDER = {
+    "style": "name aliases basedOn next link autoRedefine hidden uiPriority "
+    "semiHidden unhideWhenUsed qFormat locked personal personalCompose "
+    "personalReply rsid pPr rPr tblPr trPr tcPr tblStylePr",
+    "tblPr": "tblStyle tblpPr tblOverlap bidiVisual tblStyleRowBandSize "
+    "tblStyleColBandSize tblW jc tblCellSpacing tblInd tblBorders shd "
+    "tblLayout tblCellMar tblLook tblCaption tblDescription tblPrChange",
+    "tcPr": "cnfStyle tcW gridSpan hMerge vMerge tcBorders shd noWrap tcMar "
+    "textDirection tcFitText vAlign hideMark headers cellIns cellDel "
+    "cellMerge tcPrChange",
     "pPr": "pStyle keepNext keepLines pageBreakBefore framePr widowControl numPr "
     "suppressLineNumbers pBdr shd tabs suppressAutoHyphens kinsoku wordWrap "
     "overflowPunct topLinePunct autoSpaceDE autoSpaceDN bidi adjustRightInd "
@@ -319,7 +328,32 @@ def format_equations(body: ET.Element) -> None:
 def format_math_settings(tree: ET.Element) -> None:
     properties = tree.find("{" + M + "}mathPr")
     if properties is None:
-        properties = ET.SubElement(tree, "{" + M + "}mathPr")
+        properties = ET.Element("{" + M + "}mathPr")
+        # mathPr precedes themeFontLang and trailing compatibility extensions.
+        following = {
+            "themeFontLang",
+            "clrSchemeMapping",
+            "doNotIncludeSubdocsInStats",
+            "doNotAutoCompressPictures",
+            "forceUpgrade",
+            "captions",
+            "readModeInkLockDown",
+            "smartTagType",
+            "schemaLibrary",
+            "shapeDefaults",
+            "doNotEmbedSmartTags",
+            "decimalSymbol",
+            "listSeparator",
+        }
+        position = next(
+            (
+                i
+                for i, child in enumerate(tree)
+                if child.tag.split("}")[-1] in following
+            ),
+            len(tree),
+        )
+        tree.insert(position, properties)
     font = properties.find("{" + M + "}mathFont")
     if font is None:
         font = ET.SubElement(properties, "{" + M + "}mathFont")
