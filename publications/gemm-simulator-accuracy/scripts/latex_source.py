@@ -1,6 +1,7 @@
 """Prepare the article for Word without changing its LaTeX sources."""
 
 import hashlib
+import json
 import re
 import subprocess
 from collections.abc import Sequence
@@ -8,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from setup_docx import ARTICLE
+from tikz_scene import instrument, measurement_preamble, read_scene
 
 BUILD = ARTICLE / "build" / "docx"
 
@@ -98,13 +100,15 @@ def render_figures(
         identifier = label[1]
         number = labels[identifier]
         stem = BUILD / f"figure-{number}"
+        editable_picture, node_labels = instrument(picture[0])
         tex = (
             "\\documentclass[a4paper,12pt]{article}\n"
             + preamble
             + "\n\\usepackage[active,tightpage]{preview}\n"
             + "\\PreviewEnvironment{tikzpicture}\n\\setlength{\\PreviewBorder}{4pt}\n"
+            + measurement_preamble(stem.name + ".nodes")
             + "\\begin{document}\n"
-            + picture[0]
+            + editable_picture
             + "\n\\end{document}\n"
         )
         stem.with_suffix(".tex").write_text(tex)
@@ -118,6 +122,10 @@ def render_figures(
                 stem.with_suffix(".tex"),
             ],
             log=stem.with_suffix(".console.log"),
+        )
+        scene = read_scene(stem.with_suffix(".pdf"), node_labels)
+        stem.with_suffix(".scene.json").write_text(
+            json.dumps(scene, ensure_ascii=False, indent=2)
         )
         run_command(
             [
@@ -135,6 +143,7 @@ def render_figures(
                 "label": identifier,
                 "number": number,
                 "file": stem.name + ".png",
+                "scene_file": stem.name + ".scene.json",
                 "sha256": hashlib.sha256(
                     stem.with_suffix(".png").read_bytes()
                 ).hexdigest(),
