@@ -153,3 +153,12 @@ directly, its datapath and correction logic must implement that contract.
 Zero gating and compaction are different: retaining an empty scheduled slot
 may save switching while leaving latency unchanged. Compare both within the
 same physical resources before attributing a throughput gain to sparsity.
+
+## Numerical-model references added 2026-11-21
+
+[MMA-Sim](../papers/2025-xie-mma-sim.md) and
+[Accurate Models of NVIDIA Tensor Cores](../papers/2025-khattak-tensor-core-models.md)
+provide references for instruction-level arithmetic modeling.
+These two records cover abstract and bibliographic verification only; detailed
+hardware coverage and numerical validation remain to read. They do not replace
+a comparison against the particular instruction or device being modeled.

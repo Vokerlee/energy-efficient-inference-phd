@@ -174,3 +174,5 @@ or access date and a distinct documentation-reading status.
 | [`pytorch2026customcuda`](papers/2026-pytorch-custom-cuda-operators.md) | 11, 14 | C++/CUDA operator integration and explicit graph coverage. |
 | [`nvidia2026cublaslt`](papers/2026-nvidia-cublaslt-reference.md) | 14 | Configurable library comparator for custom GPU matrix kernels. |
 | [`nvidia2026cudaredistributables`](papers/2026-nvidia-cuda-redistributables.md) | 14 | Versioned component archives and checksums for native CUDA toolchains. |
+| [`xie2025mmasim`](papers/2025-xie-mma-sim.md) | 02 | Bit-accurate GPU matrix-unit modeling; abstract/metadata check, pinned to v1. |
+| [`khattak2025tensorcoremodels`](papers/2025-khattak-tensor-core-models.md) | 02 | Instruction-arithmetic model scope; abstract/metadata check, pinned to v1. |
