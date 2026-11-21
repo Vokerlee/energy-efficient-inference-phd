@@ -12,3 +12,7 @@ article's ignored `build/` directory. Generated PDFs are also ignored by Git.
 The `clean` target removes generated files. Builds retain their PDF and log,
 and run with shell escape disabled. `latexmk` invokes `pdflatex` explicitly and
 handles any additional passes needed for references and bibliographies.
+
+The [GEMM article README](gemm-simulator-accuracy/README.md) documents its editable
+Word export, journal formatting evidence and optional DOCX-derived PDF preview.
+Generated Word files also appear directly here and remain ignored by Git.
