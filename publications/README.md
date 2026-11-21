@@ -16,3 +16,8 @@ handles any additional passes needed for references and bibliographies.
 The [GEMM article README](gemm-simulator-accuracy/README.md) documents its editable
 Word export, journal formatting evidence and optional DOCX-derived PDF preview.
 Generated Word files also appear directly here and remain ignored by Git.
+
+The repository-local [formal LaTeX writing skill](.agents/skills/formal-latex-writing/SKILL.md)
+guides scientific prose, notation, quantitative comparisons and the distinction
+between observed results, mathematical conclusions and hypotheses. Its local
+context is confined to `publications`; it requires no global skill installation.
