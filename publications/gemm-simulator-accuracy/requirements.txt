@@ -1,2 +1,5 @@
-# Development tools only. DOCX conversion uses the Python standard library.
+# Runtime: extract native paths from the article's compiled TikZ diagrams.
+pypdf==7.1.1
+
+# Development formatting and linting.
 ruff==0.14.5
