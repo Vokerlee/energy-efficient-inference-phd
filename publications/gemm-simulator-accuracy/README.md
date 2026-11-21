@@ -104,6 +104,25 @@ links the journal's [Word template](https://2025.microelectronica.online/print/%
 This is an undated legacy template, not a verified newly issued 2026 standard.
 Its Equation 3.0 requirement is deliberately replaced here by modern OMML.
 
+### Structure of the article
+
+Rechecked the template linked by the Forum 2026 author page on 2026-11-21.
+It specifies front matter, abstracts, keywords, body formatting, equations,
+tables, figures, references and author details. It does **not** prescribe
+mandatory body-section titles, their number, an IMRAD sequence or heading
+numbering. The headings in the template such as “Формулы” and “Таблицы”
+organize its formatting instructions; they are not required manuscript sections.
+Choose the manuscript sections to follow its research argument. This finding
+concerns the available undated template, not an independently dated 2026
+editorial policy.
+
+The template also explicitly requires abbreviation definitions and explanations
+of figure labels; it disallows shortened words in table cells except units. Diagrams must remain legible when reduced; illustrations
+must be inserted at the relevant point in the text. For this manuscript, figure
+labels use the same base font size as body text without scaling the entire
+diagram. Relative speedup ranges are outward-rounded bounds of existing
+measurements, not invented samples or confidence intervals.
+
 ### Complete published examples inspected for formatting
 
 The [journal archive](https://www.niime.ru/science/) identifies the journal and
