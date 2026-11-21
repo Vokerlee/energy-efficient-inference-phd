@@ -1,0 +1,2 @@
+# Development tools only. DOCX conversion uses the Python standard library.
+ruff==0.14.5
