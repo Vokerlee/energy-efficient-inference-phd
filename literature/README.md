@@ -16,7 +16,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 07 — Quantization and structured sparsity | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/07-quantization-and-structured-sparsity.md) |
 | 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/08-accumulation-and-block-scaling.md) |
 | 09 — Adaptive low-rank computation | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/09-adaptive-low-rank-computation.md) |
-| 10 — Fast matrix multiplication | Reviewed 2026-11-08 | [Review](topics/10-fast-matrix-multiplication.md) |
+| 10 — Fast matrix multiplication | Reviewed 2026-11-08; screened 2026-11-22 | [Review](topics/10-fast-matrix-multiplication.md) |
 | 11 — Operator fusion and streaming inference | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/11-operator-fusion-and-streaming.md) |
 | 12 — Hardware control for adaptive execution | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/12-adaptive-execution-control.md) |
 | 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09; expanded 2026-11-22 | [Review](topics/13-end-to-end-quality.md) |
@@ -189,3 +189,6 @@ or access date and a distinct documentation-reading status.
 | [`wei2026witcert`](papers/2026-wei-witcert.md) | 12, 13 | Runtime risk gates with explicitly different adaptive-query guarantees. |
 | [`yang2026activationconcentration`](papers/2026-yang-activation-concentration.md) | 07, 14, 15 | Scalar-versus-column sparsity, threshold quality and mapping-specific costs. |
 | [`yoon2026disc`](papers/2026-yoon-disc.md) | 07, 12, 15 | Token reuse and sparse attention co-designed with bank distribution. |
+| [`jangda2026subcuber`](papers/2026-jangda-subcuber.md) | 10 | A direct implementation comparator for shape-dependent Strassen scheduling. Compiler generation and memory fusion are existing mechanisms. |
+| [`chiu2025strassenquant`](papers/2025-chiu-strassen-dynamic-quantization.md) | 10 | The specific combination of Strassen, block quantization and ViT acceleration already has a prior description. |
+| [`xie2026fp8fastmatmul`](papers/2026-xie-fp8-fast-matmul.md) | 10 | Coefficient choice and low-precision fast multiplication are an existing research intersection. |
