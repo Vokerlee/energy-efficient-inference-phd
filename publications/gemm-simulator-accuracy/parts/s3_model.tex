@@ -382,6 +382,51 @@ $\eta_w^{(l)}\in\mathbb{R}^{p_l}$~--- ошибка вычисления град
             &=H^{(l)T}h^{(l)}+\eta_w^{(l)},\qquad p_l>0.
     \end{aligned}
 \end{equation}
+Для графа на рис.~\ref{fig:transport} обратное распространение
+погрешностей градиентов по активациям показано на рис.~\ref{fig:backward-dag}.
+
+\begingroup
+\setlength{\intextsep}{3pt}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        font=\normalsize,
+        box/.style={draw=black!65, rounded corners=2pt,
+            fill=babyblue!20, minimum width=16mm, minimum height=8mm},
+        arr/.style={-{Stealth[length=4pt]}, line width=0.6pt},
+        loc/.style={arr, red!70!black}
+    ]
+        \node (g0) at (-2.6,0) {$h^{(0)}$};
+        \node[box] (g1) at (0,0) {$h^{(1)}$};
+        \node[box] (g2) at (3,0.9) {$h^{(2)}$};
+        \node[box] (g3) at (3,-0.9) {$h^{(3)}$};
+        \node[box] (g4) at (6,0) {$h^{(4)}$};
+        \draw[arr] (g1.west) -- node[above] {$J^{(1,0)T}$} (g0.east);
+        \draw[arr] (g2.west) -- node[above, sloped] {$J^{(2,1)T}$} (g1.east);
+        \draw[arr] (g3.west) -- node[below, sloped] {$J^{(3,1)T}$} (g1.east);
+        \draw[arr] (g4.west) -- node[above, sloped] {$J^{(4,2)T}$} (g2.east);
+        \draw[arr] (g4.west) -- node[below, sloped] {$J^{(4,3)T}$} (g3.east);
+        \node (e0) at (-2.6,1.1) {$\eta_x^{(0)}$};
+        \node (e1) at (0,1.1) {$\eta_x^{(1)}$};
+        \node (e2) at (4.4,1.4) {$\eta_x^{(2)}$};
+        \node (e3) at (4.4,-1.4) {$\eta_x^{(3)}$};
+        \draw[loc] (e0) -- (g0.north);
+        \draw[loc] (e1) -- (g1.north);
+        \draw[loc] (e2) -- (g2.north);
+        \draw[loc] (e3) -- (g3.south);
+        \node at (2,-2.2) {
+            $h^{(1)}=J^{(2,1)T}h^{(2)}
+                +J^{(3,1)T}h^{(3)}+\eta_x^{(1)}$
+        };
+    \end{tikzpicture}
+    \caption{Обратное распространение погрешностей градиентов для графа
+        на рис.~\ref{fig:transport}. На рёбрах указаны транспонированные
+        якобианы; красные стрелки задают локальные ошибки $\eta_x^{(j)}$.
+        Начальное $h^{(4)}$ включает ошибку градиента функции потерь.}
+    \label{fig:backward-dag}
+\end{figure}
+\endgroup
+
 Начальное $h^{(L)}$ включает возможное расхождение градиента функции потерь.
 При изменённых тензорах прямого прохода меняются также якобианы.
 
