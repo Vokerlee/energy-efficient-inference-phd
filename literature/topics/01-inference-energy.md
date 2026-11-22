@@ -1,8 +1,10 @@
 # 01 — Energy of compute-bound versus memory-bound inference
 
 Reviewed: **2026-11-08**. Scope: targeted literature review, including public
-preprints available by this date. Evidence base: **17 papers**, with focused
-reading of their full texts. No new hardware or model experiments were run.
+preprints available by this date. Initial evidence base: **17 papers**, with focused
+reading of their full texts. A three-paper supplement was reviewed on
+**2026-11-22** for vision/diffusion component costs. No new hardware or model
+experiments were run.
 
 ## Research question and current answer
 
@@ -281,3 +283,82 @@ encoder/decoder logic and metadata, and report static/background energy as
 well as dynamic energy. Activation statistics should come from the actual
 adapted trajectory. Do not reuse ReLU-derived savings for SiLU/GELU workloads
 without new characterization.
+
+## 6. Vision and diffusion component costs
+
+Supplement reviewed **2026-11-22**. Keep graph location separate from the
+physical cost of executing that operation: arithmetic, local-buffer traffic,
+more distant transfers, conversions/control and duration-dependent background
+energy. A large operator energy share does not identify its MAC energy share.
+
+### Architecture-specific evidence
+
+[LL-ViT, Table VI](../papers/2025-nag-ll-vit.md) estimates the following
+baseline INT8 encoder-block energies for a 32-by-32 systolic FPGA design:
+
+| Operation group | Energy subtotal, microjoules | Share of the reported subtotal |
+|---|---:|---:|
+| Two MLP dense layers | 188.70 | 55.8% |
+| Q/K/V and parameterized output stage | 94.36 | 27.9% |
+| QK-transpose and attention-weight/value products | 55.04 | 16.3% |
+| Total | 338.10 | 100% |
+
+These are power-tool estimates with assumed switching activity. Nonlinear
+operators are omitted, and buffer/arithmetic components are not separated.
+The already-INT8 baseline does not establish the gain of adaptive precision.
+
+[ViDiT-Q, Appendix A.1](../papers/2025-zhao-vidit-q.md) reports 14.3% of
+STDiT-block latency in the attention core with FlashAttention, excluding
+Q/K/V and output projections. This identifies a concrete linear-layer target;
+it is not an energy percentage and does not cover every token length/layout.
+
+[Diffusion energy scaling](../papers/2026-iyengar-diffusion-energy-scaling.md)
+provides whole-GPU observations and analytical phase decomposition. Its
+reported denoising share above 90% is FLOPs, not isolated phase joules.
+Repeated denoising motivates inspecting the backbone; few-step inference,
+large decoders and different conditioning can change phase shares.
+
+### Analytical arithmetic check, not measured energy
+
+For batch one, N tokens, hidden width d, and an ordinary two-linear MLP with
+intermediate width 4d, count a multiply-add as two FLOPs. Ignoring biases,
+normalization, activation functions, masking, patch embedding and the head:
+
+```text
+F_MLP = 16*N*d^2
+F_QKV_and_output = 8*N*d^2
+F_attention_core = 4*N^2*d
+```
+
+For the illustrative N=197, d=768 block, shares are approximately 63.9%,
+32.0% and 4.1%. These follow from matrix dimensions; they are not energy
+measurements. Global attention-core arithmetic exceeds all these linear
+projections combined when N > 6*d. Windowed/factorized attention, gated MLPs,
+cross-attention and multimodal blocks require their actual operation graphs.
+
+Convolutional denoisers additionally require a convolution-stage ledger:
+spatial size, channels, kernel size, skip-buffer lifetime and lowering/feeder
+traffic. The largest spatial grid need not be the most expensive stage if
+channel widths and reuse differ. Optimizing repeated denoising does not
+establish which individual stage consumes the most energy.
+
+### Consequences for activation adaptation
+
+First candidates for a cost study are MLP and Q/K/V/output GEMMs; long-token
+workloads can instead make attention-core products critical. The latter use
+two runtime-dependent operands, so both representation and scale paths matter.
+For convolutional backbones include the activation feeder and avoid assigning
+savings from hypothetical removal of an already-implicit im2col buffer.
+
+A lower-precision activation must feed a compatible arithmetic mode with a
+fixed, supported weight format to reduce actual MAC cost. Fake quantization
+followed by conversion to the original arithmetic is a numerical experiment,
+not evidence of hardware energy savings. Charge metadata, pack/unpack,
+statistics, extra passes, fallbacks, padded tiles and any vector-unit conversion.
+Changing width only at the array input cannot reduce earlier memory traffic.
+
+Compare against an optimized fixed-precision or standard dynamic-scaling
+baseline at matched quality and execution constraints. A workload can have
+large GEMM energy and still offer no gain from an additional adaptive policy.
+The full-boundary saving must exceed observation/control costs; existing
+source measurements do not determine that margin for another accelerator.

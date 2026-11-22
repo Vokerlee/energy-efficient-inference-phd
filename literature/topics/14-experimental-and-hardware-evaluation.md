@@ -155,6 +155,20 @@ can miss rare response failures. Dynamic-scaling experiments should report
 their actual scaling restrictions and output-quality checks; architecture
 similarity does not transfer numerical tolerances or energy claims.
 
+## Component-energy attribution
+
+Supplement reviewed **2026-11-22**. [CLEAR](../papers/2026-jain-clear-transformer-energy.md)
+replays saved inputs to overcome coarse GPU energy-sensor timing. Repetitions
+can alter caches, clocks and launch amortization, so validate against complete
+model invocations and the actual fused baseline. Its language-model findings
+are not direct ViT/DiT energy measurements.
+
+[Diffusion energy scaling](../papers/2026-iyengar-diffusion-energy-scaling.md)
+fits complete-run idle-subtracted GPU energy; its FLOP decomposition does not
+isolate stage energy. Combine physical observations with mapping/action counts
+rather than turning latency or FLOP percentages into joule percentages.
+See [topic 01](01-inference-energy.md) for the vision/diffusion evidence split.
+
 ## Search and limits
 
 Primary web searches on **2026-11-09** covered TVM, MLPerf Inference, MLPerf
