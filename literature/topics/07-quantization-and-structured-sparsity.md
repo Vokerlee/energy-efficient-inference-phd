@@ -184,3 +184,25 @@ changes separately. Gating need not reduce cycles; compaction can reduce work
 but add selection, gathering and utilization costs. Report full-model quality,
 including the changed diffusion trajectory. Percentage scalar sparsity alone
 establishes none of these benefits.
+
+## Concrete combined-method comparators
+
+Supplement reviewed **2026-11-22** from the stated method sections.
+
+| Method | Combination already present | Boundary to preserve |
+|---|---|---|
+| [DIP](../papers/2025-federici-dip.md) | Live pruning scores modified by cache residency | Flash/DRAM-limited decoding; optional adaptation |
+| [Chipmunk](../papers/2025-silveria-chipmunk.md) | Shared token-chunk masks, temporal deltas, dense packing | Stored history; MLP selection includes a smaller matrix product |
+| [RT-Lynx](../papers/2026-cong-rt-lynx.md) | N:M activation pruning, norm compensation, LoRA and fusion | Correction work and training are part of the complete method |
+| [WiSparse](../papers/2026-chen-wisparse.md) | Live weight-aware masks and mixed sparsity allocation | Calibrated exponents/thresholds; mixed granularity means block/layer allocation |
+| [Prox](../papers/2026-liu-prox.md) | Quantized proxy selection and sparse exact recomputation | Extra proxy products, stored weights and calibrated thresholds |
+
+Do not equate training-free with calibration-free, or a shared mask across
+projections with a shared mask across token rows. Neither the generic
+combination nor memory awareness alone establishes novelty.
+
+For interacting techniques, compare each alone, both application orders,
+and a jointly selected version on the same supported hardware actions and
+full-model quality targets. Include an optimized fixed combined policy.
+This distinguishes a combination benefit from the benefit of one component,
+extra preparation, correction work or an unsupported execution mode.

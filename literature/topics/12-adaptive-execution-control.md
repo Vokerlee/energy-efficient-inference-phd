@@ -162,3 +162,18 @@ pays for scoring and tiered recovery, while [WitCert](../papers/2026-wei-witcert
 distinguishes deterministic and restricted probabilistic guarantees. A
 controller's information availability, amortization, state and actual critical
 path must be compared explicitly; “online” does not imply negligible cost.
+
+## Budgeted scheduling and the actual decision inputs
+
+Supplement reviewed **2026-11-22**. [ReCache](../papers/2026-aliev-recache.md)
+learns schedules conditioned on a requested step budget;
+[BudCache](../papers/2026-lei-budcache.md) searches schedules offline.
+Neither title alone establishes live activation-error or cache-capacity control.
+[DIP](../papers/2025-federici-dip.md), however, explicitly includes residency in
+live scores, so a memory-aware pruning proposal must compare its mechanism.
+
+[WiSparse](../papers/2026-chen-wisparse.md) has live masks with prepared
+exponents/thresholds. [Prox](../papers/2026-liu-prox.md) pays for proxy products;
+[Chipmunk](../papers/2025-silveria-chipmunk.md) also has a reduced MLP prediction
+product. Classify such work by its size, frequency and critical path, rather
+than calling every online selector lightweight.

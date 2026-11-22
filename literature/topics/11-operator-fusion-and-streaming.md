@@ -128,3 +128,10 @@ were screened as follow-up leads; their detailed results were not incorporated.
 
 This is a targeted review, not a complete fusion-compiler survey. No new fusion
 schedule or energy benefit is validated.
+
+## Fused sparse preparation is an existing comparator
+
+Supplement reviewed **2026-11-22**. [RT-Lynx](../papers/2026-cong-rt-lynx.md)
+fuses online selection/compression and integrates a correction path.
+Fusion itself is not a new contribution; compare required reads, retained
+state and synchronization with an equally optimized combined baseline.

@@ -112,3 +112,11 @@ stages history in a shared global-buffer partition with bulk DRAM backing;
 evaluates a GDDR6-based layout. Transfer none of their external-memory savings
 to an entirely on-chip transfer without rebuilding the action/capacity model.
 A cache partition can avoid dedicated area while still consuming capacity.
+
+## Approximation can change memory requests
+
+Supplement reviewed **2026-11-22**. [DIP](../papers/2025-federici-dip.md)
+already changes pruning choices using weight residency. Its storage-bound
+setting differs from dense compute, without invalidating that policy overlap.
+[Chipmunk](../papers/2025-silveria-chipmunk.md) couples shared masks and packing
+to activation histories; retain all corresponding capacity and transfer costs.
