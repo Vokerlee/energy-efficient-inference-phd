@@ -196,3 +196,20 @@ path before a hypothesis test. Separate uninstrumented timing from activation
 inspection; changing fusion, offload or conditioning reuse changes the measured
 system. Architecture descriptions do not establish approximation headroom or
 energy savings, and no model run was performed in this review.
+
+## Arithmetic and quality validation boundaries
+
+Supplement reviewed **2026-11-23**. [MIAO](../papers/2026-wong-miao.md) combines
+synthesis-based hardware estimates, an accuracy predictor and bit-exact
+end-to-end candidate evaluation. This is stronger implementation evidence
+than counting useful MACs, but remains tied to its declared architecture and
+calibration/search procedure. [FnRR boundaries](../papers/2026-he-bfp-accumulation-boundary.md)
+is another accumulation/hardware comparator whose complete assumptions await
+full-text review.
+
+[Kernel Contracts](../papers/2026-veit-kernel-contracts.md) motivates recording
+a reference oracle and tolerance separately from the measurement protocol.
+Its checker measurements do not establish a controller's energy or a full
+network guarantee. Preserve the distinction between fixed-input local replay,
+accumulated DAG discrepancy and task-level quality, especially when changing
+block order, accumulator width or the number of rounding points.

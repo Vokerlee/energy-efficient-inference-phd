@@ -191,3 +191,19 @@ Supplement reviewed **2026-11-22**. [Sigma-Delta networks](../papers/2016-oconno
 retain state and quantize updates. A new temporal controller must differ in a
 specified algorithm or execution result; historical residual feedback alone
 is not a novelty claim.
+
+## Autonomous arithmetic control and output-driven recovery
+
+Supplement reviewed **2026-11-23**. [Overflow-driven DPS](../papers/2026-fasolino-overflow-dps.md)
+describes a fully hardware per-MAC monitor. [FAST](../papers/2021-zhang-fast.md)
+already couples live precision decisions to native variable-width arithmetic
+in training. Distinguish these from prepared configuration search in
+[MIAO](../papers/2026-wong-miao.md); prepared search is still hardware/software
+codesign, and does not establish absence of a different online contribution.
+
+[CoMPAQt](../papers/2025-kabaha-compaqt.md) prepares class-specific bounds but
+performs acceptance/refinement online. [RAELLA](../papers/2023-andrulis-raella.md)
+uses live speculative input slicing with recovery and ADC gating. In its
+reviewed design the crossbar still runs recovery cycles, so energy reductions
+do not imply shorter array execution. Price the component actually gated,
+the retained state, fallback and result-release boundary.

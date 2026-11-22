@@ -201,3 +201,12 @@ hardware. [M-ANT](../papers/2025-hu-m-ant.md) combines streaming statistics with
 prepared mappings. [Adana](../papers/2026-geng-adana.md) describes an approximate
 online metric and dedicated engine; its reviewed evidence is abstract/slides.
 An absent public RTL repository does not prove absence of an implementation.
+
+## Speculation can target conversion energy
+
+Supplement reviewed **2026-11-23**. [RAELLA](../papers/2023-andrulis-raella.md)
+combines prepared weight transformations with live speculative input slicing
+and selective ADC recovery. The reviewed crossbar still executes recovery,
+with successful ADC columns gated. This is a concrete example of online
+hardware control whose energy benefit is not equivalent to skipped matrix
+cycles, and whose analog cost structure cannot be assumed for digital arrays.
