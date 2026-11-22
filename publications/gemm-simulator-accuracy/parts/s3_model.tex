@@ -199,6 +199,52 @@ $M_l=J^{(L,L-1)}\cdots J^{(l+1,l)}$ при $l<L$.
 
 Для каждого фиксированного $M_l$ выполняется
 $\|M_l\delta_l\|_2^2=\delta_l^TM_l^TM_l\delta_l$.
+Прямые передачи для того же графа показаны на рис.~\ref{fig:forward-jacobians}:
+в узле 4 складываются вклады двух ветвей и собственная локальная ошибка.
+
+\begingroup
+\setlength{\intextsep}{3pt}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        font=\normalsize,
+        box/.style={draw=black!65, rounded corners=2pt,
+            fill=babyblue!20, minimum width=16mm, minimum height=8mm},
+        arr/.style={-{Stealth[length=4pt]}, line width=0.6pt},
+        loc/.style={arr, red!70!black}
+    ]
+        \node (a0) at (-2.6,0) {$\Delta\Vec{y}^{(0)}$};
+        \node[box] (a1) at (0,0) {$\Delta\Vec{y}^{(1)}$};
+        \node[box] (a2) at (3,0.9) {$\Delta\Vec{y}^{(2)}$};
+        \node[box] (a3) at (3,-0.9) {$\Delta\Vec{y}^{(3)}$};
+        \node[box] (a4) at (6,0) {$\Delta\Vec{y}^{(4)}$};
+        \draw[arr] (a0.east) -- node[above] {$J^{(1,0)}$} (a1.west);
+        \draw[arr] (a1.east) -- node[above, sloped] {$J^{(2,1)}$} (a2.west);
+        \draw[arr] (a1.east) -- node[below, sloped] {$J^{(3,1)}$} (a3.west);
+        \draw[arr] (a2.east) -- node[above, sloped] {$J^{(4,2)}$} (a4.west);
+        \draw[arr] (a3.east) -- node[below, sloped] {$J^{(4,3)}$} (a4.west);
+        \node (d1) at (0,1.1) {$\delta_1$};
+        \node (d2) at (4.4,1.25) {$\delta_2$};
+        \node (d3) at (4.4,-1.25) {$\delta_3$};
+        \node (d4) at (6,1.1) {$\delta_4$};
+        \draw[loc] (d1) -- (a1.north);
+        \draw[loc] (d2) -- (a2.north);
+        \draw[loc] (d3) -- (a3.south);
+        \draw[loc] (d4) -- (a4.north);
+        \node at (2,-2) {
+            $\Delta\Vec{y}^{(4)}\approx
+                J^{(4,2)}\Delta\Vec{y}^{(2)}
+                +J^{(4,3)}\Delta\Vec{y}^{(3)}+\delta_4$
+        };
+    \end{tikzpicture}
+    \caption{Линейное распространение отклонений для графа
+        на рис.~\ref{fig:transport}. Якобианы указаны на рёбрах,
+        красные стрелки вводят $\delta_l$. Внешний вход фиксирован
+        ($\Delta\Vec{y}^{(0)}=0$), остатки $r_l$ опущены.}
+    \label{fig:forward-jacobians}
+\end{figure}
+\endgroup
+
 Поэтому одинаковая норма входной ошибки не определяет
 одинаковое выходное расхождение: оно зависит и от направления ошибки.
 Кроме направления отдельного вклада важна взаимная ориентация разных
