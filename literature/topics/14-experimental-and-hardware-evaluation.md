@@ -180,3 +180,19 @@ was checked for its full-system measurement boundary.
 This targeted review does not select a complete software stack or claim that
 an existing simulator models our controller. No runtime, neural-network
 experiment, hardware simulation, or energy measurement was executed here.
+
+## Architecture-specific evaluation boundaries
+
+Supplement reviewed **2026-11-22** from primary architecture descriptions and
+checkpoint documentation, with reading depth recorded per source.
+
+- [SigLIP 2](../papers/2025-tschannen-siglip2.md): distinguish the vision tower from the full image/text system and preserve the final classification/retrieval protocol.
+- [Sana](../papers/2024-xie-sana.md): linear attention and depthwise Mix-FFN invalidate a conventional quadratic-attention/two-linear-MLP accounting shortcut.
+- [PixArt-Sigma](../papers/2024-chen-pixart-sigma.md): query and key/value token lengths can differ; inspect the actual checkpoint's compression configuration.
+- [Qwen-Image](../papers/2025-wu-qwen-image.md): weight bytes alone do not establish peak memory; generator size and full pipeline costs differ.
+
+Freeze checkpoint revision, configuration, preprocessing, precision and execution
+path before a hypothesis test. Separate uninstrumented timing from activation
+inspection; changing fusion, offload or conditioning reuse changes the measured
+system. Architecture descriptions do not establish approximation headroom or
+energy savings, and no model run was performed in this review.

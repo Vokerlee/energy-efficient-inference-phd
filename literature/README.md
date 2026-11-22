@@ -200,3 +200,7 @@ or access date and a distinct documentation-reading status.
 | [`aliev2026recache`](papers/2026-aliev-recache.md) | 12, 13 | Budget-aware caching is established; specifying a compute budget alone is not a new contribution. |
 | [`lei2026budcache`](papers/2026-lei-budcache.md) | 12, 13 | Distinguishes prepared budgeted scheduling from per-input runtime decisions. |
 | [`sao2026productrounding`](papers/2026-sao-product-aware-rounding.md) | 04, 08, 13 | Output-aware rounding and coordinated errors are explicit prior art, beyond activation-domain MSE. |
+| [`tschannen2025siglip2`](papers/2025-tschannen-siglip2.md) | 14 | A frozen model family with final-task metrics for testing changes to vision activations. |
+| [`xie2024sana`](papers/2024-xie-sana.md) | 14 | An architectural contrast for checking whether a matrix optimization remains relevant after attention complexity changes. |
+| [`chen2024pixartsigma`](papers/2024-chen-pixart-sigma.md) | 14 | A reproducible diffusion family with explicit attention, projection and conditioning boundaries. |
+| [`wu2025qwenimage`](papers/2025-wu-qwen-image.md) | 14 | A larger generator contrast with task requirements extending beyond paired latent similarity, including text rendering. |
