@@ -8,19 +8,19 @@ research, centered on systolic hardware and portable numerical experiments.
 | Topic | Status | Synthesis |
 |---|---|---|
 | 01 — Energy of compute-bound versus memory-bound inference | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/01-inference-energy.md) |
-| 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/02-matrix-multiplier-architectures.md) |
+| 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08; expanded 2026-11-23 | [Review](topics/02-matrix-multiplier-architectures.md) |
 | 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/03-im2col-and-convolution-mapping.md) |
-| 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/04-dynamic-activation-quantization.md) |
+| 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-23 | [Review](topics/04-dynamic-activation-quantization.md) |
 | 05 — Outliers and selective precision | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/05-outliers-and-selective-precision.md) |
 | 06 — Range prediction and tracking | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/06-range-prediction-and-tracking.md) |
 | 07 — Quantization and structured sparsity | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/07-quantization-and-structured-sparsity.md) |
-| 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/08-accumulation-and-block-scaling.md) |
+| 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08; expanded 2026-11-23 | [Review](topics/08-accumulation-and-block-scaling.md) |
 | 09 — Adaptive low-rank computation | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/09-adaptive-low-rank-computation.md) |
 | 10 — Fast matrix multiplication | Reviewed 2026-11-08; screened 2026-11-22 | [Review](topics/10-fast-matrix-multiplication.md) |
 | 11 — Operator fusion and streaming inference | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/11-operator-fusion-and-streaming.md) |
-| 12 — Hardware control for adaptive execution | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/12-adaptive-execution-control.md) |
-| 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09; expanded 2026-11-22 | [Review](topics/13-end-to-end-quality.md) |
-| 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09; expanded 2026-11-22 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
+| 12 — Hardware control for adaptive execution | Reviewed 2026-11-08; expanded 2026-11-23 | [Review](topics/12-adaptive-execution-control.md) |
+| 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09; expanded 2026-11-23 | [Review](topics/13-end-to-end-quality.md) |
+| 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09; expanded 2026-11-23 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
 | 15 — Modern accelerator memory hierarchies and matrix/vector execution | Reviewed 2026-11-14; expanded 2026-11-22 | [Review](topics/15-accelerator-memory-and-execution.md) |
 
 Other agreed topics are added when their reviews are performed.
@@ -48,6 +48,14 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`wong2026miao`](papers/2026-wong-miao.md) | 02, 08, 14 | Direct hardware/software precedent for changing intermediate precision with operand quantization. Compare its optimized datapath before claiming savings against uniform accumulation. |
+| [`fasolino2026overflowdps`](papers/2026-fasolino-overflow-dps.md) | 08, 12 | Existing autonomous per-accumulation control rules out novelty of merely moving an overflow detector into hardware. |
+| [`he2026bfpboundary`](papers/2026-he-bfp-accumulation-boundary.md) | 08, 14 | Close baseline for reducing accumulator precision and choosing chunk structure rather than only lowering operand width. |
+| [`lo2023bucketgetter`](papers/2023-lo-bucket-getter.md) | 02, 08 | Direct hardware precedent for exponent grouping and deferred floating-point accumulation; these primitives cannot be presented as new. |
+| [`andrulis2023raella`](papers/2023-andrulis-raella.md) | 04, 08, 12 | Demonstrates that data-dependent recovery can save energy without saving execution cycles. Useful for separating conversion, array activity and numerical fidelity. |
+| [`zhang2021fast`](papers/2021-zhang-fast.md) | 02, 08, 12 | Established live precision decisions coupled to a native arithmetic implementation, with explicit conversion and multi-pass work. |
+| [`kabaha2025compaqt`](papers/2025-kabaha-compaqt.md) | 12, 13 | Online refinement and claimed classification consistency already have formal-method precedents; this is not an offline-only algorithm. |
+| [`veit2026kernelcontracts`](papers/2026-veit-kernel-contracts.md) | 13, 14 | Methodological comparator for separating an intended arithmetic change from an implementation failure in numerical experiments. |
 | [`hu2025mant`](papers/2025-hu-m-ant.md) | 04, 06, 12, 15 | Streaming statistics and dedicated quantization hardware; preparation separated. |
 | [`geng2026adana`](papers/2026-geng-adana.md) | 04, 12 | Approximate online metric and dedicated engine; abstract/slides evidence. |
 | [`hsieh2025fpgasparsequantized`](papers/2025-hsieh-fpga-sparse-quantized.md) | 02, 07, 14 | Offline weight preparation and floating-point FPGA zero gating. |

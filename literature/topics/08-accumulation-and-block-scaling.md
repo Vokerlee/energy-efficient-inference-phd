@@ -153,3 +153,27 @@ Supplement reviewed **2026-11-22**. [Product-aware rounding](../papers/2026-sao-
 is a comparator for receiving-product error with explicit finite-precision and
 rounding-work caveats. Exact-arithmetic accuracy guarantees do not eliminate
 controller work or prove a throughput/energy gain.
+
+## Prepared precision, live monitoring and deferred accumulation
+
+Supplement reviewed **2026-11-23**. These mechanisms require different baselines:
+
+| Source | Mechanism already demonstrated or described | Reading boundary |
+|---|---|---|
+| [MIAO](../papers/2026-wong-miao.md) | Calibrated product/scale choices and stage-wise accumulator hardware in a weight-stationary MX array | Focused full text; cross-tile BF16 remains |
+| [Overflow-driven DPS](../papers/2026-fasolino-overflow-dps.md) | Autonomous carry/sign-driven fixed-point MAC representation updates | Publisher abstract/introduction; complete algorithm pending |
+| [FnRR boundaries](../papers/2026-he-bfp-accumulation-boundary.md) | Accumulation-width analysis and hierarchical chunking with hardware evaluation | Abstract/introduction/snippets; full assumptions pending |
+| [Bucket Getter](../papers/2023-lo-bucket-getter.md) | Integer buckets preceding floating-point accumulation | Publisher abstract; assignment/flush/control details pending |
+| [FAST](../papers/2021-zhang-fast.md) | Live BFP precision criterion with native multi-pass fMAC systolic execution | Focused full text; training setting |
+
+Narrowing an accumulator, grouping exponents, and replacing repeated floating
+accumulation with fixed-point work have direct prior art. Compare against an
+optimized native block-scaled reduction, not only dequantization followed by
+ordinary floating-point GEMM. Dynamic gating does not remove the hardware
+area required by a fallback mode. Additional buckets also add registers and
+merge work; fewer floating conversions alone do not establish net savings.
+
+Static stage specialization in a weight-stationary array and live format
+selection in an output-stationary array have different state and propagation
+contracts. Describe the actual mapping before transferring a technique.
+Missing full text is an unresolved comparison, not evidence of novelty.

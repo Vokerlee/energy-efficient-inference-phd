@@ -176,3 +176,13 @@ Supplement reviewed **2026-11-22**. [Adaptive Tiling](../papers/2018-kung-adapti
 already adapts sparse filter coverage to fixed-size array calls. Its prepared
 weight structure differs from live activation masks; neither fixed arrays nor
 variable tile widths alone establish a new architecture/policy contribution.
+
+## Accumulation topology is part of the architecture
+
+Supplement reviewed **2026-11-23**. [MIAO](../papers/2026-wong-miao.md) assigns
+different accumulation widths to physical stages in a weight-stationary array.
+[FAST](../papers/2021-zhang-fast.md) supplies a variable-precision fMAC systolic
+implementation; [Bucket Getter](../papers/2023-lo-bucket-getter.md) describes
+integer accumulation buckets. These do not share an interchangeable PE
+contract. Specify what is stationary, where partial sums live, how scales
+align, and which additional states and wires a supported mode requires.

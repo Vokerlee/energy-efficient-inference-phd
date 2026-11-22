@@ -170,3 +170,18 @@ expresses a reconstruction loss with a Gram matrix. [VR-SparseQuant](../papers/2
 separates a local assignment guarantee from output/task quality. Exact local
 mask minimization is not a whole-network guarantee or evidence of net energy
 savings after its computation cost.
+
+## What an acceptance guarantee refers to
+
+Supplement reviewed **2026-11-23**. [CoMPAQt](../papers/2025-kabaha-compaqt.md)
+uses prepared verification bounds and online precision refinement to preserve
+classification relative to a specified reference model. It is not offline-only,
+and its class-consistency property does not transfer automatically to diffusion
+quality, arbitrary DAGs or device-specific floating-point rounding.
+
+[Kernel Contracts](../papers/2026-veit-kernel-contracts.md) is a preprint
+comparator for explicit reference semantics, tolerances and test protocols;
+operator-contract composition is outside its completed results. A fast
+arithmetic substitution can satisfy an empirical task tolerance while failing
+a bit-accurate emulation contract. State which requirement is being tested.
+Local error replay and whole-model execution remain complementary tests.
