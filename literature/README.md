@@ -7,7 +7,7 @@ research, centered on systolic hardware and portable numerical experiments.
 
 | Topic | Status | Synthesis |
 |---|---|---|
-| 01 — Energy of compute-bound versus memory-bound inference | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/01-inference-energy.md) |
+| 01 — Energy of compute-bound versus memory-bound inference | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/01-inference-energy.md) |
 | 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/02-matrix-multiplier-architectures.md) |
 | 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/03-im2col-and-convolution-mapping.md) |
 | 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/04-dynamic-activation-quantization.md) |
@@ -178,3 +178,6 @@ or access date and a distinct documentation-reading status.
 | [`khattak2025tensorcoremodels`](papers/2025-khattak-tensor-core-models.md) | 02 | Instruction-arithmetic model scope; abstract/metadata check, pinned to v1. |
 | [`jiang2023mistral7b`](papers/2023-jiang-mistral-7b.md) | 14 | Versioned architecture dimensions, GQA/window rules and output-head sizing. |
 | [`dubey2024llama3`](papers/2024-dubey-llama-3.md) | 13, 14 | Architecture scaling references and dynamic FP8 quality-evaluation limits. |
+| [`nag2025llvit`](papers/2025-nag-ll-vit.md) | 01, 02 | Estimated encoder-block energy split on an INT8 systolic FPGA baseline. |
+| [`iyengar2026diffusionenergy`](papers/2026-iyengar-diffusion-energy-scaling.md) | 01, 14 | Whole-GPU diffusion energy fits and denoising FLOP attribution limits. |
+| [`jain2026clear`](papers/2026-jain-clear-transformer-energy.md) | 01, 14 | Component replay for energy attribution and measurement-context limits. |
