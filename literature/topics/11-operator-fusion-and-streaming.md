@@ -142,3 +142,10 @@ Supplement reviewed **2026-11-22**. [VR-SparseQuant](../papers/2026-khaki-vr-spa
 shares staged weights and an accumulator between two sparse streams. Its two
 products retain dense nonzero work together; distinguish avoided duplicate
 loads from removed arithmetic and include sparse metadata.
+
+## Choose the correct range-observation baseline
+
+Supplement reviewed **2026-11-22**. [Delayed-scaling documentation](../papers/2026-nvidia-delayed-scaling.md)
+compares tensor scans. For producer-side groups, first determine whether values
+can remain in local registers through current-maximum reduction and casting.
+Avoiding a scan that this fused baseline never performs is not a saving.

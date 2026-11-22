@@ -169,3 +169,10 @@ Supplement reviewed **2026-11-22**. [ShatterQuant](../papers/2026-walczak-shatte
 couples prepared weight precision to PE block dimensions. It is an existing
 mapping comparator, with fixed 8-bit activations rather than an autonomous
 activation-width selector.
+
+## Prepared adaptive tiling versus live activation decisions
+
+Supplement reviewed **2026-11-22**. [Adaptive Tiling](../papers/2018-kung-adaptive-tiling.md)
+already adapts sparse filter coverage to fixed-size array calls. Its prepared
+weight structure differs from live activation masks; neither fixed arrays nor
+variable tile widths alone establish a new architecture/policy contribution.

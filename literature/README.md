@@ -12,7 +12,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/03-im2col-and-convolution-mapping.md) |
 | 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/04-dynamic-activation-quantization.md) |
 | 05 — Outliers and selective precision | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/05-outliers-and-selective-precision.md) |
-| 06 — Range prediction and tracking | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/06-range-prediction-and-tracking.md) |
+| 06 — Range prediction and tracking | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/06-range-prediction-and-tracking.md) |
 | 07 — Quantization and structured sparsity | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/07-quantization-and-structured-sparsity.md) |
 | 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/08-accumulation-and-block-scaling.md) |
 | 09 — Adaptive low-rank computation | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/09-adaptive-low-rank-computation.md) |
@@ -208,3 +208,6 @@ or access date and a distinct documentation-reading status.
 | [`song2026roshift`](papers/2026-song-roshift.md) | 07, 09, 12 | Receiving-weight geometry and shared-projection Gram objectives already appear in activation-sparsity research. |
 | [`zimmer2025sparseswaps`](papers/2025-zimmer-sparseswaps.md) | 07, 13 | A clear comparator against claiming that Gram-based mask optimization or pairwise interactions are new mathematical ideas. |
 | [`wang2025was`](papers/2025-wang-was.md) | 07, 12, 13 | Weight-aware live masks, prepared allocation and kernel-level costs. |
+| [`oconnor2016sigmadelta`](papers/2016-oconnor-sigma-delta.md) | 06, 07, 12 | Stateful quantized temporal updates and numerical equivalence scope. |
+| [`kung2018adaptivetiling`](papers/2018-kung-adaptive-tiling.md) | 02, 07, 15 | Prepared sparse-weight tiling and fixed-array call reduction. |
+| [`nvidia2026delayedscaling`](papers/2026-nvidia-delayed-scaling.md) | 06, 11 | Documented historical scaling, clipping and two-pass comparison boundary. |

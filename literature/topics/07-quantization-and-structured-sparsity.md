@@ -222,3 +222,11 @@ Output-error objectives and pairwise quadratic interactions are established
 mathematics. A bounded runtime activation mechanism still needs an exact
 preparation/execution comparison; changing which operand is pruned is not a
 novelty proof. A group-local objective also omits interactions between groups.
+
+## Older mechanisms constrain broad combination claims
+
+Supplement reviewed **2026-11-22**. [Sigma-Delta networks](../papers/2016-oconnor-sigma-delta.md)
+already connect temporal differences, sparsity and quantized emissions.
+[Adaptive Tiling](../papers/2018-kung-adaptive-tiling.md) connects prepared
+sparsity to array invocation count. These sources do not close every live
+activation case, but prevent claiming either generic combination as new.
