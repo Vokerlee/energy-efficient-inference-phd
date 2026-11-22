@@ -173,3 +173,10 @@ is insufficient to classify an activation policy.
 These are observed mechanism differences, not proof that a specialized
 activation-selection problem is new. Compare full preparation, observation,
 execution and quality assumptions; count fallback work.
+
+## Product-aware rounding versus affordable runtime selection
+
+Supplement reviewed **2026-11-22**. [Product-aware rounding](../papers/2026-sao-product-aware-rounding.md)
+optimizes coordinated decisions on fixed grids. Its factorization/optimization
+cost is explicit; do not mistake a dynamic numerical construction for an
+energy-saving streaming hardware rule.

@@ -17,7 +17,7 @@ research, centered on systolic hardware and portable numerical experiments.
 | 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/08-accumulation-and-block-scaling.md) |
 | 09 — Adaptive low-rank computation | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/09-adaptive-low-rank-computation.md) |
 | 10 — Fast matrix multiplication | Reviewed 2026-11-08; screened 2026-11-22 | [Review](topics/10-fast-matrix-multiplication.md) |
-| 11 — Operator fusion and streaming inference | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/11-operator-fusion-and-streaming.md) |
+| 11 — Operator fusion and streaming inference | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/11-operator-fusion-and-streaming.md) |
 | 12 — Hardware control for adaptive execution | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/12-adaptive-execution-control.md) |
 | 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09; expanded 2026-11-22 | [Review](topics/13-end-to-end-quality.md) |
 | 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09; expanded 2026-11-22 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
@@ -192,3 +192,11 @@ or access date and a distinct documentation-reading status.
 | [`jangda2026subcuber`](papers/2026-jangda-subcuber.md) | 10 | A direct implementation comparator for shape-dependent Strassen scheduling. Compiler generation and memory fusion are existing mechanisms. |
 | [`chiu2025strassenquant`](papers/2025-chiu-strassen-dynamic-quantization.md) | 10 | The specific combination of Strassen, block quantization and ViT acceleration already has a prior description. |
 | [`xie2026fp8fastmatmul`](papers/2026-xie-fp8-fast-matmul.md) | 10 | Coefficient choice and low-precision fast multiplication are an existing research intersection. |
+| [`federici2025dip`](papers/2025-federici-dip.md) | 07, 12, 15 | Already couples approximation decisions with memory state; cache-aware sparsity alone is not an unoccupied problem. |
+| [`silveria2025chipmunk`](papers/2025-silveria-chipmunk.md) | 07, 12, 15 | Grouped masks, compaction and temporal reuse already occur together. The extra prediction product must be charged even though it is smaller than the full operation. |
+| [`cong2026rtlynx`](papers/2026-cong-rt-lynx.md) | 07, 11, 13 | A direct diffusion activation-sparsity comparator; fusion and norm compensation are already described. |
+| [`chen2026wisparse`](papers/2026-chen-wisparse.md) | 07, 12, 13 | Weight-aware activation scoring and mixed sparsity allocation already have explicit prior art. |
+| [`liu2026prox`](papers/2026-liu-prox.md) | 07, 12, 13 | An important example of sparsity plus quantization and of paying extra computation to avoid more expensive work. |
+| [`aliev2026recache`](papers/2026-aliev-recache.md) | 12, 13 | Budget-aware caching is established; specifying a compute budget alone is not a new contribution. |
+| [`lei2026budcache`](papers/2026-lei-budcache.md) | 12, 13 | Distinguishes prepared budgeted scheduling from per-input runtime decisions. |
+| [`sao2026productrounding`](papers/2026-sao-product-aware-rounding.md) | 04, 08, 13 | Output-aware rounding and coordinated errors are explicit prior art, beyond activation-domain MSE. |

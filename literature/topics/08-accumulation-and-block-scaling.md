@@ -146,3 +146,10 @@ Supplement reviewed **2026-11-22**. [ShatterQuant](../papers/2026-walczak-shatte
 includes block rescaling and output accumulation for mixed weight widths.
 Compare its supported arithmetic and preparation; do not assume arbitrary
 runtime activation formats inherit compatible partial-sum semantics.
+
+## Coordinated rounding cost boundary
+
+Supplement reviewed **2026-11-22**. [Product-aware rounding](../papers/2026-sao-product-aware-rounding.md)
+is a comparator for receiving-product error with explicit finite-precision and
+rounding-work caveats. Exact-arithmetic accuracy guarantees do not eliminate
+controller work or prove a throughput/energy gain.

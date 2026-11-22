@@ -149,3 +149,16 @@ pending; published claims are not reproduced results here.
 shows workload-dependent threshold/quality behavior. Recheck full inference
 when pruning, reuse or quantization changes later activations and decisions;
 a frozen-input or frozen-mask test alone misses that feedback.
+
+## Approximation, compensation and preparation
+
+Supplement reviewed **2026-11-22**. [RT-Lynx](../papers/2026-cong-rt-lynx.md)
+separates native activation sparsity, norm compensation and trained correction.
+[Prox](../papers/2026-liu-prox.md) uses a proxy for selection, then recomputes
+retained values. [WiSparse](../papers/2026-chen-wisparse.md) calibrates its
+weight-aware score. Preserve these distinctions in quality-matched comparisons.
+
+[Product-aware rounding](../papers/2026-sao-product-aware-rounding.md)
+coordinates errors in the receiving-product objective, but its accuracy bound
+does not establish an efficient deployed selector. A local arithmetic bound
+must remain distinct from empirical final-task quality.
