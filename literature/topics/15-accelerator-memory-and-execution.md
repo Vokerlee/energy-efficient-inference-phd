@@ -127,3 +127,14 @@ Supplement reviewed **2026-11-22**. [Adaptive Tiling](../papers/2018-kung-adapti
 reduces fixed-array calls through prepared sparse filter organization. Compare
 its grouping/metadata assumptions before transferring the mechanism to live
 activation decisions or attributing all logical sparsity to fewer calls.
+
+## Lowering and encoded on-chip activation storage
+
+Supplement reviewed **2026-11-23**. [CompAct](../papers/2019-zhang-compact.md)
+links row-major convolution scheduling, local compression and buffer sleep.
+[LMAI2C](../papers/2025-li-lmai2c.md) reduces DDR reads with more BRAM activity;
+that DDR-based saving cannot be assigned to an already on-chip-resident tensor.
+The [CNN-LSTM ASIC](../papers/2026-chen-sleep-dynamic-quantization.md) combines
+channel packing, reusable dataflow and live range observation for selected
+layers. Track activation storage, feeder delivery and accumulator traffic as
+different boundaries rather than counting one saved byte several times.

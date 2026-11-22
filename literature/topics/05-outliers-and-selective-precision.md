@@ -115,3 +115,12 @@ recorded in the notes.
 
 The evidence is LLM/diffusion-heavy. Portability to CNN/video operators needs
 experiments. No new detector or energy result has been evaluated.
+
+## Spare-slot precision already has hardware precedent
+
+Supplement reviewed **2026-11-23**. [OverQ](../papers/2021-zhao-overq.md) places
+extra activation bits in neighboring zero slots and routes them through a
+weight-stationary array. Its evaluated clipping thresholds use profiled data.
+A new live short-window rule must differ in its selection, representation or
+execution mechanism; substituting deterministic padding for ReLU zeros alone
+is insufficient evidence of a new approach.

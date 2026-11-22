@@ -186,3 +186,11 @@ implementation; [Bucket Getter](../papers/2023-lo-bucket-getter.md) describes
 integer accumulation buckets. These do not share an interchangeable PE
 contract. Specify what is stationary, where partial sums live, how scales
 align, and which additional states and wires a supported mode requires.
+
+## Convolution mapping is part of the multiplier comparison
+
+Supplement reviewed **2026-11-23**. [Zhou et al.](../papers/2021-zhou-implicit-convolution.md)
+show an implicit channel-first mapping. The complete reduction includes the
+input channels; short spatial taps alone do not determine input utilization.
+Compare legal operand/partial-sum schedules before attributing idle lanes to
+the multiplier geometry itself.

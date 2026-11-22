@@ -210,3 +210,12 @@ and selective ADC recovery. The reviewed crossbar still executes recovery,
 with successful ADC columns gated. This is a concrete example of online
 hardware control whose energy benefit is not equivalent to skipped matrix
 cycles, and whose analog cost structure cannot be assumed for digital arrays.
+
+## Source representation and live range scope
+
+Supplement reviewed **2026-11-23**. [MicroQonv](../papers/2026-facq-microqonv.md)
+aligns source microscaling with convolution lowering. The
+[CNN-LSTM ASIC](../papers/2026-chen-sleep-dynamic-quantization.md) measures live
+LSTM/MLP input ranges while keeping CNN ranges and layer bit widths prepared.
+Specify runtime range selection, representation lifetime and prepared choices
+separately; neither paper establishes every possible live tile controller.

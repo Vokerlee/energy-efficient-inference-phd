@@ -207,3 +207,12 @@ uses live speculative input slicing with recovery and ADC gating. In its
 reviewed design the crossbar still runs recovery cycles, so energy reductions
 do not imply shorter array execution. Price the component actually gated,
 the retained state, fallback and result-release boundary.
+
+## Runtime scope in convolution-related designs
+
+Supplement reviewed **2026-11-23**. [OverQ](../papers/2021-zhao-overq.md) provides
+live overwrite/routing with profiled clipping ranges. The
+[CNN-LSTM ASIC](../papers/2026-chen-sleep-dynamic-quantization.md) observes ranges
+online for selected layers with prepared precision. These are hardware
+contributions even where some parameters are chosen offline. Compare state
+reset, live statistics and decision granularity individually.
