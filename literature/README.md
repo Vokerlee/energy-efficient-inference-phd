@@ -84,7 +84,7 @@ or access date and a distinct documentation-reading status.
 | [`rouhani2023mx`](papers/2023-rouhani-microscaling.md) | 04, 08 | Microscaling representation and conversion foundations. |
 | [`abdelmaksoud2026adip`](papers/2026-abdelmaksoud-adip.md) | 04 | Precision-scalable systolic execution; controller distinction. |
 | [`fasoli2026microscaling`](papers/2026-fasoli-microscaling-limits.md) | 04 | Scale quantization can defeat finer grouping. |
-| [`song2020drq`](papers/2020-song-drq.md) | 04, 12 | Priority dynamic-quantization competitor; full text pending. |
+| [`song2020drq`](papers/2020-song-drq.md) | 04, 12 | Live regional precision with prepared thresholds; focused full text reviewed. |
 | [`liu2024drift`](papers/2024-liu-drift.md) | 04, 12 | Distribution-based adaptation competitor; full text pending. |
 | [`dettmers2022llmint8`](papers/2022-dettmers-llm-int8.md) | 05 | Activation outliers routed to a higher-precision feature path. |
 | [`guo2023olive`](papers/2023-guo-olive.md) | 05 | Locally aligned outlier encoding with lossy victims. |
@@ -204,3 +204,7 @@ or access date and a distinct documentation-reading status.
 | [`xie2024sana`](papers/2024-xie-sana.md) | 14 | An architectural contrast for checking whether a matrix optimization remains relevant after attention complexity changes. |
 | [`chen2024pixartsigma`](papers/2024-chen-pixart-sigma.md) | 14 | A reproducible diffusion family with explicit attention, projection and conditioning boundaries. |
 | [`wu2025qwenimage`](papers/2025-wu-qwen-image.md) | 14 | A larger generator contrast with task requirements extending beyond paired latent similarity, including text rendering. |
+| [`khaki2026vrsparsequant`](papers/2026-khaki-vr-sparsequant.md) | 04, 07, 11 | Direct prior art for quantizer-dependent gain selection, sparse residual correction and fused execution. |
+| [`song2026roshift`](papers/2026-song-roshift.md) | 07, 09, 12 | Receiving-weight geometry and shared-projection Gram objectives already appear in activation-sparsity research. |
+| [`zimmer2025sparseswaps`](papers/2025-zimmer-sparseswaps.md) | 07, 13 | A clear comparator against claiming that Gram-based mask optimization or pairwise interactions are new mathematical ideas. |
+| [`wang2025was`](papers/2025-wang-was.md) | 07, 12, 13 | Weight-aware live masks, prepared allocation and kernel-level costs. |

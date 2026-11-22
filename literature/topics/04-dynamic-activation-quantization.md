@@ -28,10 +28,10 @@ A precision-scalable array alone does not establish autonomous decision-making.
 | [Finer Better?](../papers/2026-fasoli-microscaling-limits.md) | Scale-format limitations | More groups versus representable scales |
 | [ViDiT-Q](../papers/2025-zhao-vidit-q.md) | Diffusion quality and execution baseline | Dynamic values versus offline sensitivity choices |
 
-[DRQ](../papers/2020-song-drq.md) and [Drift](../papers/2024-liu-drift.md) are
-important competitors whose full-text mechanisms remain unverified in this
-pass. Their existence precludes treating “dynamic activation quantization” as
-a novelty claim by itself.
+[DRQ](../papers/2020-song-drq.md) is now reviewed from an author-uploaded full
+text: live regional selection uses prepared thresholds and a variable-speed
+array. [Drift](../papers/2024-liu-drift.md) remains a full-text dependency.
+Dynamic activation quantization alone is not a novelty claim.
 
 ## The hardware-realistic decision point
 
@@ -152,8 +152,9 @@ conversion, datapaths, and evaluation. Versions are pinned in the notes.
 
 Drift metadata was checked using
 [Crossref's publisher-deposited record](https://api.crossref.org/works/10.1145%2F3649329.3655986);
-publisher access failed. DRQ uses an author publication record. These records
-are intentionally not labeled completed full-text reviews.
+publisher access failed again on **2026-11-22**. DRQ was initially metadata-only;
+the author-uploaded full text was accessed and the canonical review upgraded on
+that date. Reading status remains distinct for the two papers.
 
 This targeted corpus is not exhaustive. No new algorithm, measurement, or
 novelty conclusion is established here.
@@ -180,3 +181,10 @@ Supplement reviewed **2026-11-22**. [Product-aware rounding](../papers/2026-sao-
 optimizes coordinated decisions on fixed grids. Its factorization/optimization
 cost is explicit; do not mistake a dynamic numerical construction for an
 energy-saving streaming hardware rule.
+
+## Quantizer-dependent sparse assignment is already described
+
+Supplement reviewed **2026-11-22**. [VR-SparseQuant](../papers/2026-khaki-vr-sparsequant.md)
+selects quartet contributions by reconstruction-error reduction and calibrates
+scale ratios against output error. Fixed-scale gain ranking alone must not be
+claimed as a new joint precision/sparsity mechanism.

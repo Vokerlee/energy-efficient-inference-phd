@@ -206,3 +206,19 @@ and a jointly selected version on the same supported hardware actions and
 full-model quality targets. Include an optimized fixed combined policy.
 This distinguishes a combination benefit from the benefit of one component,
 extra preparation, correction work or an unsupported execution mode.
+
+## Signed geometry and assignment comparisons
+
+Supplement reviewed **2026-11-22**.
+
+| Source | Existing mechanism | Scope distinction |
+|---|---|---|
+| [VR-SparseQuant](../papers/2026-khaki-vr-sparsequant.md) | Quantization-error gains select sparse contributions | Local reconstruction objective; prepared scale ratio |
+| [WAS](../papers/2025-wang-was.md) | Receiving-weight norm scores activation importance | Prepared allocation and thresholds |
+| [RoShift](../papers/2026-song-roshift.md) | Weight geometry informs activation sparsification | Prepared rotations and runtime corrections |
+| [SparseSwaps](../papers/2025-zimmer-sparseswaps.md) | Gram-based quadratic mask refinement | Calibration inputs and prepared parameter masks |
+
+Output-error objectives and pairwise quadratic interactions are established
+mathematics. A bounded runtime activation mechanism still needs an exact
+preparation/execution comparison; changing which operand is pruned is not a
+novelty proof. A group-local objective also omits interactions between groups.
