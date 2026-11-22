@@ -140,6 +140,21 @@ provide versioned compiler/runtime inputs. Record these alongside Python
 dependencies, source revisions and GPU architectures; a driver version alone
 does not identify the compiler used for a native kernel.
 
+## Architecture references for component scaling
+
+Supplement reviewed **2026-11-22**. [Mistral 7B](../papers/2023-jiang-mistral-7b.md)
+and [Llama 3](../papers/2024-dubey-llama-3.md) provide versioned dimensions
+for defining reduced components. Preserve or explicitly vary hidden/FFN
+ratios, head dimensions, query/key-value head ratios and attention rules.
+Specify output-head size independently: the papers use different vocabularies.
+A reduced initialized block tests a numerical mechanism, not the quality of
+the trained source model.
+
+Llama 3's FP8 evaluation also shows why a standard aggregate benchmark alone
+can miss rare response failures. Dynamic-scaling experiments should report
+their actual scaling restrictions and output-quality checks; architecture
+similarity does not transfer numerical tolerances or energy claims.
+
 ## Search and limits
 
 Primary web searches on **2026-11-09** covered TVM, MLPerf Inference, MLPerf

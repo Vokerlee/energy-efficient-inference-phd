@@ -19,8 +19,8 @@ research, centered on systolic hardware and portable numerical experiments.
 | 10 — Fast matrix multiplication | Reviewed 2026-11-08 | [Review](topics/10-fast-matrix-multiplication.md) |
 | 11 — Operator fusion and streaming inference | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/11-operator-fusion-and-streaming.md) |
 | 12 — Hardware control for adaptive execution | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/12-adaptive-execution-control.md) |
-| 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09; expanded 2026-11-15 | [Review](topics/13-end-to-end-quality.md) |
-| 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09; expanded 2026-11-15 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
+| 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09; expanded 2026-11-22 | [Review](topics/13-end-to-end-quality.md) |
+| 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09; expanded 2026-11-22 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
 | 15 — Modern accelerator memory hierarchies and matrix/vector execution | Initial review 2026-11-14 | [Review](topics/15-accelerator-memory-and-execution.md) |
 
 Other agreed topics are added when their reviews are performed.
@@ -176,3 +176,5 @@ or access date and a distinct documentation-reading status.
 | [`nvidia2026cudaredistributables`](papers/2026-nvidia-cuda-redistributables.md) | 14 | Versioned component archives and checksums for native CUDA toolchains. |
 | [`xie2025mmasim`](papers/2025-xie-mma-sim.md) | 02 | Bit-accurate GPU matrix-unit modeling; abstract/metadata check, pinned to v1. |
 | [`khattak2025tensorcoremodels`](papers/2025-khattak-tensor-core-models.md) | 02 | Instruction-arithmetic model scope; abstract/metadata check, pinned to v1. |
+| [`jiang2023mistral7b`](papers/2023-jiang-mistral-7b.md) | 14 | Versioned architecture dimensions, GQA/window rules and output-head sizing. |
+| [`dubey2024llama3`](papers/2024-dubey-llama-3.md) | 13, 14 | Architecture scaling references and dynamic FP8 quality-evaluation limits. |
