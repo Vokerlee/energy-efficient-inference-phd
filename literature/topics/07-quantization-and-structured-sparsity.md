@@ -230,3 +230,11 @@ already connect temporal differences, sparsity and quantized emissions.
 [Adaptive Tiling](../papers/2018-kung-adaptive-tiling.md) connects prepared
 sparsity to array invocation count. These sources do not close every live
 activation case, but prevent claiming either generic combination as new.
+
+## Prepared representations versus runtime hardware selection
+
+The [FPGA co-design study](../papers/2025-hsieh-fpga-sparse-quantized.md) prepares
+weights offline and executes dequantized floating-point values. Its hardware
+zero handling is distinct from current-activation selection, low-bit storage
+and native low-bit arithmetic. None implies all the others. Hardware novelty
+must be evaluated at the actual decision and execution boundary.

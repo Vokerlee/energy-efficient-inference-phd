@@ -188,3 +188,16 @@ Supplement reviewed **2026-11-22**. [VR-SparseQuant](../papers/2026-khaki-vr-spa
 selects quartet contributions by reconstruction-error reduction and calibrates
 scale ratios against output error. Fixed-scale gain ranking alone must not be
 claimed as a new joint precision/sparsity mechanism.
+
+## Decision placement and implementation evidence
+
+An established offline algorithm does not exclude a distinct online hardware
+contribution. Compare preparation, current inputs, decision logic, dataflow and
+total cost separately. GPU execution, architecture proposals, RTL/synthesis,
+FPGA tests and fabricated silicon are different evidence levels.
+
+[FGMP](../papers/2025-hooper-fgmp.md) includes a live precision PPU and synthesized
+hardware. [M-ANT](../papers/2025-hu-m-ant.md) combines streaming statistics with
+prepared mappings. [Adana](../papers/2026-geng-adana.md) describes an approximate
+online metric and dedicated engine; its reviewed evidence is abstract/slides.
+An absent public RTL repository does not prove absence of an implementation.

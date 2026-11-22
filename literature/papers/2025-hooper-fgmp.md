@@ -6,7 +6,7 @@
 - Source: [paper](https://arxiv.org/abs/2504.14152v1); [full text](https://arxiv.org/html/2504.14152v1).
 - Reviewed: 2026-11-15. Status: **full-text focused reading**.
 - Reading focus: Sections 3.1–3.4 and 4.1–4.2: preparation, live assignment, and datapath.
-- Evidence: Precision-selection derivation and hardware design; results not reproduced here.
+- Evidence: Online activation PPU; SystemC/HLS-generated RTL, simulation and 5-nm synthesis/activity-based power. Results not reproduced here.
 
 ## What it establishes
 
