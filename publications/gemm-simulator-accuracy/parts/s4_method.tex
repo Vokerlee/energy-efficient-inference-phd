@@ -73,13 +73,52 @@
 В обратном проходе фиксируются как тензоры
 прямого прохода, так и опорный градиент по выходу узла, включающий
 сумму вкладов всех его потребителей. Ошибки других сравниваемых узлов
-в такой повтор не передаются.
+в такой повтор не передаются. Прямой режим показан на рис.~\ref{fig:replay}.
 
 Тензоры сохраняются средствами перехвата PyTorch~\cite{Paszke2019}.
 При отложенном исполнении XLA первый проход строит граф и фиксирует
 точки захвата, а второй извлекает вычисленные значения для сравнения.
 
 
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        font=\normalsize,
+        box/.style={draw=black!60, rounded corners=2pt,
+            minimum height=9mm, text width=30mm, align=center},
+        ref/.style={box, fill=babyblue!20},
+        target/.style={box, fill=orange!10},
+        arr/.style={-{Stealth[length=4pt]}, line width=0.6pt},
+        feed/.style={arr, blue!65!black}
+    ]
+        \node[align=center] at (0,2.2) {Сохранённые\\опорные входы};
+        \node[align=center] at (4.2,2.2) {Независимый\\повтор узлов};
+        \node[ref] (r1) at (0,1) {$\Vec{x}^{(1)}$};
+        \node[ref] (r2) at (0,-0.55) {$\Vec{x}^{(2)}$};
+        \node[ref] (rL) at (0,-2.2) {$\Vec{x}^{(L)}$};
+        \node at (0,-1.4) {$\vdots$};
+        \node[target] (t1) at (4.2,1) {Узел 1};
+        \node[target] (t2) at (4.2,-0.55) {Узел 2};
+        \node[target] (tL) at (4.2,-2.2) {Узел $L$};
+        \node at (4.2,-1.4) {$\vdots$};
+        \draw[feed] (r1) -- (t1);
+        \draw[feed] (r2) -- (t2);
+        \draw[feed] (rL) -- (tL);
+        \draw[densely dashed, black!40] (t1) -- (t2);
+        \draw[red!70!black, line width=0.8pt] (4.07,0.08) -- (4.33,0.34);
+        \draw[red!70!black, line width=0.8pt] (4.07,0.34) -- (4.33,0.08);
+        \node[box, text width=35mm, fill=black!4] (compare) at (8.6,-0.55)
+            {Сравнение\\с опорными выходами\\$d_{\mathrm{rel}}$, $b$, $c$};
+        \draw[arr] (t1) -- (compare.north west);
+        \draw[arr] (t2) -- (compare.west);
+        \draw[arr] (tL) -- (compare.south west);
+    \end{tikzpicture}
+    \caption{Изолированное послойное измерение в прямом проходе.
+        Каждый узел получает полный набор опорных входов $\Vec{x}^{(l)}$;
+        его результат сравнивается с выходом того же узла в опорном запуске.
+        Перечёркнутая связь исключает передачу результатов между повторами.}
+    \label{fig:replay}
+\end{figure}
 
 После изолированного измерения проверяется совместное действие
 сохранённых локальных разностей. Обозначим их через
