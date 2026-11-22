@@ -142,3 +142,14 @@ The current official documentation was checked after an older URL failed.
 This is a targeted review. MixQ full-text verification, broader nonstationary
 streaming methods, and model-specific hardware cost evaluation remain open.
 No prediction policy has been implemented or validated.
+
+## Historical scales and retained residuals are established
+
+Supplement reviewed **2026-11-22**. [Transformer Engine delayed scaling](../papers/2026-nvidia-delayed-scaling.md)
+records current maxima for later casts; accepted clipping is part of its
+numerical behavior. An overflow check alone does not establish equivalence to
+current-scale rounding, since an oversized scale can change reconstructed values.
+
+[Sigma-Delta networks](../papers/2016-oconnor-sigma-delta.md) provide older
+stateful quantized-difference mechanisms. Separate residual/state invariants
+from whole-network quality and from an affordable hardware schedule.

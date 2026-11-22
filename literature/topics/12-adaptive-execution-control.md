@@ -184,3 +184,10 @@ uses weight Gram information to prepare rotations; [WAS](../papers/2025-wang-was
 prepares sparsity allocation and applies weighted live masks. Compare observation,
 preparation and per-input work separately; neither “weight-aware” nor “Gram”
 alone identifies an unexplored controller.
+
+## Temporal residual control predates diffusion accelerators
+
+Supplement reviewed **2026-11-22**. [Sigma-Delta networks](../papers/2016-oconnor-sigma-delta.md)
+retain state and quantize updates. A new temporal controller must differ in a
+specified algorithm or execution result; historical residual feedback alone
+is not a novelty claim.

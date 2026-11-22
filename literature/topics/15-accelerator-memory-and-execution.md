@@ -120,3 +120,10 @@ already changes pruning choices using weight residency. Its storage-bound
 setting differs from dense compute, without invalidating that policy overlap.
 [Chipmunk](../papers/2025-silveria-chipmunk.md) couples shared masks and packing
 to activation histories; retain all corresponding capacity and transfer costs.
+
+## Physical-call accounting has prepared-weight precedents
+
+Supplement reviewed **2026-11-22**. [Adaptive Tiling](../papers/2018-kung-adaptive-tiling.md)
+reduces fixed-array calls through prepared sparse filter organization. Compare
+its grouping/metadata assumptions before transferring the mechanism to live
+activation decisions or attributing all logical sparsity to fewer calls.
