@@ -158,3 +158,29 @@ quantization, Panacea, SCNN, and Sparseloop, with reference chaining to the
 already reviewed systolic and online-decomposition papers. Full-text focus:
 representation, mask generation, accumulation, and cost boundaries.
 The review is targeted and does not cover every structured-sparsity proposal.
+
+## Runtime sparsity beyond numerical zeros
+
+Supplement reviewed **2026-11-22**. Keep three opportunities distinct:
+thresholding activations, omitting selected attention interactions, and reusing
+prior outputs instead of recomputing them. Each changes a different computation.
+
+[Activation Concentration](../papers/2026-yang-activation-concentration.md)
+compares scalar and column inactivity under a particular FFN-Reuse mapping.
+Its column constraint must not be generalized to every systolic design.
+[Phantom](../papers/2026-fu-phantom.md) instead compacts selected temporal updates
+into dense work; [DiSC](../papers/2026-yoon-disc.md) co-designs reuse and sparse
+attention with bank distribution. Packing and memory scheduling are therefore
+existing research mechanisms, not automatic novelty.
+
+Joint precision/pruning also has specific comparators:
+[APT](../papers/2026-yoo-apt.md) uses runtime attention masks with prepared
+threshold statistics; [DSTAR](../papers/2026-zhang-dstar.md) combines live
+differential precision with prepared attention masks and temporal reuse.
+Neither can be classified as entirely offline or entirely preparation-free.
+
+Measure avoided arithmetic switching, issued cycles and storage/transfer
+changes separately. Gating need not reduce cycles; compaction can reduce work
+but add selection, gathering and utilization costs. Report full-model quality,
+including the changed diffusion trajectory. Percentage scalar sparsity alone
+establishes none of these benefits.

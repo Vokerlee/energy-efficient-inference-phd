@@ -135,3 +135,17 @@ reports dynamic row-wise FP8 scaling with additional restrictions. Its reported
 rare corrupted responses, despite strong standard-benchmark results, motivate
 checking generated-response distributions alongside aggregate task scores.
 The reported settings are model-specific evidence, not a universal safe range.
+
+## Local certificates and changed trajectories
+
+Supplement reviewed **2026-11-22**. [Runtime-certified attention](../papers/2026-calver-runtime-certified-attention.md)
+states bounds relative to a specified numerical reference. [WitCert](../papers/2026-wei-witcert.md)
+separates an adaptive-safe deterministic tier from a probabilistic tier requiring
+queries independent of stored dither. Neither reading establishes a general
+whole-network task-quality certificate. Formal proof/artifact audits remain
+pending; published claims are not reproduced results here.
+
+[Activation Concentration](../papers/2026-yang-activation-concentration.md)
+shows workload-dependent threshold/quality behavior. Recheck full inference
+when pruning, reuse or quantization changes later activations and decisions;
+a frozen-input or frozen-mask test alone misses that feedback.

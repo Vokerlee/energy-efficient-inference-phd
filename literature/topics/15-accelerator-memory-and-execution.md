@@ -102,3 +102,13 @@ rates nor training-system results establish inference joules per task.
 Coverage is bounded to documented mechanisms, not every available generation.
 No inference experiment, kernel implementation, simulator change, or new PhD
 novelty claim is part of this review.
+
+## Sparse execution and retained history
+
+Supplement reviewed **2026-11-22**. [Phantom](../papers/2026-fu-phantom.md)
+stages history in a shared global-buffer partition with bulk DRAM backing;
+[DiSC](../papers/2026-yoon-disc.md) uses bank distribution for hybrid execution.
+[Activation Concentration](../papers/2026-yang-activation-concentration.md)
+evaluates a GDDR6-based layout. Transfer none of their external-memory savings
+to an entirely on-chip transfer without rebuilding the action/capacity model.
+A cache partition can avoid dedicated area while still consuming capacity.

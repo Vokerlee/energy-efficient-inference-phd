@@ -8,20 +8,20 @@ research, centered on systolic hardware and portable numerical experiments.
 | Topic | Status | Synthesis |
 |---|---|---|
 | 01 — Energy of compute-bound versus memory-bound inference | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/01-inference-energy.md) |
-| 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/02-matrix-multiplier-architectures.md) |
+| 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/02-matrix-multiplier-architectures.md) |
 | 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/03-im2col-and-convolution-mapping.md) |
-| 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/04-dynamic-activation-quantization.md) |
+| 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/04-dynamic-activation-quantization.md) |
 | 05 — Outliers and selective precision | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/05-outliers-and-selective-precision.md) |
 | 06 — Range prediction and tracking | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/06-range-prediction-and-tracking.md) |
-| 07 — Quantization and structured sparsity | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/07-quantization-and-structured-sparsity.md) |
-| 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/08-accumulation-and-block-scaling.md) |
+| 07 — Quantization and structured sparsity | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/07-quantization-and-structured-sparsity.md) |
+| 08 — Accumulation and block-scale arithmetic | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/08-accumulation-and-block-scaling.md) |
 | 09 — Adaptive low-rank computation | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/09-adaptive-low-rank-computation.md) |
 | 10 — Fast matrix multiplication | Reviewed 2026-11-08 | [Review](topics/10-fast-matrix-multiplication.md) |
 | 11 — Operator fusion and streaming inference | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/11-operator-fusion-and-streaming.md) |
-| 12 — Hardware control for adaptive execution | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/12-adaptive-execution-control.md) |
+| 12 — Hardware control for adaptive execution | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/12-adaptive-execution-control.md) |
 | 13 — End-to-end quality under runtime approximation | Reviewed 2026-11-09; expanded 2026-11-22 | [Review](topics/13-end-to-end-quality.md) |
 | 14 — Portable experiments and credible hardware evaluation | Reviewed 2026-11-09; expanded 2026-11-22 | [Review](topics/14-experimental-and-hardware-evaluation.md) |
-| 15 — Modern accelerator memory hierarchies and matrix/vector execution | Initial review 2026-11-14 | [Review](topics/15-accelerator-memory-and-execution.md) |
+| 15 — Modern accelerator memory hierarchies and matrix/vector execution | Reviewed 2026-11-14; expanded 2026-11-22 | [Review](topics/15-accelerator-memory-and-execution.md) |
 
 Other agreed topics are added when their reviews are performed.
 
@@ -181,3 +181,11 @@ or access date and a distinct documentation-reading status.
 | [`nag2025llvit`](papers/2025-nag-ll-vit.md) | 01, 02 | Estimated encoder-block energy split on an INT8 systolic FPGA baseline. |
 | [`iyengar2026diffusionenergy`](papers/2026-iyengar-diffusion-energy-scaling.md) | 01, 14 | Whole-GPU diffusion energy fits and denoising FLOP attribution limits. |
 | [`jain2026clear`](papers/2026-jain-clear-transformer-energy.md) | 01, 14 | Component replay for energy attribution and measurement-context limits. |
+| [`zhang2026dstar`](papers/2026-zhang-dstar.md) | 04, 07, 12 | Live differential precision, prepared scales/masks and physical bit-slice mapping. |
+| [`yoo2026apt`](papers/2026-yoo-apt.md) | 04, 07, 12 | Attention-guided skipping/precision with offline-profiled thresholds. |
+| [`fu2026phantom`](papers/2026-fu-phantom.md) | 07, 12, 15 | Temporal token selection, dense compaction and explicit cache traffic. |
+| [`walczak2026shatterquant`](papers/2026-walczak-shatterquant.md) | 02, 04, 08 | Prepared weight-block precision; activation width remains fixed. |
+| [`calver2026runtimecertified`](papers/2026-calver-runtime-certified-attention.md) | 04, 12, 13 | Local attention certificates and tiered precision/fallback costs. |
+| [`wei2026witcert`](papers/2026-wei-witcert.md) | 12, 13 | Runtime risk gates with explicitly different adaptive-query guarantees. |
+| [`yang2026activationconcentration`](papers/2026-yang-activation-concentration.md) | 07, 14, 15 | Scalar-versus-column sparsity, threshold quality and mapping-specific costs. |
+| [`yoon2026disc`](papers/2026-yoon-disc.md) | 07, 12, 15 | Token reuse and sparse attention co-designed with bank distribution. |

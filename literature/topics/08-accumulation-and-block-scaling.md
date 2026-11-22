@@ -139,3 +139,10 @@ Full-text focus: guarantees, arithmetic assumptions, and evaluation boundaries.
 No dynamic accumulator algorithm or chip energy split has been established.
 Safe widths, efficient variable-width hardware, and final-model quality all
 require separate validation.
+
+## Heterogeneous block rescaling comparator
+
+Supplement reviewed **2026-11-22**. [ShatterQuant](../papers/2026-walczak-shatterquant.md)
+includes block rescaling and output accumulation for mixed weight widths.
+Compare its supported arithmetic and preparation; do not assume arbitrary
+runtime activation formats inherit compatible partial-sum semantics.
