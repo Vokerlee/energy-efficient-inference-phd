@@ -127,3 +127,11 @@ The selected versions are recorded in their canonical notes.
 This is a targeted review. It does not establish a universal error budget,
 guaranteed detector validity, or a complete evaluation suite.
 No neural-network outputs were generated or measured during this review.
+
+## Production dynamic-scaling example
+
+Supplement reviewed **2026-11-22**. [Llama 3, Section 6.2](../papers/2024-dubey-llama-3.md)
+reports dynamic row-wise FP8 scaling with additional restrictions. Its reported
+rare corrupted responses, despite strong standard-benchmark results, motivate
+checking generated-response distributions alongside aggregate task scores.
+The reported settings are model-specific evidence, not a universal safe range.
