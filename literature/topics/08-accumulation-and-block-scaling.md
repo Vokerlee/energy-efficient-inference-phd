@@ -177,3 +177,11 @@ Static stage specialization in a weight-stationary array and live format
 selection in an output-stationary array have different state and propagation
 contracts. Describe the actual mapping before transferring a technique.
 Missing full text is an unresolved comparison, not evidence of novelty.
+
+## Microscaling direction through convolution lowering
+
+Supplement reviewed **2026-11-23**. [MicroQonv](../papers/2026-facq-microqonv.md)
+uses square source blocks and applies scales along the directions of its matrix
+products. A source layout that avoids repeated quantization still requires
+compatible scale boundaries in the consumer's reduction. Price scale application
+and partial sums alongside saved conversion/storage actions.

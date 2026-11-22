@@ -238,3 +238,13 @@ weights offline and executes dequantized floating-point values. Its hardware
 zero handling is distinct from current-activation selection, low-bit storage
 and native low-bit arithmetic. None implies all the others. Hardware novelty
 must be evaluated at the actual decision and execution boundary.
+
+## Zeros, compression and spare representation capacity
+
+Supplement reviewed **2026-11-23**. [OverQ](../papers/2021-zhao-overq.md) already
+uses zero slots for greater activation range/precision. [CompAct](../papers/2019-zhang-compact.md)
+compresses activation storage but reconstructs a dense array stream. Compare
+both with [SPOTS](../papers/2022-soltaniyeh-spots.md), which exploits zero-block
+structure before GEMM. These mechanisms save different actions. Padding
+coordinates, data zeros, quantized zeros and empty physical lanes must not be
+combined into one sparsity statistic.

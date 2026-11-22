@@ -9,7 +9,7 @@ research, centered on systolic hardware and portable numerical experiments.
 |---|---|---|
 | 01 — Energy of compute-bound versus memory-bound inference | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/01-inference-energy.md) |
 | 02 — Systolic arrays and alternative matrix multipliers | Reviewed 2026-11-08; expanded 2026-11-23 | [Review](topics/02-matrix-multiplier-architectures.md) |
-| 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08; expanded 2026-11-14 | [Review](topics/03-im2col-and-convolution-mapping.md) |
+| 03 — Efficient hardware im2col and convolution mapping | Reviewed 2026-11-08; expanded 2026-11-23 | [Review](topics/03-im2col-and-convolution-mapping.md) |
 | 04 — Hardware-driven dynamic activation quantization | Reviewed 2026-11-08; expanded 2026-11-23 | [Review](topics/04-dynamic-activation-quantization.md) |
 | 05 — Outliers and selective precision | Reviewed 2026-11-08; expanded 2026-11-15 | [Review](topics/05-outliers-and-selective-precision.md) |
 | 06 — Range prediction and tracking | Reviewed 2026-11-08; expanded 2026-11-22 | [Review](topics/06-range-prediction-and-tracking.md) |
@@ -48,6 +48,13 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`facq2026microqonv`](papers/2026-facq-microqonv.md) | 03, 04, 08 | A direct baseline for combining quantization with convolution lowering; quantize-once-before-expansion is already established. |
+| [`zhao2021overq`](papers/2021-zhao-overq.md) | 05, 07, 12 | Using spare zero slots for outliers, including hardware routing, is existing work. Compare against it before proposing an im2col-tail variant. |
+| [`zhou2021implicitconv`](papers/2021-zhou-implicit-convolution.md) | 02, 03 | A strong implicit-lowering baseline; small spatial kernels do not inherently require issuing one short input-channel window at a time. |
+| [`zhang2019compact`](papers/2019-zhang-compact.md) | 03, 07, 15 | Prior work already combines activation representation, convolution scheduling and local-memory energy. |
+| [`li2025lmai2c`](papers/2025-li-lmai2c.md) | 03, 15 | A concrete reference for combining feeder reuse with alignment/padding and local-memory costs. |
+| [`wu2025reusedim2col`](papers/2025-wu-data-reused-im2col.md) | 03 | A close hardware comparator for reducing feeder buffers and aligning repeated data in time. |
+| [`chen2026sleepdynamic`](papers/2026-chen-sleep-dynamic-quantization.md) | 03, 04, 12, 15 | Hardware reuse plus dynamic quantization already exists; identify which layers, parameters and runtime choices actually adapt. |
 | [`wong2026miao`](papers/2026-wong-miao.md) | 02, 08, 14 | Direct hardware/software precedent for changing intermediate precision with operand quantization. Compare its optimized datapath before claiming savings against uniform accumulation. |
 | [`fasolino2026overflowdps`](papers/2026-fasolino-overflow-dps.md) | 08, 12 | Existing autonomous per-accumulation control rules out novelty of merely moving an overflow detector into hardware. |
 | [`he2026bfpboundary`](papers/2026-he-bfp-accumulation-boundary.md) | 08, 14 | Close baseline for reducing accumulator precision and choosing chunk structure rather than only lowering operand width. |

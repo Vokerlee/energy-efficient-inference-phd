@@ -165,3 +165,40 @@ For quantized activations, regenerate the sparse representation at the stage
 where zeros are defined, preserve zero-point semantics, and keep physical
 padding separate. Short spatial windows do not by themselves establish either
 compressibility or profitable sparse execution.
+
+## Microscaling reuse and short-vector boundaries
+
+Supplement reviewed **2026-11-23**. [MicroQonv](../papers/2026-facq-microqonv.md)
+already quantizes before modified lowering. Its square-block formulation also
+makes the scale-application direction part of the compute contract. Compare
+with that mechanism, not only an expanded full-precision im2col baseline.
+
+[Zhou et al.](../papers/2021-zhou-implicit-convolution.md) provide a channel-first
+implicit algorithm: nine spatial taps do not imply a nine-element complete
+reduction when multiple input channels belong to the group. A feeder that
+issues each channel separately is a particular mapping, requiring an explicit
+merge of its output partial sums.
+
+[LMAI2C](../papers/2025-li-lmai2c.md) trades external traffic for local reuse;
+[Wu et al.](../papers/2025-wu-data-reused-im2col.md) distinguish multiple reuse
+levels, with important stride restrictions. [CompAct](../papers/2019-zhang-compact.md)
+compresses on-chip storage while restoring the dense stream before execution.
+Thus compressed bytes, invalid input positions and skipped array operations
+must remain separate counters.
+
+The [CNN-LSTM accelerator](../papers/2026-chen-sleep-dynamic-quantization.md)
+already combines memory reuse with online range collection, although its CNN
+ranges are static and its live quantization serves LSTM/MLP inputs. This is
+hardware prior art, not merely a software simulation.
+
+For combined quantization/sparsity mechanisms include
+[OverQ](../papers/2021-zhao-overq.md): spare zero slots already carry extra
+activation range/precision bits. Deterministic window padding is a different
+source of slots, but does not alone establish novelty or legal routing.
+
+The targeted search covered microscaling before lowering, overlapping-window
+statistics, implicit/channel-first convolution, zero-slot overwrite and recent
+hardware reuse with dynamic quantization. Full-text review remains pending for
+Wu et al.; no exhaustive novelty clearance is implied. Matching scale groups,
+valid masks, weight delivery and partial-sum costs is necessary before claiming
+an advantage for a combined mechanism.
