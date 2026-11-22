@@ -157,3 +157,19 @@ are intentionally not labeled completed full-text reviews.
 
 This targeted corpus is not exhaustive. No new algorithm, measurement, or
 novelty conclusion is established here.
+
+## Mechanism-level scope audit
+
+Supplement reviewed **2026-11-22** from pinned primary texts. A broad title
+is insufficient to classify an activation policy.
+
+| Source | Live decision | Prepared information / observed boundary |
+|---|---|---|
+| [DSTAR](../papers/2026-zhang-dstar.md) | Differential group precision from live maxima | Dataset-profiled base/thresholds; attention mask preparation |
+| [APT](../papers/2026-yoo-apt.md) | Input-dependent skip/precision masks | Per-model offline head/timestep statistics |
+| [ShatterQuant](../papers/2026-walczak-shatterquant.md) | Executes heterogeneous weight blocks | Prepared weight widths; activations fixed at 8 bits |
+| [Runtime-certified attention](../papers/2026-calver-runtime-certified-attention.md) | Local bounds, promotion and fallback | Compressed KV plus retained FP16 originals and scoring pass |
+
+These are observed mechanism differences, not proof that a specialized
+activation-selection problem is new. Compare full preparation, observation,
+execution and quality assumptions; count fallback work.

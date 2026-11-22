@@ -147,3 +147,18 @@ cost of realizing the decision.
 The current corpus supports these distinctions but does not establish an
 optimal control algorithm or complete novelty coverage. No hardware controller
 has been implemented; final chip-simulator work remains deferred.
+
+## Precision, omission and reuse controllers
+
+Supplement reviewed **2026-11-22**. [Phantom](../papers/2026-fu-phantom.md)
+uses streaming token-change reductions, TopK and address merging before dense
+execution. [DiSC](../papers/2026-yoon-disc.md) connects token/mask reuse to
+on-chip bank placement. [DSTAR](../papers/2026-zhang-dstar.md) and
+[APT](../papers/2026-yoo-apt.md) combine live decisions with prepared statistics.
+The broad notion of autonomous runtime adaptation is already represented.
+
+Certification also has comparators: [Runtime-certified attention](../papers/2026-calver-runtime-certified-attention.md)
+pays for scoring and tiered recovery, while [WitCert](../papers/2026-wei-witcert.md)
+distinguishes deterministic and restricted probabilistic guarantees. A
+controller's information availability, amortization, state and actual critical
+path must be compared explicitly; “online” does not imply negligible cost.

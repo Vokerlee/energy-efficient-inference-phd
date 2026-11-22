@@ -162,3 +162,10 @@ provide references for instruction-level arithmetic modeling.
 These two records cover abstract and bibliographic verification only; detailed
 hardware coverage and numerical validation remain to read. They do not replace
 a comparison against the particular instruction or device being modeled.
+
+## Precision-dependent physical block dimensions
+
+Supplement reviewed **2026-11-22**. [ShatterQuant](../papers/2026-walczak-shatterquant.md)
+couples prepared weight precision to PE block dimensions. It is an existing
+mapping comparator, with fixed 8-bit activations rather than an autonomous
+activation-width selector.
