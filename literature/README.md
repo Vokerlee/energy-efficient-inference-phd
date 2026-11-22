@@ -48,6 +48,9 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`hu2025mant`](papers/2025-hu-m-ant.md) | 04, 06, 12, 15 | Streaming statistics and dedicated quantization hardware; preparation separated. |
+| [`geng2026adana`](papers/2026-geng-adana.md) | 04, 12 | Approximate online metric and dedicated engine; abstract/slides evidence. |
+| [`hsieh2025fpgasparsequantized`](papers/2025-hsieh-fpga-sparse-quantized.md) | 02, 07, 14 | Offline weight preparation and floating-point FPGA zero gating. |
 | [`williams2009roofline`](papers/2009-williams-roofline.md) | 01 | Performance bottlenecks and operational intensity. |
 | [`horowitz2014energy`](papers/2014-horowitz-computing-energy.md) | 01 | Historical component-energy and locality foundations. |
 | [`chen2016eyeriss`](papers/2016-chen-eyeriss.md) | 01 | Matched-resource dataflow energy comparison. |
