@@ -162,3 +162,11 @@ weight-aware score. Preserve these distinctions in quality-matched comparisons.
 coordinates errors in the receiving-product objective, but its accuracy bound
 does not establish an efficient deployed selector. A local arithmetic bound
 must remain distinct from empirical final-task quality.
+
+## Local mask optimality and deployment
+
+Supplement reviewed **2026-11-22**. [SparseSwaps](../papers/2025-zimmer-sparseswaps.md)
+expresses a reconstruction loss with a Gram matrix. [VR-SparseQuant](../papers/2026-khaki-vr-sparsequant.md)
+separates a local assignment guarantee from output/task quality. Exact local
+mask minimization is not a whole-network guarantee or evidence of net energy
+savings after its computation cost.

@@ -135,3 +135,10 @@ Supplement reviewed **2026-11-22**. [RT-Lynx](../papers/2026-cong-rt-lynx.md)
 fuses online selection/compression and integrates a correction path.
 Fusion itself is not a new contribution; compare required reads, retained
 state and synchronization with an equally optimized combined baseline.
+
+## Shared weights do not eliminate a second sparse product
+
+Supplement reviewed **2026-11-22**. [VR-SparseQuant](../papers/2026-khaki-vr-sparsequant.md)
+shares staged weights and an accumulator between two sparse streams. Its two
+products retain dense nonzero work together; distinguish avoided duplicate
+loads from removed arithmetic and include sparse metadata.

@@ -48,10 +48,9 @@ Runtime signals such as clipping counts are proxies, not guaranteed task-quality
 bounds. A controller must not inspect the reference forward pass or future
 outputs unless that extra computation is explicitly part of the mechanism.
 
-[DRQ](../papers/2020-song-drq.md),
-[Drift](../papers/2024-liu-drift.md), and
-[MixQ](../papers/2024-chen-mixq.md) remain priority full-text comparison
-dependencies before a novelty claim.
+[DRQ](../papers/2020-song-drq.md) now has a focused full-text review of live
+selection and prepared region settings. [Drift](../papers/2024-liu-drift.md) and
+[MixQ](../papers/2024-chen-mixq.md) remain full-text comparison dependencies.
 
 ## Costs and stability
 
@@ -177,3 +176,11 @@ exponents/thresholds. [Prox](../papers/2026-liu-prox.md) pays for proxy products
 [Chipmunk](../papers/2025-silveria-chipmunk.md) also has a reduced MLP prediction
 product. Classify such work by its size, frequency and critical path, rather
 than calling every online selector lightweight.
+
+## Geometry can enter preparation rather than live optimization
+
+Supplement reviewed **2026-11-22**. [RoShift](../papers/2026-song-roshift.md)
+uses weight Gram information to prepare rotations; [WAS](../papers/2025-wang-was.md)
+prepares sparsity allocation and applies weighted live masks. Compare observation,
+preparation and per-input work separately; neither “weight-aware” nor “Gram”
+alone identifies an unexplored controller.
