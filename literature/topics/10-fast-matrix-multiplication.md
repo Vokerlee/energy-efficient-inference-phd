@@ -91,3 +91,17 @@ The current selection is foundational rather than an exhaustive catalog of
 
 No scheme has been implemented in our engine and no new neural-network
 energy/quality result or novelty claim is established.
+
+## Recent specific comparators
+
+Supplement screened **2026-11-22** at primary-abstract level; detailed reviews
+remain pending and no results were reproduced.
+
+- [SubCuber](../papers/2026-jangda-subcuber.md) generates fused shape/GPU-dependent CUDA schedules.
+- [Strassen with dynamic block quantization](../papers/2025-chiu-strassen-dynamic-quantization.md) is explicitly described for ViT in an official 2025 conference poster abstract.
+- [FP8 coefficient optimization](../papers/2026-xie-fp8-fast-matmul.md) studies numerical differences between exact multiplication realizations under a specified model.
+
+These sources constrain broad novelty claims without establishing that every
+runtime selection, finite-memory mapping or error-control problem is covered.
+Do not label Strassen-plus-quantization or GPU schedule generation as new solely
+because the foundational review did not contain these recent comparators.
