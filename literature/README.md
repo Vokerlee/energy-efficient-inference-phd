@@ -48,6 +48,7 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`guo2026dynacore`](papers/2026-guo-dynacore.md) | 02, 12, 15 | Precision-dependent reduction capacity with invariant output count and explicitly scheduled partial-sum reduction. |
 | [`deepseek2026v4`](papers/2026-deepseek-v4-scale-widening.md) | 04, 08 | Direct prior art for losslessly absorbing fine source scales into a wider matrix operand format. |
 | [`makhov2025prefilt`](papers/2025-makhov-prefilt.md) | 04, 13 | Noise spectrum, downstream filtering and a reconstruction bypass in fully quantized image restoration. |
 | [`minami2020noiseshaping`](papers/2020-minami-noise-shaping.md) | 04, 13 | Existing diffusion-filter design for weight quantization; abstract-only comparison boundary is explicit. |

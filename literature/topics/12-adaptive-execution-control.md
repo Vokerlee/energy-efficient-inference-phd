@@ -236,3 +236,11 @@ changes wordline execution from live exponents. The
 uses exponent cache events and impending overflow to activate finalization.
 A proposed pre-issue metadata rule must be compared with those actual controls,
 including retained state, exception paths and dataflow costs.
+
+## Shape scheduling and value-driven decisions
+
+Supplement reviewed **2026-11-23**. [DynaCore](../papers/2026-guo-dynacore.md)
+selects runtime configurations using batch shapes and prepared hardware cost
+tables; quantization follows execution phases. Distinguish this from choosing
+a representation from the current activation values. A live-value controller
+still needs a hardware cost model; its CUDA execution time is not that model.
