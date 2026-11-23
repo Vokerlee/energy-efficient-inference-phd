@@ -300,3 +300,9 @@ justify its bounds, intervention, acceptance criterion and input scope. An
 observed perturbation envelope is diagnostic evidence, not a universal
 certificate; unchanged decisions alone do not certify unchanged output codes
 or task quality.
+
+Focused follow-up **2026-11-24**: [NNSmith](../papers/2023-liu-nnsmith.md)
+Sections2.3,3 and4 distinguish graph/type validity from numerical validity.
+Its gradient search avoids exceptional intermediates even when downstream
+operators would hide them. Any comparison against this baseline must preserve
+that distinction; naive random-tensor testing is not representative of NNSmith.
