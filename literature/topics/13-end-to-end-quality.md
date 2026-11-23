@@ -185,3 +185,13 @@ operator-contract composition is outside its completed results. A fast
 arithmetic substitution can satisfy an empirical task tolerance while failing
 a bit-accurate emulation contract. State which requirement is being tested.
 Local error replay and whole-model execution remain complementary tests.
+
+## Propagated error and spatial feedback comparators
+
+Supplement reviewed **2026-11-23**. [Error Diffusion](../papers/2024-khodamoradi-error-diffusion.md)
+explicitly distinguishes original from inherited quantized activations while
+calibrating a DAG. [Dither NN](../papers/2019-ando-dither-nn.md) shapes spatial
+error and trains corresponding networks. The first is not an online source
+feedback controller; the second is not merely an offline rounding analysis.
+Neither lower local MSE nor a zero-mean residual proves whole-model quality.
+Use fixed-input local comparisons and cumulative model execution separately.

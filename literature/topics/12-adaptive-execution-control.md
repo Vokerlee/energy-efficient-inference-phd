@@ -216,3 +216,12 @@ live overwrite/routing with profiled clipping ranges. The
 online for selected layers with prepared precision. These are hardware
 contributions even where some parameters are chosen offline. Compare state
 reset, live statistics and decision granularity individually.
+
+## Exponent-driven execution is already a hardware mechanism
+
+Supplement reviewed **2026-11-23**. [BFP-CIM](../papers/2024-chang-bfp-cim.md)
+changes wordline execution from live exponents. The
+[integer-accumulation patent description](../papers/2025-zhang-integer-fp-accumulation.md)
+uses exponent cache events and impending overflow to activate finalization.
+A proposed pre-issue metadata rule must be compared with those actual controls,
+including retained state, exception paths and dataflow costs.

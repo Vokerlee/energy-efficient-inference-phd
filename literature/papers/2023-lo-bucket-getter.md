@@ -10,7 +10,7 @@
 
 ## What it establishes
 
-Uses small fixed-point accumulation buckets for bounded exponent ranges before floating-point accumulation, targeting the remaining accumulation cost in low-bit BFP processing.
+Uses fixed-point buckets before floating accumulation. The abstract explicitly describes inter-bucket carry propagation, an out-of-bound-aware adaptive circular bucket accumulator, and sharing a floating accumulator across MAC engines. These reduce alignment/conversion activity and amortize floating state.
 
 ## Relevance to our goals
 

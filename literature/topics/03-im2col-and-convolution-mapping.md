@@ -202,3 +202,11 @@ hardware reuse with dynamic quantization. Full-text review remains pending for
 Wu et al.; no exhaustive novelty clearance is implied. Matching scale groups,
 valid masks, weight delivery and partial-sum costs is necessary before claiming
 an advantage for a combined mechanism.
+
+## Spatial feedback also has a hardware history
+
+Supplement reviewed **2026-11-23**. [Dither NN](../papers/2019-ando-dither-nn.md)
+already co-designs spatial activation-error feedback with PE scheduling and
+convolutional consumers. Quantizing before overlapping-window generation does
+not make residual feedback itself new. Compare scan order, state, training
+requirements and the consumer's filtering, alongside representation reuse.

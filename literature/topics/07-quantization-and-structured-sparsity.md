@@ -248,3 +248,12 @@ both with [SPOTS](../papers/2022-soltaniyeh-spots.md), which exploits zero-block
 structure before GEMM. These mechanisms save different actions. Padding
 coordinates, data zeros, quantized zeros and empty physical lanes must not be
 combined into one sparsity statistic.
+
+## Runtime bit sparsity and error-feedback trade-offs
+
+Supplement reviewed **2026-11-23**. [BFP-CIM](../papers/2024-chang-bfp-cim.md)
+already couples quantization with exponent/bit-level scheduling. Its analog
+conversion costs cannot be transferred to a digital array. The spatial
+feedback in [Dither NN](../papers/2019-ando-dither-nn.md) also changes activation
+patterns. Count the resulting zeros and state accesses when comparing a new
+rounding rule; reducing an error statistic is not a sparse-execution saving.

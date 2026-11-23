@@ -219,3 +219,16 @@ aligns source microscaling with convolution lowering. The
 LSTM/MLP input ranges while keeping CNN ranges and layer bit widths prepared.
 Specify runtime range selection, representation lifetime and prepared choices
 separately; neither paper establishes every possible live tile controller.
+
+## Range-aware hardware and error-feedback scope
+
+Supplement reviewed **2026-11-23**. [BFP-CIM](../papers/2024-chang-bfp-cim.md)
+combines input-dependent rounding, exponent grouping and zero skipping in a
+hardware design. Its uint8 front-end and collection of a tensor maximum remain
+part of the representation contract. [Dither NN](../papers/2019-ando-dither-nn.md)
+provides spatial residual feedback with hardware and trained models.
+[Error Diffusion](../papers/2024-khodamoradi-error-diffusion.md) instead adjusts
+weights on calibration inputs while accounting for inherited activation error.
+These are different preparation/execution mechanisms; compare their actual
+runtime state and model assumptions rather than grouping them by the word
+“dynamic” or “diffusion.”

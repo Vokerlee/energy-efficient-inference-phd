@@ -48,6 +48,10 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`chang2024bfpcim`](papers/2024-chang-bfp-cim.md) | 04, 07, 08, 12 | Direct hardware prior art for runtime quantization together with sparsity and exponent grouping. |
+| [`zhang2025integerfpaccum`](papers/2025-zhang-integer-fp-accumulation.md) | 02, 08, 12 | Integer intermediates with floating outputs and a dynamically enabled normalizer are already described in hardware prior art. |
+| [`khodamoradi2024ed`](papers/2024-khodamoradi-error-diffusion.md) | 04, 08, 13 | A concrete comparator for distinguishing local quantization error from error propagated through a model DAG. |
+| [`ando2019dithernn`](papers/2019-ando-dither-nn.md) | 03, 04, 07, 13 | Spatial activation error feedback with a hardware implementation is established work, not an unexplored alternative to ordinary rounding. |
 | [`facq2026microqonv`](papers/2026-facq-microqonv.md) | 03, 04, 08 | A direct baseline for combining quantization with convolution lowering; quantize-once-before-expansion is already established. |
 | [`zhao2021overq`](papers/2021-zhao-overq.md) | 05, 07, 12 | Using spare zero slots for outliers, including hardware routing, is existing work. Compare against it before proposing an im2col-tail variant. |
 | [`zhou2021implicitconv`](papers/2021-zhou-implicit-convolution.md) | 02, 03 | A strong implicit-lowering baseline; small spatial kernels do not inherently require issuing one short input-channel window at a time. |
