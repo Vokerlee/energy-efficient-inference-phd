@@ -259,3 +259,13 @@ and quantization-robustness search. A new tool is not automatically a new method
 Compare arithmetic boundaries, causal decisions/state, acceptable approximation,
 cost characterization and scientific findings. Full-method dependencies are
 marked in each record; this map is not an exhaustive novelty verdict.
+
+## Numerical decisions beyond a fixed path
+
+Supplement reviewed **2026-11-24**: [FLUCTUAT](../papers/2013-goubault-fluctuat-unstable-tests.md)
+models discontinuity error when finite-precision execution changes a branch;
+[stable-test transformations](../papers/2018-titolo-eliminating-unstable-tests.md)
+and [verified C generation](../papers/2020-titolo-test-stable-code.md) already
+address detection and guarding. Fixed-path Jacobian reasoning must not silently
+cover changed quantization/precision decisions. Stable decisions, tensor fidelity
+and full-model quality are separate validation requirements.

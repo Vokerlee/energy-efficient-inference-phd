@@ -282,3 +282,21 @@ The inspected DiverGet protocol does not report the same live/frozen controller
 intervention as the decoder diagnostics. This narrow comparison does not prove
 absence from all prior work. General custom arithmetic emulators may be
 extensible; lack of a reported experiment is not lack of implementation capability.
+
+## Existing analysis of unstable numerical decisions
+
+Focused primary-source follow-up **2026-11-24**: [FLUCTUAT](../papers/2013-goubault-fluctuat-unstable-tests.md)
+already separates round-off effects from discontinuity caused by different
+branches. [Titolo et al. 2018](../papers/2018-titolo-eliminating-unstable-tests.md)
+and [2020](../papers/2020-titolo-test-stable-code.md) give sound guarded execution
+and verified code generation, rather than merely observing that rounding can
+change a decision. Margin checks and selective escalation must be compared
+with this prior art; their generic principle is not a new contribution.
+
+A finite-precision neural experiment can ask a different empirical question:
+which decisions and state matter for comparing candidate optimizations, and
+when does a cheaper implementation preserve the comparison? It must still
+justify its bounds, intervention, acceptance criterion and input scope. An
+observed perturbation envelope is diagnostic evidence, not a universal
+certificate; unchanged decisions alone do not certify unchanged output codes
+or task quality.

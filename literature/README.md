@@ -263,3 +263,6 @@ or access date and a distinct documentation-reading status.
 | [`oconnor2016sigmadelta`](papers/2016-oconnor-sigma-delta.md) | 06, 07, 12 | Stateful quantized temporal updates and numerical equivalence scope. |
 | [`kung2018adaptivetiling`](papers/2018-kung-adaptive-tiling.md) | 02, 07, 15 | Prepared sparse-weight tiling and fixed-array call reduction. |
 | [`nvidia2026delayedscaling`](papers/2026-nvidia-delayed-scaling.md) | 06, 11 | Documented historical scaling, clipping and two-pass comparison boundary. |
+| [`goubault2013unstabletests`](papers/2013-goubault-fluctuat-unstable-tests.md) | 13, 14 | Numerical decision stability and existing analysis of divergent execution paths. |
+| [`titolo2018unstabletests`](papers/2018-titolo-eliminating-unstable-tests.md) | 13, 14 | Numerical decision stability and existing analysis of divergent execution paths. |
+| [`titolo2020teststable`](papers/2020-titolo-test-stable-code.md) | 13, 14 | Numerical decision stability and existing analysis of divergent execution paths. |
