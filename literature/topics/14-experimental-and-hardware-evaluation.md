@@ -261,3 +261,24 @@ and quantization-robustness search. A new tool is not automatically a new method
 Compare arithmetic boundaries, causal decisions/state, acceptable approximation,
 cost characterization and scientific findings. Full-method dependencies are
 marked in each record; this map is not an exhaustive novelty verdict.
+
+Focused follow-up **2026-11-24**: [DiverGet](../papers/2022-yahmed-diverget.md)
+is now read in Sections4.1–4.4 and5.1. Its search objectives include output
+Jensen–Shannon divergence and coverage-signature differences, using
+hyperspectral-domain transformations and TensorFlow Lite PTQ/QAT subjects.
+Do not describe this as merely random noise testing.
+
+For numerical-validation comparisons, state which claims are actually tested:
+
+| Comparison axis | Evidence to inspect |
+|---|---|
+| Arithmetic fidelity | Primitive rounding, accumulation boundaries, exceptional values and reference semantics |
+| Adaptive decisions | Information deadline, actual decisions, prior state and reset behavior |
+| Counterfactual interpretation | Fixed versus recomputed configuration, changed future trajectories and interaction terms |
+| Model outcome | Complete execution, task/fidelity metric, strong controls and independent input scope |
+| Cost validity | Activity counts, characterized coefficients, uncertainty and unmodified-work denominator |
+
+The inspected DiverGet protocol does not report the same live/frozen controller
+intervention as the decoder diagnostics. This narrow comparison does not prove
+absence from all prior work. General custom arithmetic emulators may be
+extensible; lack of a reported experiment is not lack of implementation capability.
