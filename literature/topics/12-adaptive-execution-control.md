@@ -244,3 +244,19 @@ selects runtime configurations using batch shapes and prepared hardware cost
 tables; quantization follows execution phases. Distinguish this from choosing
 a representation from the current activation values. A live-value controller
 still needs a hardware cost model; its CUDA execution time is not that model.
+
+## Precision regularity and scheduling axes
+
+Supplement reviewed **2026-11-23**. [Atom](../papers/2024-zhao-atom.md) moves
+activation channels online using calibrated IDs and aligned weight reordering.
+[TileQuant](../papers/2026-zhang-tilequant.md) packs fixed weight precision maps
+and adapts row tiling/splitting to call shape. [OFGQ](../papers/2026-wang-ofgq.md)
+explicitly links format granularity to synchronized variable-cycle systolic
+execution; its full control protocol remains unreviewed.
+
+Distinguish reduction-channel permutation, static weight-tile packing,
+activation-row scheduling and live precision decisions. The terms mixed
+precision, runtime scheduling and reordering alone do not identify a new
+mechanism. Charge format residency, source lookahead, row IDs, output ordering,
+mode changes and fill/drain under the actual multiplier geometry. Missing full
+text is an unresolved comparison, not evidence that a mechanism is absent.
