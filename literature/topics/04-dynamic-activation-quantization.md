@@ -259,3 +259,12 @@ conditioning reconstruction and activation calibration; its
 selection and cached features. Distinguish a live decision from the way its
 parameters are obtained. Replacing prepared sensitivity with live scalar
 statistics is a comparison axis, not by itself evidence of novelty or energy gain.
+
+## Image-decoder quantization and receiving-consumer scope
+
+Supplement reviewed **2026-11-23**. [PassionSR](../papers/2025-zhu-passionsr.md)
+quantizes both UNet and VAE using calibrated learned boundaries and channel
+transformations. Low-bit decoding alone is not an unexplored application;
+its offline parameter fitting must be distinguished from live source-group
+conversion or hardware policy selection. Separately evaluate decoder-only
+and complete-pipeline quality, with fixed conditions and component coverage.

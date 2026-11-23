@@ -224,3 +224,17 @@ Separate calibration/training, live decision inputs, block/graph granularity,
 state and hardware scheduling when comparing a calibration-free controller.
 Cache reuse additionally requires genuine sample independence and compatible
 sampler/timestep conditions; it is not automatic for arbitrary networks.
+
+## Image-decoder quantization and receiving-consumer scope
+
+Supplement reviewed **2026-11-23**. [PassionSR](../papers/2025-zhu-passionsr.md)
+quantizes both UNet and VAE using calibrated learned boundaries and channel
+transformations. Low-bit decoding alone is not an unexplored application;
+its offline parameter fitting must be distinguished from live source-group
+conversion or hardware policy selection. Separately evaluate decoder-only
+and complete-pipeline quality, with fixed conditions and component coverage.
+
+[LatentQuant](../papers/2026-deng-latentquant.md) is currently abstract-only:
+its VAE QAT example warns that good reconstruction can coexist with damaged
+frozen downstream control. A final image decoder and a policy-facing encoder
+have different consumer contracts; the full method remains a reading dependency.
