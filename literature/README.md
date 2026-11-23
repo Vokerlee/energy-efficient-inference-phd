@@ -48,6 +48,9 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`zhao2024atom`](papers/2024-zhao-atom.md) | 04, 05, 11, 12 | Online activation movement with calibrated channel identities; mixed-precision regularity and fusion. |
+| [`zhang2026tilequant`](papers/2026-zhang-tilequant.md) | 04, 08, 12, 14 | Static weight-tile precision maps, compact layout and shape-adaptive execution. |
+| [`wang2026ofgq`](papers/2026-wang-ofgq.md) | 02, 04, 12 | Adaptive-format and variable-cycle systolic synchronization; indexed abstract/introduction only. |
 | [`huang2024tfmq`](papers/2024-huang-tfmq.md) | 04, 13 | Temporal conditioning sensitivity, isolated reconstruction and finite-timestep calibration. |
 | [`huang2025temporalfeatures`](papers/2025-huang-temporal-features.md) | 11, 13 | Cached temporal features and explicitly offline strategy selection. |
 | [`lee2025qlip`](papers/2025-lee-qlip.md) | 04, 12, 13 | Input-prompt-dependent layer/timestep precision using trained control and prepared quantizers. |
