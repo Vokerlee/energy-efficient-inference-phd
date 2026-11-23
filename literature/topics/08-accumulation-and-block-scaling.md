@@ -201,3 +201,12 @@ different stage: preparing block-scaled models using inherited-error-aware
 weight updates. A new controller needs a mechanism-level, matched-state/cost
 comparison. Identify changes to the controller, arithmetic, state organization
 or integration cost beyond these mechanisms.
+
+## Input widening versus accumulator alignment
+
+Supplement reviewed **2026-11-23**. [DeepSeek-V4](../papers/2026-deepseek-v4-scale-widening.md)
+provides explicit prior art for absorbing fine FP4 scales into a wider FP8
+operand representation. Input-lane representability and wide accumulator
+capacity are separate constraints: a safe accumulated sum does not prove that
+rescaled individual inputs fit a narrow lane. Conversely, exact operand
+widening does not require an unchanged floating-point reduction order.
