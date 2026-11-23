@@ -210,3 +210,13 @@ already co-designs spatial activation-error feedback with PE scheduling and
 convolutional consumers. Quantizing before overlapping-window generation does
 not make residual feedback itself new. Compare scan order, state, training
 requirements and the consumer's filtering, alongside representation reuse.
+
+## Upsampling without explicit expanded tensors
+
+Supplement reviewed **2026-11-23**. [Colbert et al.](../papers/2021-colbert-upsampling.md)
+already fold nearest-neighbor duplication into prepared weights, reducing2x
+resize-plus3x3 arithmetic to4/9 of its original dense MAC count. This is a
+baseline, not a new decomposition. [Sestito et al.](../papers/2021-sestito-flexible-convolution.md)
+provide a distinct online remapping implementation for zero-insertion transposed
+convolution. Check border/phase ordering, numerical formats, array utilization,
+weight growth and buffering; modeled energy is not target-chip measurement.

@@ -149,3 +149,13 @@ Supplement reviewed **2026-11-22**. [Delayed-scaling documentation](../papers/20
 compares tensor scans. For producer-side groups, first determine whether values
 can remain in local registers through current-maximum reduction and casting.
 Avoiding a scan that this fused baseline never performs is not a saving.
+
+## Upsampling without explicit expanded tensors
+
+Supplement reviewed **2026-11-23**. [Colbert et al.](../papers/2021-colbert-upsampling.md)
+already fold nearest-neighbor duplication into prepared weights, reducing2x
+resize-plus3x3 arithmetic to4/9 of its original dense MAC count. This is a
+baseline, not a new decomposition. [Sestito et al.](../papers/2021-sestito-flexible-convolution.md)
+provide a distinct online remapping implementation for zero-insertion transposed
+convolution. Check border/phase ordering, numerical formats, array utilization,
+weight growth and buffering; modeled energy is not target-chip measurement.
