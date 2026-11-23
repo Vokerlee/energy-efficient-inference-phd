@@ -213,3 +213,14 @@ Its checker measurements do not establish a controller's energy or a full
 network guarantee. Preserve the distinction between fixed-input local replay,
 accumulated DAG discrepancy and task-level quality, especially when changing
 block order, accumulator width or the number of rounding points.
+
+## Current model families and preserved per-model evidence
+
+Supplement reviewed **2026-11-23**. [DINOv3](../papers/2025-simeoni-dinov3.md)
+requires distinguishing a feature backbone from its downstream evaluation head.
+[SANA-Sprint](../papers/2025-chen-sana-sprint.md) separates text encoding,
+few-step denoising and decoding. [ConvNeXt V2](../papers/2023-woo-convnext-v2.md)
+provides a depthwise/channel-mixing control rather than a dense-convolution
+surrogate. Preserve pinned checkpoints, input conditions, complete operator
+profiles and numerical measurements for each model, including unfavorable
+results. Shape-only MAC profiles and task-quality runs are different evidence.
