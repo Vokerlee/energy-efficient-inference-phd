@@ -48,6 +48,9 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`huang2024tfmq`](papers/2024-huang-tfmq.md) | 04, 13 | Temporal conditioning sensitivity, isolated reconstruction and finite-timestep calibration. |
+| [`huang2025temporalfeatures`](papers/2025-huang-temporal-features.md) | 11, 13 | Cached temporal features and explicitly offline strategy selection. |
+| [`lee2025qlip`](papers/2025-lee-qlip.md) | 04, 12, 13 | Input-prompt-dependent layer/timestep precision using trained control and prepared quantizers. |
 | [`simeoni2025dinov3`](papers/2025-simeoni-dinov3.md) | 01, 13, 14 | Modern vision backbone with distinct global/dense feature and downstream evaluation contracts. |
 | [`chen2025sanasprint`](papers/2025-chen-sana-sprint.md) | 01, 03, 13 | Few-step diffusion with SANA-derived channel mixing and linear attention; denoiser scope must be explicit. |
 | [`woo2023convnextv2`](papers/2023-woo-convnext-v2.md) | 03, 13, 14 | Depthwise/channel-mixing/normalization control; masked-pretraining sparsity is not inference sparsity. |
