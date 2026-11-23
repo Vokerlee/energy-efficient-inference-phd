@@ -232,3 +232,19 @@ weights on calibration inputs while accounting for inherited activation error.
 These are different preparation/execution mechanisms; compare their actual
 runtime state and model assumptions rather than grouping them by the word
 “dynamic” or “diffusion.”
+
+## Noise-shaping and lossless widening comparison boundaries
+
+Supplement reviewed **2026-11-23**. [PREFILT](../papers/2025-makhov-prefilt.md)
+relates quantization noise to subsequent filtering, with input preprocessing,
+a bypass and quantization-aware training. [Minami et al.](../papers/2020-minami-noise-shaping.md)
+already study data-informed diffusion-filter design for weights; only their
+abstract was reviewed. Together with [DitherNN](../papers/2019-ando-dither-nn.md),
+these rule out treating generic spatial error feedback as a new principle.
+Distinguish the quantized object, coefficient-selection information, live state,
+training requirements and actual implementation before claiming a contribution.
+
+[DeepSeek-V4 Section 5.2.1](../papers/2026-deepseek-v4-scale-widening.md) describes
+losslessly absorbing FP4 subblock scales into wider FP8 operands when scale
+ratios permit. Live activation selection and INT-lane representability have
+different contracts, but lossless scale absorption itself is established.

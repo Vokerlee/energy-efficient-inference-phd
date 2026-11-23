@@ -48,6 +48,9 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`deepseek2026v4`](papers/2026-deepseek-v4-scale-widening.md) | 04, 08 | Direct prior art for losslessly absorbing fine source scales into a wider matrix operand format. |
+| [`makhov2025prefilt`](papers/2025-makhov-prefilt.md) | 04, 13 | Noise spectrum, downstream filtering and a reconstruction bypass in fully quantized image restoration. |
+| [`minami2020noiseshaping`](papers/2020-minami-noise-shaping.md) | 04, 13 | Existing diffusion-filter design for weight quantization; abstract-only comparison boundary is explicit. |
 | [`yu2024dbfs`](papers/2024-yu-dbfs.md) | 02, 08, 12 | Width-dependent frequency, shift-add SIMD and explicit repacking costs; runtime configurability is established. |
 | [`lu2025flexibleriscv`](papers/2025-lu-flexible-riscv-inference.md) | 03, 04, 12 | ISA-guided packing and local convolution lowering combined with configurable arithmetic; live-value selection remains a separate comparison. |
 | [`chang2024bfpcim`](papers/2024-chang-bfp-cim.md) | 04, 07, 08, 12 | Direct hardware prior art for runtime quantization together with sparsity and exponent grouping. |

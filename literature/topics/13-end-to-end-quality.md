@@ -195,3 +195,14 @@ error and trains corresponding networks. The first is not an online source
 feedback controller; the second is not merely an offline rounding analysis.
 Neither lower local MSE nor a zero-mean residual proves whole-model quality.
 Use fixed-input local comparisons and cumulative model execution separately.
+
+## Spatial noise distribution and downstream filtering
+
+Supplement reviewed **2026-11-23**. [PREFILT](../papers/2025-makhov-prefilt.md)
+connects quantization to frequency-domain filtering and reconstruction in
+trained image-restoration systems. [Minami et al.](../papers/2020-minami-noise-shaping.md)
+study diffusion-filter selection for weight quantization; full-text comparison
+remains pending. A white-residual approximation can motivate a coefficient,
+but actual deterministic residuals may be biased and correlated. Test both
+same-input receiving errors and the complete modified model; reducing the
+former does not establish improved final-task quality.
