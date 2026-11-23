@@ -185,3 +185,19 @@ uses square source blocks and applies scales along the directions of its matrix
 products. A source layout that avoids repeated quantization still requires
 compatible scale boundaries in the consumer's reduction. Price scale application
 and partial sums alongside saved conversion/storage actions.
+
+## Adaptive buckets and floating finalization
+
+Supplement reviewed **2026-11-23**. The reviewed
+[Bucket Getter abstract](../papers/2023-lo-bucket-getter.md) explicitly includes
+inter-bucket carries, adaptive circular buckets and a shared floating
+accumulator. [US20250284460A1](../papers/2025-zhang-integer-fp-accumulation.md)
+describes dynamic exponent caching and pending-overflow flushing before
+floating finalization. [BFP-CIM](../papers/2024-chang-bfp-cim.md) also aligns
+integer partial sums after live exponent grouping. Broad deferred conversion
+or integer-inside/floating-outside claims therefore overlap prior hardware.
+[Error Diffusion](../papers/2024-khodamoradi-error-diffusion.md) concerns a
+different stage: preparing block-scaled models using inherited-error-aware
+weight updates. A new controller needs a mechanism-level, matched-state/cost
+comparison. Identify changes to the controller, arithmetic, state organization
+or integration cost beyond these mechanisms.

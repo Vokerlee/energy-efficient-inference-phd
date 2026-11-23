@@ -194,3 +194,12 @@ show an implicit channel-first mapping. The complete reduction includes the
 input channels; short spatial taps alone do not determine input utilization.
 Compare legal operand/partial-sum schedules before attributing idle lanes to
 the multiplier geometry itself.
+
+## Floating interfaces with integer intermediate state
+
+Supplement reviewed **2026-11-23**. The technical description in
+[US20250284460A1](../papers/2025-zhang-integer-fp-accumulation.md) already combines
+integer intermediate accumulation, exponent tags, overflow handling and a gated
+floating finalizer. A floating input/output interface does not reveal the
+internal arithmetic. This source describes hardware mechanisms; it is not a
+measurement of a released processor.
