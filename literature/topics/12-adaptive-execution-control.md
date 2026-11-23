@@ -1,5 +1,16 @@
 # 12 — Hardware control policies for adaptive execution
 
+## Runtime configuration versus live-value selection
+
+Supplement reviewed **2026-11-23**. [DBFS](../papers/2024-yu-dbfs.md) adapts
+frequency to selected SIMD widths and explicitly includes accumulation
+repacking. [Lu et al.](../papers/2025-lu-flexible-riscv-inference.md) combine
+custom instructions, configurable arithmetic and local im2col/packing for
+prepared mixed-precision models. Configuring hardware at runtime and deriving
+a mode from the current activation values are distinct mechanisms. Neither
+ISA support nor the general combination of lowering and quantization is new.
+Compare scheduling, pack/control costs and how precision is actually selected.
+
 Reviewed: **2026-11-08**. Three additional focused papers and shared runtime
 quantization, sparsity, and predictor evidence.
 

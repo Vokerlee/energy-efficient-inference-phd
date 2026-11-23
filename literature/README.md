@@ -48,6 +48,8 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`yu2024dbfs`](papers/2024-yu-dbfs.md) | 02, 08, 12 | Width-dependent frequency, shift-add SIMD and explicit repacking costs; runtime configurability is established. |
+| [`lu2025flexibleriscv`](papers/2025-lu-flexible-riscv-inference.md) | 03, 04, 12 | ISA-guided packing and local convolution lowering combined with configurable arithmetic; live-value selection remains a separate comparison. |
 | [`chang2024bfpcim`](papers/2024-chang-bfp-cim.md) | 04, 07, 08, 12 | Direct hardware prior art for runtime quantization together with sparsity and exponent grouping. |
 | [`zhang2025integerfpaccum`](papers/2025-zhang-integer-fp-accumulation.md) | 02, 08, 12 | Integer intermediates with floating outputs and a dynamically enabled normalizer are already described in hardware prior art. |
 | [`khodamoradi2024ed`](papers/2024-khodamoradi-error-diffusion.md) | 04, 08, 13 | A concrete comparator for distinguishing local quantization error from error propagated through a model DAG. |
