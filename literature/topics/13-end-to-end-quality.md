@@ -206,3 +206,21 @@ remains pending. A white-residual approximation can motivate a coefficient,
 but actual deterministic residuals may be biased and correlated. Test both
 same-input receiving errors and the complete modified model; reducing the
 former does not establish improved final-task quality.
+
+## Conditioning paths and input-dependent precision
+
+Supplement reviewed **2026-11-23**. [TFMQ-DM](../papers/2024-huang-tfmq.md)
+and its [journal extension](../papers/2025-huang-temporal-features.md) establish
+that temporal conditioning can have disproportionate downstream influence.
+They reconstruct/calibrate temporal modules; the extension also caches
+optimized temporal features and chooses the maintenance strategy offline.
+A small conditioning MAC share therefore does not establish low numerical
+importance, and simply protecting these paths is not new.
+
+[QLIP](../papers/2025-lee-qlip.md) already chooses layer/timestep precisions
+from the current prompt using a trained controller and prepared quantizers.
+Input-dependent selection must not be mislabeled as a static precision map.
+Separate calibration/training, live decision inputs, block/graph granularity,
+state and hardware scheduling when comparing a calibration-free controller.
+Cache reuse additionally requires genuine sample independence and compatible
+sampler/timestep conditions; it is not automatic for arbitrary networks.

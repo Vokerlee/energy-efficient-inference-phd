@@ -27,3 +27,9 @@ The diagonal surrogate uses statistical assumptions, not a task-quality
 certificate. Its VMAC keeps throughput constant across formats; do not infer
 systolic speedup from lower bits. Separate activation effects from prepared
 weight changes and charge statistics, metadata, scaling, and control.
+
+Section3.4 additionally weights coordinate-wise activation reconstruction errors
+by receiving-weight second moments. Its baseline threshold is a dynamic
+within-layer percentile, unlike the primary policy's calibrated global
+threshold. A coarse group-moment surrogate is not an exact reproduction of
+this channel-weighted baseline.

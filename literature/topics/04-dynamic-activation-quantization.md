@@ -248,3 +248,14 @@ training requirements and actual implementation before claiming a contribution.
 losslessly absorbing FP4 subblock scales into wider FP8 operands when scale
 ratios permit. Live activation selection and INT-lane representability have
 different contracts, but lossless scale absorption itself is established.
+
+## Conditioning-aware runtime policies
+
+Supplement reviewed **2026-11-23**. [QLIP](../papers/2025-lee-qlip.md) is direct
+prior art for prompt-dependent precision selection at inference, with offline
+training/calibration. [TFMQ-DM](../papers/2024-huang-tfmq.md) separates temporal
+conditioning reconstruction and activation calibration; its
+[extension](../papers/2025-huang-temporal-features.md) includes offline strategy
+selection and cached features. Distinguish a live decision from the way its
+parameters are obtained. Replacing prepared sensitivity with live scalar
+statistics is a comparison axis, not by itself evidence of novelty or energy gain.
