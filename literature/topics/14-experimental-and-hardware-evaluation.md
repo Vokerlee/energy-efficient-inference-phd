@@ -224,3 +224,15 @@ provides a depthwise/channel-mixing control rather than a dense-convolution
 surrogate. Preserve pinned checkpoints, input conditions, complete operator
 profiles and numerical measurements for each model, including unfavorable
 results. Shape-only MAC profiles and task-quality runs are different evidence.
+
+## Full text-to-image scope
+
+Supplement reviewed **2026-11-23**. [DC-AE](../papers/2025-chen-dc-ae.md)
+keeps a neural image decoder outside the latent denoiser; its compression
+choice changes the arithmetic balance. [Gemma2](../papers/2024-gemma-team-gemma2.md)
+can serve as a full-sequence prompt encoder without an executed LM head.
+A complete request profile must state text-encoding calls, denoising steps,
+classifier-free/guidance-embedding behavior and image-decoding calls. Cold and
+cached-prompt requests differ. Denoiser-only MAC shares cannot be generalized
+to whole-pipeline energy. Preserve component configurations and independent
+count checks; embedding lookup and masked-kernel behavior need separate accounting.
