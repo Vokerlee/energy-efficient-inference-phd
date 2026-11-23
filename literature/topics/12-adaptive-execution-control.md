@@ -260,3 +260,13 @@ precision, runtime scheduling and reordering alone do not identify a new
 mechanism. Charge format residency, source lookahead, row IDs, output ordering,
 mode changes and fill/drain under the actual multiplier geometry. Missing full
 text is an unresolved comparison, not evidence that a mechanism is absent.
+
+## Online setup and residency decisions
+
+Supplement reviewed **2026-11-23**. [Karlin et al.](../papers/1994-karlin-competitive-randomized.md)
+provide established rent-or-buy/caching theory for decisions with recurring
+service costs and one-time state changes. Mapping such a decision to numerical
+format preparation requires explicit setup, residence, eviction and service
+costs. Competitive guarantees depend on the comparator's constraints; a
+single-phase result is not a proof of globally optimal inference energy.
+Numerical eligibility and end-to-end quality remain separate obligations.
