@@ -238,3 +238,9 @@ and complete-pipeline quality, with fixed conditions and component coverage.
 its VAE QAT example warns that good reconstruction can coexist with damaged
 frozen downstream control. A final image decoder and a policy-facing encoder
 have different consumer contracts; the full method remains a reading dependency.
+
+Supplement reviewed **2026-11-23**: the English abstract of
+[Tsubone et al.](../papers/2024-tsubone-training-data-noise-shaping.md) describes
+training-data-dependent weight error redistribution. This adds a comparator
+for adaptive noise-shaping claims; its full method remains a reading dependency.
+Prepared weight correction and causal live activation feedback are distinct.

@@ -153,3 +153,9 @@ current-scale rounding, since an oversized scale can change reconstructed values
 [Sigma-Delta networks](../papers/2016-oconnor-sigma-delta.md) provide older
 stateful quantized-difference mechanisms. Separate residual/state invariants
 from whole-network quality and from an affordable hardware schedule.
+
+Supplement reviewed **2026-11-23**: the English abstract of
+[Tsubone et al.](../papers/2024-tsubone-training-data-noise-shaping.md) describes
+training-data-dependent weight error redistribution. This adds a comparator
+for adaptive noise-shaping claims; its full method remains a reading dependency.
+Prepared weight correction and causal live activation feedback are distinct.

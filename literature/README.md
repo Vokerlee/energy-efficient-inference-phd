@@ -48,6 +48,7 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`tsubone2024noiseshaping`](papers/2024-tsubone-training-data-noise-shaping.md) | 04, 06, 13 | Abstract-only: training-data-dependent weight error redistribution; adaptive noise shaping has existing neural precedents. |
 | [`zhu2025passionsr`](papers/2025-zhu-passionsr.md) | 04, 13 | Calibrated UNet-and-VAE quantization; decoder precision is already studied. |
 | [`deng2026latentquant`](papers/2026-deng-latentquant.md) | 13 | Abstract-only: reconstruction and frozen-policy compatibility can diverge during VAE QAT. |
 | [`chen2025dcae`](papers/2025-chen-dc-ae.md) | 01, 03, 13, 14 | Compression/decoder tradeoffs; complete generation scope and explicit profiling assumptions. |
