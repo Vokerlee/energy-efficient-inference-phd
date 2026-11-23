@@ -48,6 +48,13 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`zhang2019qpytorch`](papers/2019-zhang-qpytorch.md) | 13, 14 | QPyTorch methodology comparator; reading scope and limits in canonical note. |
+| [`moreau2017qappa`](papers/2017-moreau-qappa.md) | 13, 14 | QAPPA methodology comparator; reading scope and limits in canonical note. |
+| [`inci2022qappa`](papers/2022-inci-qappa.md) | 13, 14 | QAPPA methodology comparator; reading scope and limits in canonical note. |
+| [`nair2023intfpqsim`](papers/2023-nair-int-fp-qsim.md) | 13, 14 | INT-FP-QSim methodology comparator; reading scope and limits in canonical note. |
+| [`jiang2023arbitor`](papers/2023-jiang-arbitor.md) | 13, 14 | Arbitor methodology comparator; reading scope and limits in canonical note. |
+| [`liu2023nnsmith`](papers/2023-liu-nnsmith.md) | 13, 14 | NNSmith methodology comparator; reading scope and limits in canonical note. |
+| [`yahmed2022diverget`](papers/2022-yahmed-diverget.md) | 13, 14 | DiverGet methodology comparator; reading scope and limits in canonical note. |
 | [`colbert2021upsampling`](papers/2021-colbert-upsampling.md) | 03, 11, 14 | Established nearest-neighbor coefficient folding and explicitly modeled time/energy. |
 | [`sestito2021flexibleconv`](papers/2021-sestito-flexible-convolution.md) | 02, 03, 11 | Online zero-insertion remapping and reconfigurable FPGA convolution; separate from duplicate-input folding. |
 | [`tsubone2024noiseshaping`](papers/2024-tsubone-training-data-noise-shaping.md) | 04, 06, 13 | Abstract-only: training-data-dependent weight error redistribution; adaptive noise shaping has existing neural precedents. |
