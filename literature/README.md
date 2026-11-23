@@ -48,6 +48,7 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`karlin1994competitive`](papers/1994-karlin-competitive-randomized.md) | 12 | Established online state-change/caching theory; comparator assumptions must be explicit. |
 | [`zhao2024atom`](papers/2024-zhao-atom.md) | 04, 05, 11, 12 | Online activation movement with calibrated channel identities; mixed-precision regularity and fusion. |
 | [`zhang2026tilequant`](papers/2026-zhang-tilequant.md) | 04, 08, 12, 14 | Static weight-tile precision maps, compact layout and shape-adaptive execution. |
 | [`wang2026ofgq`](papers/2026-wang-ofgq.md) | 02, 04, 12 | Adaptive-format and variable-cycle systolic synchronization; indexed abstract/introduction only. |
