@@ -203,3 +203,12 @@ integer intermediate accumulation, exponent tags, overflow handling and a gated
 floating finalizer. A floating input/output interface does not reveal the
 internal arithmetic. This source describes hardware mechanisms; it is not a
 measurement of a released processor.
+
+## Precision changes the reduction capacity, not necessarily output count
+
+Supplement reviewed **2026-11-23**. [DynaCore](../papers/2026-guo-dynacore.md)
+places additional low-precision work along K while retaining one accumulator
+and output per PE. Its split-K partial sums are explicitly reduced before
+leaving the array. This is an architectural comparator for fixed output width;
+it does not imply that any alternative array can change its routing or retain
+cross-call state for free.

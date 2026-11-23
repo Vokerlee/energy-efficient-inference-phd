@@ -138,3 +138,11 @@ The [CNN-LSTM ASIC](../papers/2026-chen-sleep-dynamic-quantization.md) combines
 channel packing, reusable dataflow and live range observation for selected
 layers. Track activation storage, feeder delivery and accumulator traffic as
 different boundaries rather than counting one saved byte several times.
+
+## Partial sums at the precision-dependent output boundary
+
+Supplement reviewed **2026-11-23**. [DynaCore](../papers/2026-guo-dynacore.md)
+retains the output count when low precision increases K throughput, and defines
+how split-K sums leave the array. Count output vectors separately from SRAM
+writes: a register-forwarded sum and a result-buffer round trip are different
+schedules. Fewer K partitions alone does not establish the saved memory actions.
