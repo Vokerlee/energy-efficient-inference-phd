@@ -244,3 +244,18 @@ Supplement reviewed **2026-11-23**: the English abstract of
 training-data-dependent weight error redistribution. This adds a comparator
 for adaptive noise-shaping claims; its full method remains a reading dependency.
 Prepared weight correction and causal live activation feedback are distinct.
+
+## Numerical research tools and testing protocols
+
+Supplement reviewed **2026-11-24**. [QPyTorch](../papers/2019-zhang-qpytorch.md)
+and [Arbitor](../papers/2023-jiang-arbitor.md) already support portable numerical
+emulation, with different accumulator granularity. [INT-FP-QSim](../papers/2023-nair-int-fp-qsim.md)
+adds a model/format comparison baseline (abstract-only here).
+[QAPPA2017](../papers/2017-moreau-qappa.md) and the distinct
+[QAPPA2022](../papers/2022-inci-qappa.md) address quality/energy or quantization-aware
+PPA exploration. [NNSmith](../papers/2023-liu-nnsmith.md) and
+[DiverGet](../papers/2022-yahmed-diverget.md) establish generated/differential tests
+and quantization-robustness search. A new tool is not automatically a new method.
+Compare arithmetic boundaries, causal decisions/state, acceptable approximation,
+cost characterization and scientific findings. Full-method dependencies are
+marked in each record; this map is not an exhaustive novelty verdict.
