@@ -48,6 +48,8 @@ or access date and a distinct documentation-reading status.
 
 | Key / review | Topic | Contribution to the review |
 |---|---|---|
+| [`colbert2021upsampling`](papers/2021-colbert-upsampling.md) | 03, 11, 14 | Established nearest-neighbor coefficient folding and explicitly modeled time/energy. |
+| [`sestito2021flexibleconv`](papers/2021-sestito-flexible-convolution.md) | 02, 03, 11 | Online zero-insertion remapping and reconfigurable FPGA convolution; separate from duplicate-input folding. |
 | [`tsubone2024noiseshaping`](papers/2024-tsubone-training-data-noise-shaping.md) | 04, 06, 13 | Abstract-only: training-data-dependent weight error redistribution; adaptive noise shaping has existing neural precedents. |
 | [`zhu2025passionsr`](papers/2025-zhu-passionsr.md) | 04, 13 | Calibrated UNet-and-VAE quantization; decoder precision is already studied. |
 | [`deng2026latentquant`](papers/2026-deng-latentquant.md) | 13 | Abstract-only: reconstruction and frozen-policy compatibility can diverge during VAE QAT. |
