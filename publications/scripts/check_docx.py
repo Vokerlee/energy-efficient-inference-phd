@@ -13,9 +13,11 @@ from pathlib import Path
 from typing import Any
 
 from latex_source import BUILD
+from document_ast import visible_nodes
 from native_diagrams import NAMESPACES, drawing_digest, tag
-from setup_docx import ARTICLE
-from word_document import MATH_FONT, MATH_SIZE, NS, W, walk_nodes
+from omml import validate_omml
+from setup_docx import PUBLICATIONS
+from word_document import MATH_FONT, MATH_SIZE, NS, W
 
 MATH = "http://schemas.openxmlformats.org/officeDocument/2006/math"
 DRAWING = "http://schemas.openxmlformats.org/drawingml/2006/main"
@@ -33,7 +35,7 @@ def normalized(text: str) -> str:
 
 def source_text(document: dict[str, Any]) -> str:
     fragments = []
-    for node in walk_nodes(document["blocks"]):
+    for node in visible_nodes(document["blocks"]):
         if node["t"] == "Str":
             fragments.append(node["c"])
         elif node["t"] == "Code":
@@ -73,7 +75,7 @@ def check_content(document: ET.Element, manifest: dict[str, Any]) -> dict[str, i
     )
     for path, digest in manifest["source_sha256"].items():
         require(
-            hashlib.sha256((ARTICLE / path).read_bytes()).hexdigest() == digest,
+            hashlib.sha256((PUBLICATIONS / path).read_bytes()).hexdigest() == digest,
             f"Export is stale: {path}",
         )
     for table in document.findall(".//w:tbl", NS):
@@ -190,6 +192,11 @@ def main() -> None:
     parser.add_argument("document", type=Path)
     args = parser.parse_args()
     manifest = json.loads((BUILD / "manifest.json").read_text())
+    validate_omml(
+        args.document,
+        expected_count=manifest["math_count"]
+        + sum(figure["native"]["math_count"] for figure in manifest["figures"]),
+    )
     with zipfile.ZipFile(args.document) as package:
         require(package.testzip() is None, "Corrupt DOCX archive")
         document = ET.fromstring(package.read("word/document.xml"))

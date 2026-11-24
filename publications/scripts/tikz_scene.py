@@ -5,6 +5,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 from pdf_paths import read_paths
+from tex_syntax import read_argument as argument
 
 PT_TO_PDF = 72 / 72.27
 
@@ -16,19 +17,6 @@ class Label:
     options: str
     font_size: float = 12
     bounds: tuple[float, float, float, float] = (0, 0, 0, 0)
-
-
-def argument(source: str, start: int, opening: str = "{") -> tuple[str, int]:
-    closing = {"{": "}", "[": "]", "(": ")"}[opening]
-    if source[start] != opening:
-        raise ValueError(f"Expected {opening!r} at {source[start : start + 30]!r}")
-    depth = 1
-    for position in range(start + 1, len(source)):
-        if source[position - 1] != "\\":
-            depth += (source[position] == opening) - (source[position] == closing)
-            if depth == 0:
-                return source[start + 1 : position], position + 1
-    raise ValueError("Unclosed TikZ argument")
 
 
 def expand_loops(source: str) -> str:

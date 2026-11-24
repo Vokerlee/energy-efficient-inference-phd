@@ -3,13 +3,14 @@
 import hashlib
 import json
 import re
-import subprocess
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
 from setup_docx import ARTICLE
+from tool_process import run_tool
 from tikz_scene import instrument, measurement_preamble, read_scene
+from tikz_figures import TikzFigure, replace_figures
 
 BUILD = ARTICLE / "build" / "docx"
 
@@ -21,40 +22,13 @@ def run_command(
     log: Path | None = None,
     allow_diagnostics: bool = False,
 ) -> str:
-    result = subprocess.run(
-        [str(value) for value in arguments],
-        cwd=ARTICLE,
-        input=data,
-        text=True,
-        capture_output=True,
-        check=False,
+    return run_tool(
+        arguments, cwd=ARTICLE, data=data, log=log, allow_diagnostics=allow_diagnostics
     )
-    if log:
-        log.write_text(result.stdout + result.stderr)
-    if result.returncode:
-        raise RuntimeError(
-            f"Command failed: {arguments[0]}\n{result.stdout}\n{result.stderr}"
-        )
-    if result.stderr.strip() and not allow_diagnostics:
-        raise RuntimeError(f"Unexpected conversion diagnostic:\n{result.stderr}")
-    return result.stdout
 
 
 def uncomment(source: str) -> str:
     return re.sub(r"(?<!\\)%[^\n]*", "", source)
-
-
-def read_tex_group(source: str, start: int) -> tuple[str, int]:
-    """Read a balanced TeX argument, respecting escaped braces."""
-    if source[start] != "{":
-        raise ValueError("Expected a braced TeX argument")
-    depth = 1
-    for position in range(start + 1, len(source)):
-        if source[position] in "{}" and source[position - 1] != "\\":
-            depth += 1 if source[position] == "{" else -1
-            if not depth:
-                return source[start + 1 : position], position + 1
-    raise ValueError("Unclosed TeX argument")
 
 
 def expand_inputs(source: str, stack: tuple[Path, ...] = ()) -> str:
@@ -82,25 +56,17 @@ def render_figures(
     pictures = []
     preamble = (ARTICLE / "include/preambule.tex").read_text()
 
-    def convert(match: re.Match[str]) -> str:
-        body = match[1]
-        picture = re.search(
-            r"\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}", body, re.S
-        )
-        label = re.search(r"\\label\{([^}]+)\}", body)
-        caption_start = re.search(r"\\caption\s*\{", body)
-        if not picture or not label or not caption_start:
-            raise ValueError("Every exported figure needs TikZ, a label and a caption")
-        caption, _ = read_tex_group(body, caption_start.end() - 1)
-        scaled = re.search(r"\\resizebox\{([\d.]+)\\textwidth\}", body)
-        fraction = float(scaled[1]) if scaled else 1.0
-        if not 0 < fraction <= 1:
-            raise ValueError("Figure width must fit the available text width")
-        width_cm = 16 * fraction
-        identifier = label[1]
+    def convert(figure: TikzFigure) -> str:
+        if len(figure.pictures) != 1:
+            raise ValueError(
+                "The native-canvas backend needs one TikZ picture per figure; use a panel-aware renderer for grouped figures"
+            )
+        caption = figure.caption
+        width_cm = 16 * figure.width_fraction
+        identifier = figure.label
         number = labels[identifier]
         stem = BUILD / f"figure-{number}"
-        editable_picture, node_labels = instrument(picture[0])
+        editable_picture, node_labels = instrument(figure.pictures[0])
         tex = (
             "\\documentclass[a4paper,12pt]{article}\n"
             + preamble
@@ -155,12 +121,7 @@ def render_figures(
             + f"\\caption{{{caption}}}\\label{{{identifier}}}\n\\end{{figure}}\n"
         )
 
-    return re.sub(
-        r"\\begin\{figure\}(?:\[[^]]*\])?(.*?)\\end\{figure\}",
-        convert,
-        source,
-        flags=re.S,
-    ), pictures
+    return replace_figures(source, convert), pictures
 
 
 def prepare_tex(
