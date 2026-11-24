@@ -362,3 +362,10 @@ baseline at matched quality and execution constraints. A workload can have
 large GEMM energy and still offer no gain from an additional adaptive policy.
 The full-boundary saving must exceed observation/control costs; existing
 source measurements do not determine that margin for another accelerator.
+
+## Matrix arithmetic need not dominate after core specialization
+
+The [hybrid CIM manuscript](../papers/2025-guo-winograd-hybrid-cim.md), reviewed
+**2026-11-24**, reports a design-specific post-macro power fraction of72.2%.
+This cannot be transferred to another accelerator, but demonstrates why logical
+MAC shares alone cannot establish the energy target after matrix-core changes.

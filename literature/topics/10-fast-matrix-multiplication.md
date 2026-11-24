@@ -134,3 +134,10 @@ model-independent preparation and training. [Concentration–alignment analysis]
 provides a direct geometry comparator at abstract-reading scope. These broad
 connections are established; a new live mechanism needs a specific difference
 and matched numerical/cost evidence. Individual records state reading limits.
+
+## Prepared tile selection and specialized transform costs
+
+[Ji et al.](../papers/2021-ji-winograd-tile-fusion.md) already select Winograd
+tiles from layer-dependent total-work models. [Hybrid CIM](../papers/2025-guo-winograd-hybrid-cim.md)
+already accelerates output transforms. Reviews dated **2026-11-24** retain
+publication/reading limits; broad titles do not resolve every live-controller case.

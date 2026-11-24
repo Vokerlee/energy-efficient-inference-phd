@@ -166,3 +166,7 @@ weight growth and buffering; modeled energy is not target-chip measurement.
 [spatial partial-output accumulation](../papers/2020-hattink-winograd-memories.md)
 are established baselines. Compare storage and arithmetic together when moving
 an inverse transform across a reduction. Reviewed **2026-11-24**.
+
+[Winograd tile fusion](../papers/2021-ji-winograd-tile-fusion.md) supplies an
+additional selection comparator at explicitly limited reading scope. Reviewed
+**2026-11-24**; do not infer exact live-buffer behavior from its abstract.

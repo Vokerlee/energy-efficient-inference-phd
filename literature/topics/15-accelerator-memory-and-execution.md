@@ -154,3 +154,10 @@ is an official buffered-pipeline baseline. [Tap-wise Winograd](../papers/2022-an
 and [Hattink et al.](../papers/2020-hattink-winograd-memories.md) provide detailed
 transform, storage and reduction comparators. Count every affected boundary;
 reduced multiplication count does not establish lower total energy.
+
+## Specialized matrix cores and surrounding work
+
+The [hybrid Winograd/CIM manuscript](../papers/2025-guo-winograd-hybrid-cim.md)
+is an additional implemented transform/accumulation comparator. Its circuits
+and memory configuration are distinct; inspect boundary-specific costs rather
+than transplanting a TOPS/W headline. Reviewed **2026-11-24**.

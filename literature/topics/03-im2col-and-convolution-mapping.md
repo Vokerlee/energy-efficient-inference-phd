@@ -227,3 +227,7 @@ Reviewed **2026-11-24**. [NVDLA v1](../papers/2026-nvidia-nvdla-winograd.md) and
 [tap-wise Winograd](../papers/2022-andri-tap-wise-winograd.md) show established
 convolution-transform datapaths. Compare against these as well as explicit
 im2col; do not use a needlessly materialized lowering as the only baseline.
+
+[Layer-dependent Winograd tile fusion](../papers/2021-ji-winograd-tile-fusion.md),
+reviewed at abstract/excerpt scope **2026-11-24**, is an existing shape-selection
+comparator alongside lowering and fixed-tile algorithms.
