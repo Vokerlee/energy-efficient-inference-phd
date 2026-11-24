@@ -272,6 +272,5 @@ or access date and a distinct documentation-reading status.
 | [`ozaki2026fma`](papers/2026-ozaki-fma-gemm.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
 | [`dinechin2013ziv`](papers/2013-dinechin-ziv-test.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
 | [`pytorch2026precisioncasts`](papers/2026-pytorch-inductor-precision-casts.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
-
 | [`luo2026hap`](papers/2026-luo-hap.md) | 04, 08, 12 | Dynamic zero-point narrowing, bounded precision matching and an explicitly executed correction path. |
 | [`meng2026arcquant`](papers/2026-meng-arcquant.md) | 04, 05, 08 | Abstract-only comparator: quantized residual channels expand the GEMM reduction dimension. |
