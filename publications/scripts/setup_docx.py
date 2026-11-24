@@ -3,6 +3,7 @@
 
 import hashlib
 import io
+import os
 import platform
 import subprocess
 import tarfile
@@ -12,19 +13,30 @@ from venv import EnvBuilder
 
 VERSION = "3.14"
 SHA256 = "c5f4720cdefb3f7bdc5d07202ef579feef0d1370773c873804dd8fdaa8c4f1b8"
-ARTICLE = Path(__file__).resolve().parents[1]
-PANDOC = ARTICLE / ".tools" / f"pandoc-{VERSION}" / "pandoc"
+PUBLICATIONS = Path(__file__).resolve().parents[1]
+SCRIPTS = PUBLICATIONS / "scripts"
+ARTICLE = Path(
+    os.environ.get("PUBLICATION_SOURCE", PUBLICATIONS / "gemm-simulator-accuracy")
+).resolve()
+PANDOC = PUBLICATIONS / ".tools" / f"pandoc-{VERSION}" / "pandoc"
 
 
 def main() -> None:
     if platform.system() != "Linux" or platform.machine() not in ("x86_64", "AMD64"):
         raise SystemExit("The pinned download supports Linux x86-64 only.")
-    environment = ARTICLE / ".tools/python"
+    environment = PUBLICATIONS / ".tools/python"
     python = environment / "bin/python"
     if not python.is_file():
         EnvBuilder(with_pip=True).create(environment)
     subprocess.run(
-        [str(python), "-m", "pip", "install", "-r", str(ARTICLE / "requirements.txt")],
+        [
+            str(python),
+            "-m",
+            "pip",
+            "install",
+            "-r",
+            str(PUBLICATIONS / "requirements.txt"),
+        ],
         check=True,
     )
     if PANDOC.exists():

@@ -5,11 +5,13 @@ import re
 import subprocess
 import xml.etree.ElementTree as ET
 import zipfile
-from collections.abc import Callable, Iterator
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
+from omml import normalize_math_tex, normalize_omml
 from setup_docx import ARTICLE, PANDOC
+from document_ast import walk_nodes
 
 BUILD = ARTICLE / "build" / "docx"
 
@@ -44,6 +46,12 @@ PROPERTY_ORDER = {
 
 
 def order_properties(tree: ET.Element) -> None:
+    for row in tree.iter("{" + W + "}tr"):
+        for name in ("trPr", "tblPrEx"):
+            properties = row.find("{" + W + "}" + name)
+            if properties is not None:
+                row.remove(properties)
+                row.insert(0, properties)
     for name, sequence in PROPERTY_ORDER.items():
         positions = {
             "{" + W + "}" + tag: index for index, tag in enumerate(sequence.split())
@@ -52,17 +60,6 @@ def order_properties(tree: ET.Element) -> None:
             properties[:] = sorted(
                 properties, key=lambda child: positions.get(child.tag, len(positions))
             )
-
-
-def walk_nodes(value: Any) -> Iterator[dict[str, Any]]:
-    if isinstance(value, dict):
-        if "t" in value:
-            yield value
-        for child in value.values():
-            yield from walk_nodes(child)
-    elif isinstance(value, list):
-        for child in value:
-            yield from walk_nodes(child)
 
 
 def prepare_document_ast(
@@ -96,7 +93,9 @@ def prepare_document_ast(
                 text = match[1]
                 return match[0] if text.isdecimal() else r"(\text{" + text + "})"
 
-            content[1] = re.sub(r"\\text\{\(([^{}]*)\)\}", delimiters, content[1])
+            content[1] = normalize_math_tex(
+                re.sub(r"\\text\{\(([^{}]*)\)\}", delimiters, content[1])
+            )
         elif kind in ("Figure", "Table"):
             key = content[0][0]
             prefix = "Рис." if kind == "Figure" else "Таблица"
@@ -284,6 +283,7 @@ def format_document(tree: ET.Element) -> None:
 
 def format_equations(body: ET.Element) -> None:
     """Keep equation numbers as text at the right tab stop, outside the math."""
+    normalize_omml(body)
     for paragraph in body.iter("{" + W + "}p"):
         display = paragraph.find("{" + M + "}oMathPara")
         if display is None:

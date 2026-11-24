@@ -2,8 +2,9 @@
 /*.pdf
 /*.docx
 
-# Article-local conversion tools.
-*/.tools/
+# Shared conversion tools and legacy local aliases.
+/.tools/
+*/.tools
 
 # Keep LaTeX sources visible despite the repository's Python ignore rules.
 !*/parts/

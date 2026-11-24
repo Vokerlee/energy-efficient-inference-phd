@@ -9,7 +9,9 @@ import sys
 
 from latex_source import BUILD, labels_from_aux, prepare_tex, run_command
 from native_diagrams import replace_images
-from setup_docx import ARTICLE, PANDOC, VERSION
+from document_ast import expand_grouped_figures
+from omml import validate_omml
+from setup_docx import ARTICLE, PANDOC, PUBLICATIONS, SCRIPTS, VERSION
 from word_document import (
     MATH_SIZE,
     create_reference_docx,
@@ -20,7 +22,7 @@ from word_document import (
     walk_nodes,
 )
 
-OUTPUT = ARTICLE.parent / "gemm-simulator-accuracy.docx"
+OUTPUT = PUBLICATIONS / f"{ARTICLE.name}.docx"
 
 
 def preview_profile() -> str:
@@ -88,7 +90,7 @@ def main() -> None:
     document = json.loads(
         run_command([PANDOC, "-f", "latex", "-t", "json"], data=source)
     )
-    document = prepare_document_ast(document, labels)
+    document = expand_grouped_figures(prepare_document_ast(document, labels))
     (BUILD / "article.json").write_text(
         json.dumps(document, ensure_ascii=False, indent=2)
     )
@@ -120,32 +122,38 @@ def main() -> None:
     replace_images(staged, manifest["figures"])
     manifest.update(
         pandoc=VERSION,
+        equation_format="OMML",
         math_count=sum(n["t"] == "Math" for n in walk_nodes(document)),
         table_count=sum(n["t"] == "Table" for n in walk_nodes(document)),
+    )
+    validate_omml(
+        staged,
+        expected_count=manifest["math_count"]
+        + sum(figure["native"]["math_count"] for figure in manifest["figures"]),
     )
     inputs = [
         ARTICLE / "article.tex",
         ARTICLE / "Makefile",
-        ARTICLE / "requirements.txt",
+        PUBLICATIONS / "requirements.txt",
         ARTICLE / "literature.bib",
         ARTICLE / "ugost2008l.bst",
     ]
     for directory, extension in (
         ("include", "*.tex"),
         ("parts", "*.tex"),
-        ("scripts", "*.py"),
     ):
         inputs.extend((ARTICLE / directory).glob(extension))
+    inputs.extend(SCRIPTS.glob("*.py"))
     manifest["source_sha256"] = {
-        str(path.relative_to(ARTICLE)): hashlib.sha256(path.read_bytes()).hexdigest()
+        str(path.relative_to(PUBLICATIONS)): hashlib.sha256(
+            path.read_bytes()
+        ).hexdigest()
         for path in sorted(inputs)
     }
     (BUILD / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n"
     )
-    print(
-        run_command([sys.executable, ARTICLE / "scripts/check_docx.py", staged]), end=""
-    )
+    print(run_command([sys.executable, SCRIPTS / "check_docx.py", staged]), end="")
     shutil.copyfile(staged, OUTPUT)
     print(f"Exported {OUTPUT}")
     if args.preview:

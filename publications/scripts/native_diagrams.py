@@ -11,6 +11,7 @@ from typing import Any
 
 from latex_source import BUILD, run_command
 from setup_docx import PANDOC
+from omml import normalize_omml
 from word_document import (
     MATH_FONT,
     order_properties,
@@ -79,6 +80,7 @@ def editable_labels(scenes: list[dict[str, Any]]) -> dict[str, LabelContent]:
         body = ET.fromstring(package.read("word/document.xml")).find(
             "w:body", NAMESPACES
         )
+    normalize_omml(body)
     collected: dict[str, list[ET.Element]] = {}
     current = None
     for block in body:

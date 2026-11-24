@@ -5,10 +5,13 @@ The bundled GOST bibliography style retains its own notices.
 
 ## LaTeX and Word workflow
 
-Edit `article.tex`, `include/`, `parts/`, and `literature.bib`. The Word file is
+Edit `article.tex`, `include/`, `parts/`, and `literature.bib`. The shared
+converter lives in [`../scripts`](../scripts/README.md). The Word file is
 generated from those sources; do not maintain a second manuscript in Word.
-Export targets **Electronic Engineering. Series 3. Microelectronics**
-(ISSN 2410-9932). Modern editable Word equations (OMML) are the chosen format.
+Modern editable Word equations (OMML) are the chosen format. The retained
+default layout is the earlier **Electronic Engineering. Series 3.
+Microelectronics** profile; the formatting references below describe that
+profile, rather than a claim of current journal acceptance.
 
 From the repository root:
 
@@ -19,10 +22,10 @@ make -C publications docx-check
 make -C publications docx-preview
 ```
 
-The first command installs checksum-pinned Pandoc 3.14 inside this article's
-ignored `.tools/` directory (Linux x86-64), creates `.tools/python/`, and installs
-`requirements.txt`: pypdf 7.1.1 for reading TikZ geometry and Ruff 0.14.5 for
-formatting/checking Python. Conversion also needs Python 3.10+, the existing
+The first command installs checksum-pinned Pandoc 3.14 inside the shared,
+ignored `publications/.tools/` directory (Linux x86-64), creates its Python
+environment, and installs `publications/requirements.txt`: pypdf 7.1.1 for
+reading TikZ geometry and Ruff 0.14.5 for formatting/checking Python. Conversion also needs Python 3.10+, the existing
 LaTeX toolchain and Poppler's `pdftocairo`. Make targets use the local Python
 environment; do not install these dependencies globally.
 
@@ -44,7 +47,7 @@ installed tools. Re-run export after changing the manuscript or converter.
 
 The exporter uses the compiled LaTeX labels and GOST `.bbl` bibliography to
 preserve numbering and reference order. Cross-references in Word are regenerated
-numbers, not live Word fields. All seven TikZ figures become native Word
+numbers, not live Word fields. With the native-diagram backend, TikZ figures become native Word
 DrawingML canvases containing editable shapes and text. Formulas inside their
 labels use OMML; data tables also remain native Word objects. Vector notation
 uses bold symbols in the export, as requested by the journal template.
@@ -60,11 +63,12 @@ arrows, rounded boxes, dashed boundaries and the logarithmic scale retain their
 geometry. In Word, select a drawing canvas and then its individual objects to
 edit their text, shape or position.
 
-The current manuscript produces seven canvases, 200 shape objects and 82 editable
-labels containing 65 OMML expressions. These are additional to the 290 math
-objects in the article body. The final DOCX contains no image parts or image
-relationships. PNG files in `build/docx/` are temporary Pandoc layout placeholders
-and visual references; the native objects replace them before validation.
+Exact canvas, shape, label and equation counts are recorded in
+`build/docx/validation.json` for each build. With this backend the final DOCX
+contains no image parts or image relationships. PNG files in `build/docx/`
+are temporary layout placeholders; native objects replace them before
+validation. The shared extraction library also supports a panel-image backend
+with separate native captions and OMML equations.
 
 Arrows are editable freeform paths and arrowhead shapes, not attached connectors:
 moving a block does not automatically reroute its arrows. Text layout depends on
@@ -75,17 +79,16 @@ export rather than silently falling back to an image. New diagram constructs
 need an explicit conversion/visual check.
 
 The representation uses Microsoft's [WordprocessingML drawing extensions](https://learn.microsoft.com/en-us/openspecs/office_standards/ms-odrawxml/87221dc8-13de-4885-89b8-429c078ed191).
-The generated document was checked with Microsoft Open XML SDK 3.3.0 against
-Office 2019 schemas with zero validation errors. This checks document structure,
-not visual layout or interactive editing in Word.
+Structural checks cover native equations, labels, paths and package content;
+they do not establish visual layout or interactive editing in Word.
 
 Regression checks, after building the DOCX:
 
 ```sh
 cd publications/gemm-simulator-accuracy
-.tools/python/bin/python -m unittest discover -s scripts -p 'test_*.py' -v
-.tools/python/bin/ruff check scripts
-.tools/python/bin/ruff format --check scripts
+../.tools/python/bin/python -m unittest discover -s ../scripts -p 'test_*.py' -v
+../.tools/python/bin/python -m ruff check ../scripts
+../.tools/python/bin/python -m ruff format --check ../scripts
 ```
 
 
