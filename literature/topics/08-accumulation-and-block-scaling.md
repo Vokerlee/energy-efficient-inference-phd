@@ -210,3 +210,14 @@ operand representation. Input-lane representability and wide accumulator
 capacity are separate constraints: a safe accumulated sum does not prove that
 rescaled individual inputs fit a narrow lane. Conversely, exact operand
 widening does not require an unchanged floating-point reduction order.
+
+## Accurate GEMM versus finite-reference emulation
+
+Supplement reviewed **2026-11-24**: [Brower et al.](../papers/2026-brower-emulation-guarantees.md)
+use operand-derived exponent-span estimates to retain floating-point error
+guarantees under fixed-point emulation. [Ozaki/Koizumi](../papers/2026-ozaki-fma-gemm.md)
+analyze compensated FMA algorithms with explicit magnitude conditions.
+[Ziv's test](../papers/2013-dinechin-ziv-test.md) is prior art for rounding-cell
+acceptance. Accuracy relative to the real product and matching an explicitly
+ordered finite-precision primitive must be kept separate. Runtime/metadata
+costs and actual observation boundaries determine whether a hybrid is useful.

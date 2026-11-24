@@ -306,3 +306,25 @@ Sections2.3,3 and4 distinguish graph/type validity from numerical validity.
 Its gradient search avoids exceptional intermediates even when downstream
 operators would hide them. Any comparison against this baseline must preserve
 that distinction; naive random-tensor testing is not representative of NNSmith.
+
+## Selective numerical reference execution
+
+Focused comparison **2026-11-24**: [Ziv rounding tests](../papers/2013-dinechin-ziv-test.md)
+already address accepting a cheaper approximation when output rounding is
+determined. [TFApprox](../papers/2020-vaverka-tfapprox.md) already accelerates
+nonstandard arithmetic emulation on GPUs. [Brower et al.](../papers/2026-brower-emulation-guarantees.md)
+select accurate-emulation precision using operand-dependent estimates computed
+with low-precision products. [Ozaki/Koizumi2025](../papers/2025-ozaki-fma-matmul.md)
+and [2026](../papers/2026-ozaki-fma-gemm.md) provide accurate-FMA comparators.
+
+Distinguish exact-real accuracy, reproducible finite-operation order, observed
+BF16 outputs, adaptive decisions/state and actual reference-execution cost.
+These are different specifications. Sparse fallback must compete with a useful
+full GPU reference, including bounds, compaction, data movement and conversions.
+A different specification alone is not a novelty result.
+
+The pinned [Inductor source](../papers/2026-pytorch-inductor-precision-casts.md)
+explains why fused code can eliminate intermediate precision truncations.
+Validate the numerical guard itself after compilation, not just its real-valued
+formula or the final model's tensor error. Per-record reading scopes remain
+explicit; abstracts do not establish complete implementation capabilities.
