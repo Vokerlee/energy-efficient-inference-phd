@@ -276,3 +276,6 @@ or access date and a distinct documentation-reading status.
 | [`meng2026arcquant`](papers/2026-meng-arcquant.md) | 04, 05, 08 | Abstract-only comparator: quantized residual channels expand the GEMM reduction dimension. |
 | [`dewage2026componentsensitivity`](papers/2026-dewage-attention-component-sensitivity.md) | 04, 07, 13 | Attention roles and end-task sensitivity; intervention/transfer limits explicit. |
 | [`parvathy2026sparqle`](papers/2026-parvathy-sparqle.md) | 04, 07, 13 | Dense low/sparse high activation bits, bitmap costs and selective clipping. |
+| [`pan2025groupwinograd`](papers/2025-pan-group-quantized-winograd.md) | 04, 08, 10, 11 | Quantized Winograd and transform-scale preparation/runtime distinctions. |
+| [`chen2023paw`](papers/2023-chen-paw-winograd.md) | 04, 08, 10, 11 | Quantized Winograd and transform-scale preparation/runtime distinctions. |
+| [`krizhevsky2009cifar`](papers/2009-krizhevsky-cifar.md) | 14 | Dataset splits and archive identity for frozen-feature task evaluation. |

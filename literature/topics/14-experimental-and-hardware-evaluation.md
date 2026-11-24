@@ -328,3 +328,12 @@ explains why fused code can eliminate intermediate precision truncations.
 Validate the numerical guard itself after compilation, not just its real-valued
 formula or the final model's tensor error. Per-record reading scopes remain
 explicit; abstracts do not establish complete implementation capabilities.
+
+## Frozen-feature task checks
+
+Supplement **2026-11-24**. [CIFAR100 documentation](../papers/2009-krizhevsky-cifar.md)
+provides fixed train/test classes and archive identity for a frozen-feature
+recognition check. Keep the labeled reference gallery strictly in the evaluator.
+Record preprocessing, balanced selections, neighbor/vote ties and independent
+query allocations. Descriptor MSE, constructed kNN accuracy and an official
+model benchmark are distinct evidence; none is an ASIC energy measurement.

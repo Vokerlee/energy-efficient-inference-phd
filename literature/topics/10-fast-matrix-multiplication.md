@@ -105,3 +105,15 @@ These sources constrain broad novelty claims without establishing that every
 runtime selection, finite-memory mapping or error-control problem is covered.
 Do not label Strassen-plus-quantization or GPU schedule generation as new solely
 because the foundational review did not contain these recent comparators.
+
+## Quantized Winograd in diffusion already has direct precedents
+
+Focused supplement **2026-11-24**. [Pan et al.](../papers/2025-pan-group-quantized-winograd.md)
+combine dynamic group activation scales, synthetic-data optimization of transform
+scales and diffusion inference. [PAW](../papers/2023-chen-paw-winograd.md), reviewed
+at abstract level, already addresses full quantization and factorized scales.
+Generic Winograd-plus-dynamic-quantization is therefore not a new contribution.
+Compare offline transform preparation with any current-tile rule, including
+input/output transforms, extra transformed-weight capacity, fixed matrix tiles
+and the FP32 result path. Fewer products can coexist with more intermediate
+traffic. Do not transfer CPU latency into systolic energy.
