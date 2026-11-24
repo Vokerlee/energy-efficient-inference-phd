@@ -269,3 +269,12 @@ and [verified C generation](../papers/2020-titolo-test-stable-code.md) already
 address detection and guarding. Fixed-path Jacobian reasoning must not silently
 cover changed quantization/precision decisions. Stable decisions, tensor fidelity
 and full-model quality are separate validation requirements.
+
+## Attention component roles and proxy limits
+
+Focused supplement **2026-11-24**. [Dewage et al.](../papers/2026-dewage-attention-component-sensitivity.md)
+separate projection reconstruction error, component role and layer identity
+under single-projection LLM weight quantization. This supports an explicit
+component-level comparator, not universal V protection or a result for live
+vision activation rounding. Compare actual final outputs/tasks, and retain
+matched arithmetic topology when splitting a fused QKV operation.
