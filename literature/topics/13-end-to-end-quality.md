@@ -278,3 +278,13 @@ under single-projection LLM weight quantization. This supports an explicit
 component-level comparator, not universal V protection or a result for live
 vision activation rounding. Compare actual final outputs/tasks, and retain
 matched arithmetic topology when splitting a fused QKV operation.
+
+## Transform and geometry comparators
+
+Supplement reviewed **2026-11-24**. [Channel balancing](../papers/2022-chikin-winograd-balancing.md),
+[quantization-friendly transforms](../papers/2024-protsenko-quantization-friendly-winograd.md)
+and [Wino Vidi Vici](../papers/2024-mori-wino-vidi-vici.md) distinguish calibration,
+model-independent preparation and training. [Concentration–alignment analysis](../papers/2026-federici-concentration-alignment.md)
+provides a direct geometry comparator at abstract-reading scope. These broad
+connections are established; a new live mechanism needs a specific difference
+and matched numerical/cost evidence. Individual records state reading limits.
