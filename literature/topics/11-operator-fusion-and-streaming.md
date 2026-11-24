@@ -159,3 +159,10 @@ baseline, not a new decomposition. [Sestito et al.](../papers/2021-sestito-flexi
 provide a distinct online remapping implementation for zero-insertion transposed
 convolution. Check border/phase ordering, numerical formats, array utilization,
 weight growth and buffering; modeled energy is not target-chip measurement.
+
+## Existing Winograd fusion boundaries
+
+[Tap-wise hardware](../papers/2022-andri-tap-wise-winograd.md) and
+[spatial partial-output accumulation](../papers/2020-hattink-winograd-memories.md)
+are established baselines. Compare storage and arithmetic together when moving
+an inverse transform across a reduction. Reviewed **2026-11-24**.

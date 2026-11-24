@@ -220,3 +220,10 @@ baseline, not a new decomposition. [Sestito et al.](../papers/2021-sestito-flexi
 provide a distinct online remapping implementation for zero-insertion transposed
 convolution. Check border/phase ordering, numerical formats, array utilization,
 weight growth and buffering; modeled energy is not target-chip measurement.
+
+## Transform alternatives to direct lowering
+
+Reviewed **2026-11-24**. [NVDLA v1](../papers/2026-nvidia-nvdla-winograd.md) and
+[tap-wise Winograd](../papers/2022-andri-tap-wise-winograd.md) show established
+convolution-transform datapaths. Compare against these as well as explicit
+im2col; do not use a needlessly materialized lowering as the only baseline.

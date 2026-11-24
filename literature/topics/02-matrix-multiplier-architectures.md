@@ -212,3 +212,9 @@ and output per PE. Its split-K partial sums are explicitly reduced before
 leaving the array. This is an architectural comparator for fixed output width;
 it does not imply that any alternative array can change its routing or retain
 cross-call state for free.
+
+## Convolution pipeline implementation comparator
+
+[NVDLA v1 documentation](../papers/2026-nvidia-nvdla-winograd.md), reviewed
+**2026-11-24**, separates atomic MAC work, shared operand buffering and accumulation.
+Its release-dependent dimensions should not be inherited by another array.

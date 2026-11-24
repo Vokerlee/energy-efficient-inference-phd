@@ -117,3 +117,10 @@ Compare offline transform preparation with any current-tile rule, including
 input/output transforms, extra transformed-weight capacity, fixed matrix tiles
 and the FP32 result path. Fewer products can coexist with more intermediate
 traffic. Do not transfer CPU latency into systolic energy.
+
+## Hardware baselines for transform and reduction ordering
+
+Reviewed **2026-11-24**. [Tap-wise quantization](../papers/2022-andri-tap-wise-winograd.md)
+requires matched transform/compute rates. [Hattink et al.](../papers/2020-hattink-winograd-memories.md)
+already accumulate spatial partial outputs and discuss summation before inverse
+transforms. Neither generic fusion nor this reordering alone is new.
