@@ -266,3 +266,9 @@ or access date and a distinct documentation-reading status.
 | [`goubault2013unstabletests`](papers/2013-goubault-fluctuat-unstable-tests.md) | 13, 14 | Numerical decision stability and existing analysis of divergent execution paths. |
 | [`titolo2018unstabletests`](papers/2018-titolo-eliminating-unstable-tests.md) | 13, 14 | Numerical decision stability and existing analysis of divergent execution paths. |
 | [`titolo2020teststable`](papers/2020-titolo-test-stable-code.md) | 13, 14 | Numerical decision stability and existing analysis of divergent execution paths. |
+| [`vaverka2020tfapprox`](papers/2020-vaverka-tfapprox.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
+| [`brower2026emulationguarantees`](papers/2026-brower-emulation-guarantees.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
+| [`ozaki2025fma`](papers/2025-ozaki-fma-matmul.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
+| [`ozaki2026fma`](papers/2026-ozaki-fma-gemm.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
+| [`dinechin2013ziv`](papers/2013-dinechin-ziv-test.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
+| [`pytorch2026precisioncasts`](papers/2026-pytorch-inductor-precision-casts.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
