@@ -307,3 +307,31 @@ model-independent preparation and training. [Concentration–alignment analysis]
 provides a direct geometry comparator at abstract-reading scope. These broad
 connections are established; a new live mechanism needs a specific difference
 and matched numerical/cost evidence. Individual records state reading limits.
+
+## Which parts are actually online?
+
+Focused synthesis **2026-11-24**, using the reading scopes in the canonical
+records below. A runtime decision and the preparation of its parameters are
+different axes; the word “dynamic” alone does not identify either one.
+
+| Work | Live operation | Prepared information / restriction | Hardware comparison boundary |
+|---|---|---|---|
+| [Channel balancing](../papers/2022-chikin-winograd-balancing.md), §§3–6 | Current transformed-input maximum and activation scale in the dynamic variant | Channel-balancing coefficients; calibrated or trained setup is separate | Live Winograd scales are already explicit; this reading does not establish a bounded streaming product-error controller. |
+| [Group-wise Winograd](../papers/2025-pan-group-quantized-winograd.md), §§3–4 | Group activation min/max and quantization | Offline transform-scale optimization using synthetic inputs | Data-free is not preparation-free; CPU kernels do not establish array ports or energy. |
+| [Tap-wise Winograd](../papers/2022-andri-tap-wise-winograd.md), §§III–IV | Dedicated transform/quantization execution | Trained/calibrated tap-wise scales | Actual hardware pipeline and producer/consumer rate matching are established prior art. |
+| [Product-aware rounding](../papers/2026-sao-product-aware-rounding.md), AppendixB and §8.2 | Coordinated rounding on fixed grids | Receiving geometry and the algorithm's rank/null-space construction | Shared source representations and error-state completion already exist; a bounded hardware approximation cannot inherit the full method's certificate. |
+| [Adana](../papers/2026-geng-adana.md), Algorithm2 and §5 | Group subtype selection using integer/half-step counters | Quantizer design and group-format rules | A small candidate set and an inexpensive online metric already have dedicated hardware treatment. |
+| [HAP](../papers/2026-luo-hap.md), §§3–4 | Lossless narrowing of existing integer codes and dynamic correction | Initial calibrated intervals; profiled enablement | Correction work, precision matching and bit-serial scheduling are explicitly costed, not free. |
+| [WINS](../papers/2025-park-wins.md), §§4–5 | Execution of prepared sparse transformed matrices | Weight pruning, fine-tuning and layer-strategy selection | “Adaptive” layer preparation is not evidence of per-input activation decisions; sub-GEMM balance is an established implementation concern. |
+
+These distinctions leave implementation questions open without erasing existing
+algorithms. A software algorithm without a matching hardware implementation can
+still motivate hardware research. Conversely, moving an existing method into a
+quantizer does not establish a new rounding principle. A concrete comparison
+must identify the state, coefficient precision, observation granularity, output
+reuse, causality, buffering and error/cost claim being changed.
+
+A further deduction is that fixed weights may permit preparing some receiving
+geometry once. Whether a specific method still factorizes a live fractional
+subproblem depends on its construction. Neither “all preparation is offline” nor
+“every activation requires a new SVD” is a valid conclusion for the entire family.
