@@ -150,3 +150,15 @@ co-designs structured transformed weights with sub-GEMM workload balance.
 transformed activation zeros, but changes network semantics and retrains.
 Neither observation makes arbitrary live pruning of an unchanged model safe.
 Compare useful products, padded array work, metadata and scheduling separately.
+
+## Upsampling structure and quantized transform hardware
+
+Reviewed **2026-11-24**: [Wino-transCONV](../papers/2020-di-winograd-transposed.md)
+already combines structural-zero elimination, transforms and FPGA buffering.
+[Quantized super-resolution hardware](../papers/2023-shi-quantized-winograd-sr.md)
+explicitly combines upsampling, Winograd and quantization (abstract-only scope).
+[Multi-FPGA3D mapping](../papers/2026-cao-multi-fpga-3d.md) adds a recent
+structural-sparsity comparator at abstract/indexed-excerpt scope. Distinguish
+zero insertion from repeated nearest-neighbor values, and prepared transforms
+from actual current-input decisions; broad scope does not settle every such
+case. Neither unavailable code nor an unread full method establishes novelty.

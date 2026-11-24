@@ -290,3 +290,6 @@ or access date and a distinct documentation-reading status.
 | [`ji2021winogradfusion`](papers/2021-ji-winograd-tile-fusion.md) | 03, 10, 11 | Existing layer-shape tile selection; full-paper reading remains pending. |
 | [`park2025wins`](papers/2025-park-wins.md) | 03, 07, 10 | Prepared transform-domain structured pruning and sub-GEMM workload balance. |
 | [`liu2018sparsewinograd`](papers/2018-liu-sparse-winograd.md) | 03, 07, 10 | Dynamic Winograd activation sparsity through changed ReLU placement and retraining. |
+| [`di2020winotransconv`](papers/2020-di-winograd-transposed.md) | 03, 07, 10 | Existing structural-zero removal and Winograd FPGA dataflow. |
+| [`shi2023winogradsr`](papers/2023-shi-quantized-winograd-sr.md) | 03, 07, 10 | Abstract-only joint upsampling/Winograd/quantization FPGA comparator. |
+| [`cao2026multifpga`](papers/2026-cao-multi-fpga-3d.md) | 03, 07, 10 | 3D compute-heavy mapping and structural transposed-convolution sparsity. |
