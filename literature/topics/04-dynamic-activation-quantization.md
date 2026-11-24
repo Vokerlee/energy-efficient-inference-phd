@@ -291,3 +291,9 @@ losslessly narrows existing activation codes and explicitly schedules dynamic
 zero-point correction and bounded precision matching. These mechanisms are
 prior art even when their calibrated setup or bit-serial mapping differs from
 a proposed live BF16 source converter.
+
+## Quantized convolution transforms
+
+[Tap-wise Winograd](../papers/2022-andri-tap-wise-winograd.md) provides a
+training/calibration-based hardware comparator; its prepared scales are distinct
+from current-block range decisions. Reviewed **2026-11-24**.

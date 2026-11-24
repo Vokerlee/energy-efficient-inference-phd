@@ -146,3 +146,11 @@ retains the output count when low precision increases K throughput, and defines
 how split-K sums leave the array. Count output vectors separately from SRAM
 writes: a register-forwarded sum and a result-buffer round trip are different
 schedules. Fewer K partitions alone does not establish the saved memory actions.
+
+## Implemented convolution-transform pipelines
+
+Reviewed **2026-11-24**. [NVDLA v1](../papers/2026-nvidia-nvdla-winograd.md)
+is an official buffered-pipeline baseline. [Tap-wise Winograd](../papers/2022-andri-tap-wise-winograd.md)
+and [Hattink et al.](../papers/2020-hattink-winograd-memories.md) provide detailed
+transform, storage and reduction comparators. Count every affected boundary;
+reduced multiplication count does not establish lower total energy.

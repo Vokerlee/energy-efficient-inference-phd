@@ -279,3 +279,6 @@ or access date and a distinct documentation-reading status.
 | [`pan2025groupwinograd`](papers/2025-pan-group-quantized-winograd.md) | 04, 08, 10, 11 | Quantized Winograd and transform-scale preparation/runtime distinctions. |
 | [`chen2023paw`](papers/2023-chen-paw-winograd.md) | 04, 08, 10, 11 | Quantized Winograd and transform-scale preparation/runtime distinctions. |
 | [`krizhevsky2009cifar`](papers/2009-krizhevsky-cifar.md) | 14 | Dataset splits and archive identity for frozen-feature task evaluation. |
+| [`andri2022tapwise`](papers/2022-andri-tap-wise-winograd.md) | 03, 04, 10, 11, 15 | Quantized Winograd hardware and producer/consumer rate matching. |
+| [`hattink2020winograd`](papers/2020-hattink-winograd-memories.md) | 10, 11, 15 | Existing spatial partial-output retention and inverse/sum ordering. |
+| [`nvidia2026nvdla`](papers/2026-nvidia-nvdla-winograd.md) | 02, 03, 15 | Official convolution pipeline, buffer and atomic-work documentation. |
