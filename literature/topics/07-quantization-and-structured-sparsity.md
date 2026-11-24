@@ -257,3 +257,12 @@ conversion costs cannot be transferred to a digital array. The spatial
 feedback in [Dither NN](../papers/2019-ando-dither-nn.md) also changes activation
 patterns. Count the resulting zeros and state accesses when comparing a new
 rounding rule; reducing an error statistic is not a sparse-execution saving.
+
+## Sparsity inside an activation code
+
+Focused supplement **2026-11-24**. [SPARQLe](../papers/2026-parvathy-sparqle.md)
+stores dense low bits and sparse high bits with a precision bitmap, and adds
+selective weight-informed clipping. [SPARQ](../papers/2021-shomron-sparsity-aware-quantization.md)
+already selects bit windows and shares paired zero-slot budgets. A smaller
+bit count is not automatically fewer issued matrix operations; count the
+representation, detector, bitmap, correction path and actual scheduling.

@@ -274,3 +274,5 @@ or access date and a distinct documentation-reading status.
 | [`pytorch2026precisioncasts`](papers/2026-pytorch-inductor-precision-casts.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
 | [`luo2026hap`](papers/2026-luo-hap.md) | 04, 08, 12 | Dynamic zero-point narrowing, bounded precision matching and an explicitly executed correction path. |
 | [`meng2026arcquant`](papers/2026-meng-arcquant.md) | 04, 05, 08 | Abstract-only comparator: quantized residual channels expand the GEMM reduction dimension. |
+| [`dewage2026componentsensitivity`](papers/2026-dewage-attention-component-sensitivity.md) | 04, 07, 13 | Attention roles and end-task sensitivity; intervention/transfer limits explicit. |
+| [`parvathy2026sparqle`](papers/2026-parvathy-sparqle.md) | 04, 07, 13 | Dense low/sparse high activation bits, bitmap costs and selective clipping. |
