@@ -24,6 +24,8 @@ def render_figures(
 
     def graphic(scene: str, stem: str) -> dict:
         path = destination / stem
+        for suffix in (".tif", ".tiff"):
+            path.with_suffix(suffix).unlink(missing_ok=True)
         document = (
             preamble
             + "\\begin{document}\n\\color[cmyk]{0,0,0,1}\n\\begin{journalfigure}\n"
@@ -54,21 +56,6 @@ def render_figures(
                 "-eps",
                 str(path.with_suffix(".pdf")),
                 str(path.with_suffix(".eps")),
-            ],
-            [
-                "gs",
-                "-q",
-                "-dBATCH",
-                "-dNOPAUSE",
-                "-sDEVICE=tiff32nc",
-                f"-r{dpi}",
-                "-sCompression=lzw",
-                "-dUseFastColor=true",
-                "-sColorConversionStrategy=CMYK",
-                "-dTextAlphaBits=4",
-                "-dGraphicsAlphaBits=4",
-                "-sOutputFile=" + str(path.with_suffix(".tif")),
-                str(path.with_suffix(".pdf")),
             ],
         ]
         for command in commands:
