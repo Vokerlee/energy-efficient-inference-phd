@@ -4,8 +4,8 @@
 - Authors: Sao, Piyush; Miniskar, Narasinga; Valero-Lara, Pedro; Teranishi, Keita; Seal, Sudip.
 - Publication: arXiv preprint, 2026; version 1.
 - Source: [paper](https://arxiv.org/abs/2609.31641v1); [full text](https://arxiv.org/html/2609.31641v1).
-- Reviewed: 2026-11-22. Status: **full-text focused reading**.
-- Reading focus: Section 3 and Section 8 rounding-cost discussion; proofs not independently audited.
+- Reviewed: 2026-11-24. Status: **full-text focused reading**.
+- Reading focus: Sections 3, 6.1 and 8; Appendix B Algorithms 1–2 and the head/tail discussion. Proofs not independently audited.
 
 ## What it establishes
 
@@ -18,3 +18,13 @@ Output-aware rounding and coordinated errors are explicit prior art, beyond acti
 ## Limits and transfer conditions
 
 The direct construction includes rank/factorization and optimization work. The authors distinguish polynomial accuracy guarantees from throughput and leave kernel acceleration outside the study. It is not a lightweight streaming selector merely because activation rounding is dynamic.
+
+## Reuse and implementation limits
+
+Section8.2 explicitly asks how one rounded activation copy can serve multiple
+output blocks. Per-block low rank is insufficient; joint receiving geometry
+matters. The reported direct implementation uses repeated rank/SVD work and
+distinguishes accuracy guarantees from kernel throughput. Conditional-expectation
+completion with a running product-error state is already an existing algorithm.
+A reduced-state implementation needs its own tail-error, reuse and actual
+network evidence; it cannot inherit the full construction's certificate.

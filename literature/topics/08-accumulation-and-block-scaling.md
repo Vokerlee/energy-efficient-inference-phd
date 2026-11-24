@@ -221,3 +221,10 @@ analyze compensated FMA algorithms with explicit magnitude conditions.
 acceptance. Accuracy relative to the real product and matching an explicitly
 ordered finite-precision primitive must be kept separate. Runtime/metadata
 costs and actual observation boundaries determine whether a hybrid is useful.
+
+Supplement **2026-11-24**. [HAP](../papers/2026-luo-hap.md) explicitly accounts
+for the dynamic zero-point vector/matrix correction and aggregation schedule.
+The [ARCQuant abstract](../papers/2026-meng-arcquant.md) adds residual channels
+inside GEMM. A single issued product can still contain additional reduction
+work; compare expanded K, metadata, traffic and output accumulation, not only
+the number of matrix-kernel launches.

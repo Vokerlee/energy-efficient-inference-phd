@@ -274,3 +274,20 @@ Supplement reviewed **2026-11-23**: the English abstract of
 training-data-dependent weight error redistribution. This adds a comparator
 for adaptive noise-shaping claims; its full method remains a reading dependency.
 Prepared weight correction and causal live activation feedback are distinct.
+
+## Coordinated activation rounding and reusable source copies
+
+Focused supplement **2026-11-24**. [Product-aware rounding](../papers/2026-sao-product-aware-rounding.md)
+already coordinates dynamic rounding through receiving-product geometry. Its
+Section8.2 explicitly isolates shared activation copies across output blocks;
+separate per-block low ranks do not solve that reuse problem. Reduced-state
+feedback needs independent accuracy, tail-error and full-network validation.
+[AQuant](../papers/2023-li-aquant.md) instead learns shared border parameters
+from calibration. Runtime execution and parameter preparation must be separated.
+
+Focused hardware supplement **2026-11-24**: [Adana](../papers/2026-geng-adana.md)
+uses a counter-based online metric and dedicated quantizer. [HAP](../papers/2026-luo-hap.md)
+losslessly narrows existing activation codes and explicitly schedules dynamic
+zero-point correction and bounded precision matching. These mechanisms are
+prior art even when their calibrated setup or bit-serial mapping differs from
+a proposed live BF16 source converter.

@@ -97,3 +97,13 @@ The corpus is deliberately small and mechanism-oriented. It does not establish
 novelty for activation-subspace execution or prove a net energy benefit.
 NA-LR is workshop-scale evidence; Palu's memory objective differs from our
 compute-intensive target. No low-rank experiment has been run.
+
+## Coordinated activation rounding and reusable source copies
+
+Focused supplement **2026-11-24**. [Product-aware rounding](../papers/2026-sao-product-aware-rounding.md)
+already coordinates dynamic rounding through receiving-product geometry. Its
+Section8.2 explicitly isolates shared activation copies across output blocks;
+separate per-block low ranks do not solve that reuse problem. Reduced-state
+feedback needs independent accuracy, tail-error and full-network validation.
+[AQuant](../papers/2023-li-aquant.md) instead learns shared border parameters
+from calibration. Runtime execution and parameter preparation must be separated.

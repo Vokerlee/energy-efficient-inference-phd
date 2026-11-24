@@ -270,3 +270,10 @@ format preparation requires explicit setup, residence, eviction and service
 costs. Competitive guarantees depend on the comparator's constraints; a
 single-phase result is not a proof of globally optimal inference energy.
 Numerical eligibility and end-to-end quality remain separate obligations.
+
+Focused hardware supplement **2026-11-24**: [Adana](../papers/2026-geng-adana.md)
+uses a counter-based online metric and dedicated quantizer. [HAP](../papers/2026-luo-hap.md)
+losslessly narrows existing activation codes and explicitly schedules dynamic
+zero-point correction and bounded precision matching. These mechanisms are
+prior art even when their calibrated setup or bit-serial mapping differs from
+a proposed live BF16 source converter.

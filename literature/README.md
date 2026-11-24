@@ -98,7 +98,7 @@ or access date and a distinct documentation-reading status.
 | [`kabaha2025compaqt`](papers/2025-kabaha-compaqt.md) | 12, 13 | Online refinement and claimed classification consistency already have formal-method precedents; this is not an offline-only algorithm. |
 | [`veit2026kernelcontracts`](papers/2026-veit-kernel-contracts.md) | 13, 14 | Methodological comparator for separating an intended arithmetic change from an implementation failure in numerical experiments. |
 | [`hu2025mant`](papers/2025-hu-m-ant.md) | 04, 06, 12, 15 | Streaming statistics and dedicated quantization hardware; preparation separated. |
-| [`geng2026adana`](papers/2026-geng-adana.md) | 04, 12 | Approximate online metric and dedicated engine; abstract/slides evidence. |
+| [`geng2026adana`](papers/2026-geng-adana.md) | 04, 12 | Counter-based online subtype selection and dedicated engine; focused paper review. |
 | [`hsieh2025fpgasparsequantized`](papers/2025-hsieh-fpga-sparse-quantized.md) | 02, 07, 14 | Offline weight preparation and floating-point FPGA zero gating. |
 | [`williams2009roofline`](papers/2009-williams-roofline.md) | 01 | Performance bottlenecks and operational intensity. |
 | [`horowitz2014energy`](papers/2014-horowitz-computing-energy.md) | 01 | Historical component-energy and locality foundations. |
@@ -272,3 +272,6 @@ or access date and a distinct documentation-reading status.
 | [`ozaki2026fma`](papers/2026-ozaki-fma-gemm.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
 | [`dinechin2013ziv`](papers/2013-dinechin-ziv-test.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
 | [`pytorch2026precisioncasts`](papers/2026-pytorch-inductor-precision-casts.md) | 08, 14 | Accurate emulation, rounding acceptance or explicit compiler precision semantics. |
+
+| [`luo2026hap`](papers/2026-luo-hap.md) | 04, 08, 12 | Dynamic zero-point narrowing, bounded precision matching and an explicitly executed correction path. |
+| [`meng2026arcquant`](papers/2026-meng-arcquant.md) | 04, 05, 08 | Abstract-only comparator: quantized residual channels expand the GEMM reduction dimension. |
