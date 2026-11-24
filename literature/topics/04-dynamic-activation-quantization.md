@@ -297,3 +297,13 @@ a proposed live BF16 source converter.
 [Tap-wise Winograd](../papers/2022-andri-tap-wise-winograd.md) provides a
 training/calibration-based hardware comparator; its prepared scales are distinct
 from current-block range decisions. Reviewed **2026-11-24**.
+
+## Transform and geometry comparators
+
+Supplement reviewed **2026-11-24**. [Channel balancing](../papers/2022-chikin-winograd-balancing.md),
+[quantization-friendly transforms](../papers/2024-protsenko-quantization-friendly-winograd.md)
+and [Wino Vidi Vici](../papers/2024-mori-wino-vidi-vici.md) distinguish calibration,
+model-independent preparation and training. [Concentration–alignment analysis](../papers/2026-federici-concentration-alignment.md)
+provides a direct geometry comparator at abstract-reading scope. These broad
+connections are established; a new live mechanism needs a specific difference
+and matched numerical/cost evidence. Individual records state reading limits.

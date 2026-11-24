@@ -282,3 +282,7 @@ or access date and a distinct documentation-reading status.
 | [`andri2022tapwise`](papers/2022-andri-tap-wise-winograd.md) | 03, 04, 10, 11, 15 | Quantized Winograd hardware and producer/consumer rate matching. |
 | [`hattink2020winograd`](papers/2020-hattink-winograd-memories.md) | 10, 11, 15 | Existing spatial partial-output retention and inverse/sum ordering. |
 | [`nvidia2026nvdla`](papers/2026-nvidia-nvdla-winograd.md) | 02, 03, 15 | Official convolution pipeline, buffer and atomic-work documentation. |
+| [`chikin2022balancing`](papers/2022-chikin-winograd-balancing.md) | 04, 10, 13 | Prepared transforms/coefficients and live decision boundaries. |
+| [`protsenko2024winograd`](papers/2024-protsenko-quantization-friendly-winograd.md) | 04, 10, 13 | Prepared transforms/coefficients and live decision boundaries. |
+| [`mori2024wino`](papers/2024-mori-wino-vidi-vici.md) | 04, 10, 13 | Prepared transforms/coefficients and live decision boundaries. |
+| [`federici2026alignment`](papers/2026-federici-concentration-alignment.md) | 04, 10, 13 | Prepared transforms/coefficients and live decision boundaries. |

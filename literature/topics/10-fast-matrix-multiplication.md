@@ -124,3 +124,13 @@ Reviewed **2026-11-24**. [Tap-wise quantization](../papers/2022-andri-tap-wise-w
 requires matched transform/compute rates. [Hattink et al.](../papers/2020-hattink-winograd-memories.md)
 already accumulate spatial partial outputs and discuss summation before inverse
 transforms. Neither generic fusion nor this reordering alone is new.
+
+## Transform and geometry comparators
+
+Supplement reviewed **2026-11-24**. [Channel balancing](../papers/2022-chikin-winograd-balancing.md),
+[quantization-friendly transforms](../papers/2024-protsenko-quantization-friendly-winograd.md)
+and [Wino Vidi Vici](../papers/2024-mori-wino-vidi-vici.md) distinguish calibration,
+model-independent preparation and training. [Concentration–alignment analysis](../papers/2026-federici-concentration-alignment.md)
+provides a direct geometry comparator at abstract-reading scope. These broad
+connections are established; a new live mechanism needs a specific difference
+and matched numerical/cost evidence. Individual records state reading limits.
