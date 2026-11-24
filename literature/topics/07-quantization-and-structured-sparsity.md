@@ -266,3 +266,12 @@ selective weight-informed clipping. [SPARQ](../papers/2021-shomron-sparsity-awar
 already selects bit windows and shares paired zero-slot budgets. A smaller
 bit count is not automatically fewer issued matrix operations; count the
 representation, detector, bitmap, correction path and actual scheduling.
+
+## Transform-domain sparse execution
+
+Focused review **2026-11-24**: [WINS](../papers/2025-park-wins.md) already
+co-designs structured transformed weights with sub-GEMM workload balance.
+[Winograd-ReLU](../papers/2018-liu-sparse-winograd.md) already produces dynamic
+transformed activation zeros, but changes network semantics and retrains.
+Neither observation makes arbitrary live pruning of an unchanged model safe.
+Compare useful products, padded array work, metadata and scheduling separately.
