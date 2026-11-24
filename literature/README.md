@@ -286,3 +286,5 @@ or access date and a distinct documentation-reading status.
 | [`protsenko2024winograd`](papers/2024-protsenko-quantization-friendly-winograd.md) | 04, 10, 13 | Prepared transforms/coefficients and live decision boundaries. |
 | [`mori2024wino`](papers/2024-mori-wino-vidi-vici.md) | 04, 10, 13 | Prepared transforms/coefficients and live decision boundaries. |
 | [`federici2026alignment`](papers/2026-federici-concentration-alignment.md) | 04, 10, 13 | Prepared transforms/coefficients and live decision boundaries. |
+| [`guo2025winogradcim`](papers/2025-guo-winograd-hybrid-cim.md) | 01, 10, 15 | Design-specific transform/postprocessing power and hybrid CIM architecture. |
+| [`ji2021winogradfusion`](papers/2021-ji-winograd-tile-fusion.md) | 03, 10, 11 | Existing layer-shape tile selection; full-paper reading remains pending. |
