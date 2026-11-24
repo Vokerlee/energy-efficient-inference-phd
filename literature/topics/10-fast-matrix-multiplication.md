@@ -141,3 +141,12 @@ and matched numerical/cost evidence. Individual records state reading limits.
 tiles from layer-dependent total-work models. [Hybrid CIM](../papers/2025-guo-winograd-hybrid-cim.md)
 already accelerates output transforms. Reviews dated **2026-11-24** retain
 publication/reading limits; broad titles do not resolve every live-controller case.
+
+## Transform-domain sparse execution
+
+Focused review **2026-11-24**: [WINS](../papers/2025-park-wins.md) already
+co-designs structured transformed weights with sub-GEMM workload balance.
+[Winograd-ReLU](../papers/2018-liu-sparse-winograd.md) already produces dynamic
+transformed activation zeros, but changes network semantics and retrains.
+Neither observation makes arbitrary live pruning of an unchanged model safe.
+Compare useful products, padded array work, metadata and scheduling separately.

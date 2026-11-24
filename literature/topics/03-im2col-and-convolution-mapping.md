@@ -231,3 +231,12 @@ im2col; do not use a needlessly materialized lowering as the only baseline.
 [Layer-dependent Winograd tile fusion](../papers/2021-ji-winograd-tile-fusion.md),
 reviewed at abstract/excerpt scope **2026-11-24**, is an existing shape-selection
 comparator alongside lowering and fixed-tile algorithms.
+
+## Transform-domain sparse execution
+
+Focused review **2026-11-24**: [WINS](../papers/2025-park-wins.md) already
+co-designs structured transformed weights with sub-GEMM workload balance.
+[Winograd-ReLU](../papers/2018-liu-sparse-winograd.md) already produces dynamic
+transformed activation zeros, but changes network semantics and retrains.
+Neither observation makes arbitrary live pruning of an unchanged model safe.
+Compare useful products, padded array work, metadata and scheduling separately.
