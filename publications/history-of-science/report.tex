@@ -1,0 +1,46 @@
+\documentclass[a4paper,14pt]{extarticle}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{%
+    \setmainfont{Times New Roman}%
+}{%
+    \setmainfont{TeX Gyre Termes}%
+}
+\usepackage[russian]{babel}
+\usepackage[left=3cm,right=1.5cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{ragged2e}
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries\raggedright\hyphenpenalty=10000}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\raggedright\hyphenpenalty=10000}{\thesubsection.}{0.5em}{}
+\usepackage[hidelinks,unicode]{hyperref}
+\urlstyle{same}
+\setlength{\emergencystretch}{2em}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+\setcounter{tocdepth}{1}
+
+\input{metadata}
+
+\begin{document}
+\input{title}
+\setcounter{page}{2}
+\onehalfspacing
+\tableofcontents
+\clearpage
+\input{parts/introduction}
+\clearpage
+\input{parts/origins}
+\clearpage
+\input{parts/specialization}
+\clearpage
+\input{parts/precision}
+\clearpage
+\input{parts/adaptation}
+\clearpage
+\input{parts/conclusion}
+\clearpage
+\input{references}
+\end{document}
