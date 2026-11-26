@@ -3,14 +3,21 @@
 Manuscript sources are kept in one directory per article. The current
 `gemm-simulator-accuracy` manuscript is the existing Russian article draft.
 
-Requires GNU Make, `latexmk`, pdfLaTeX, BibTeX, and the LaTeX packages used by
-the manuscript preamble, including Russian language/T2A fonts and TikZ.
+The separate [history-of-science report](history-of-science/README.md) covers
+the development of energy-efficient neural-network computing, including
+research from the 1930s–1990s. Its Russian text, bibliography and MIPT title page
+are maintained in LaTeX independently of the article.
+
+Requires GNU Make, `latexmk`, and the engines and packages documented in each
+publication's README. The GEMM article uses pdfLaTeX and BibTeX, including
+Russian language/T2A fonts and TikZ; the history report uses XeLaTeX and
+Times New Roman, with TeX Gyre Termes as a fallback.
 The publications Makefile builds all articles; each article also has its own Makefile.
 Generated PDFs are written directly to this directory, named after the article
 (for example, `gemm-simulator-accuracy.pdf`). Auxiliary files stay in each
 article's ignored `build/` directory. Generated PDFs are also ignored by Git.
 The `clean` target removes generated files. Builds retain their PDF and log,
-and run with shell escape disabled. `latexmk` invokes `pdflatex` explicitly and
+and run with shell escape disabled. `latexmk` invokes the selected compiler and
 handles any additional passes needed for references and bibliographies.
 
 The [GEMM article README](gemm-simulator-accuracy/README.md) documents its editable

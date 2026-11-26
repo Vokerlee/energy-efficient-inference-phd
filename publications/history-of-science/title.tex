@@ -1,0 +1,64 @@
+% Перенос предоставленного официального образца «Титульный лист реферата.doc».
+% Подписи и сведения об аспирантуре остаются редактируемым текстом и линиями.
+\newcommand{\ReportBlank}[2]{%
+    \makebox[#1][c]{\strut #2\hfill}\llap{\rule{#1}{0.4pt}}%
+}
+
+\begin{titlepage}
+    \thispagestyle{empty}
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{0pt}
+    \fontsize{14}{16.1}\selectfont
+
+    \begin{center}
+        Федеральное государственное автономное образовательное учреждение\\
+        высшего образования\\
+        «Московский физико-технический институт\\
+        (национальный исследовательский университет)»
+
+        \vspace{14.5mm}
+        Учебно-научный центр гуманитарных и социальных наук
+
+        \vspace{29mm}
+        РЕФЕРАТ ПО ИСТОРИИ НАУКИ
+
+        \vspace{14.5mm}
+        {\fontsize{20}{23}\selectfont\bfseries \ReportTopic\par}
+    \end{center}
+
+    \vspace{22mm}
+
+    \begin{flushright}
+        \begin{minipage}{152mm}
+            \raggedleft
+            Аспирант~–~%
+            \begin{tabular}[t]{@{}c@{}}
+                \rule{36mm}{0.4pt}\\[-1mm]
+                {\fontsize{9}{10.4}\selectfont\itshape подпись}
+            \end{tabular}%
+            \enspace\ReportAuthor\par
+
+            \vspace{1mm}
+            (\ReportBlank{115mm}{\ReportGroupAndProgramme}\par
+            {\fontsize{9}{10.4}\selectfont\itshape
+                \makebox[115mm][c]{группа, программа аспирантуры,}\par}
+            \ReportBlank{115mm}{\ReportSpecialty})\par
+            {\fontsize{9}{10.4}\selectfont\itshape
+                \makebox[115mm][c]{научная специальность}\par}
+
+            \vspace{10mm}
+            \begin{tabular}{@{}l@{\enspace}c@{\enspace}l@{}}
+                Научный руководитель~– & \rule{34mm}{0.4pt} & \ReportSupervisor\\[-1mm]
+                аспиранта & {\fontsize{9}{10.4}\selectfont\itshape подпись} &
+            \end{tabular}\par
+
+            \vspace{5mm}
+            Преподаватель УНЦ ГСН~–~\rule{27mm}{0.4pt}~\ReportTeacher\par
+        \end{minipage}
+    \end{flushright}
+
+    \vfill
+    \begin{center}
+        \ReportCity, \ReportYear
+    \end{center}
+\end{titlepage}
